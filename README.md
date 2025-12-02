@@ -1,16 +1,18 @@
-# Multilingual Translation Dataset (English ↔ 30+ Languages)
+# Multilingual Translation Dataset (English ↔ XX Languages)
 
-This dataset contains **parallel translations between English and 30+ world languages**, with approximately **50 sentence pairs per language**.  
+This dataset contains **parallel translations between English and XX world languages**, with approximately **XX sentence pairs per language**.  
 It is designed to support low-resource MT research, evaluation, benchmarking, linguistics, and multilingual NLP education.
 
 ## 📦 Contents
 
-- ~30 languages × 50 English-source sentences each
+- XX languages × XX English-source sentences each
 - Cleaned and normalized text
 - JSONL format and line-aligned format
 - Metadata including language codes, domains, and sources
 - Train/dev/test splits
 - Scripts for preprocessing, combining, and generating statistics
+
+## File Name Format
 
 ## 🏗️ Directory Structure
 
