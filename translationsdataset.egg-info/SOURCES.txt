@@ -1,0 +1,8 @@
+LICENSE.md
+README.md
+pyproject.toml
+translationsdataset/__init__.py
+translationsdataset.egg-info/PKG-INFO
+translationsdataset.egg-info/SOURCES.txt
+translationsdataset.egg-info/dependency_links.txt
+translationsdataset.egg-info/top_level.txt

@@ -14,17 +14,22 @@ It is designed to support low-resource MT research, evaluation, benchmarking, li
 
 ## File Name Format
 
-## 🏗️ Directory Structure
+### Raw Files
 
-See the full directory tree in the repository root.
+`source_scenario.filetype`
+
+ex: `portland_911_outage.csv` is a csv file containing translations about 911 outages from Portland.
+
+### Processed Data Files
+
+<!-- ## 🏗️ Directory Structure
+
+See the full directory tree in the repository root. -->
 
 <!-- ## 🔥 How to Use -->
 
-<!-- ### Load with Python
-```python
-import json
 
-with open("data/splits/train.jsonl") as f:
-    for line in f:
-        ex = json.loads(line)
-        print(ex["src"], "→", ex["tgt"]) -->
+## Project Setup
+
+All of the code and data is in the translationsdataset package. To install the package:
+`pip install -e .`
