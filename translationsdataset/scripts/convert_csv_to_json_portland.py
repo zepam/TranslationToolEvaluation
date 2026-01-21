@@ -65,11 +65,17 @@ if __name__ == "__main__":
     # args = parser.parse_args()
 
     csv_file = "translationsdataset/data/raw/portland_911_outage.csv"
+    # go through all of the *.csv files in the translationsdataset/data/raw/ directory
+    for csv_path in Path("translationsdataset/data/raw/").glob("*.csv"):
+        csv_file = str(csv_path)
+        print(f"Processing {csv_file}...")
+
+
     
 
-    # Load language mapping JSON
-    # with open(language_codes, "r", encoding="utf-8") as f:
-    #     lang_map = json.load(f)
+        # Load language mapping JSON
+        # with open(language_codes, "r", encoding="utf-8") as f:
+        #     lang_map = json.load(f)
 
-    #convert_csv_to_jsonl(args.csv)
-    convert_csv_to_jsonl(csv_file, lang_map=language_codes)
+        #convert_csv_to_jsonl(args.csv)
+        convert_csv_to_jsonl(csv_file, lang_map=language_codes)
