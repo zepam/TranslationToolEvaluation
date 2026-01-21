@@ -18,7 +18,7 @@ It is designed to support low-resource MT research, evaluation, benchmarking, li
 
 `source_scenario.filetype`
 
-ex: `portland_911_outage.csv` is a csv file containing translations about 911 outages from Portland.
+ex: `portland_911_outage.csv` is a csv file containing translations about 911 outages from Portland RDPO.
 
 ### Processed Data Files
 
@@ -33,3 +33,8 @@ See the full directory tree in the repository root. -->
 
 All of the code and data is in the translationsdataset package. To install the package:
 `pip install -e .`
+
+## Project Operation
+
+### Scripts
+python -m translationsdataset.scripts.convert_csv_to_json_portland

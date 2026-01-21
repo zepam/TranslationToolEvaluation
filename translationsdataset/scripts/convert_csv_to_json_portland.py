@@ -3,7 +3,7 @@ import json
 import argparse
 import pandas as pd
 from pathlib import Path
-from data.language_codes import language_codes
+from translationsdataset.data.language_codes import language_codes
 
 def convert_csv_to_jsonl(csv_path, lang_map=language_codes):
 
@@ -19,11 +19,18 @@ def convert_csv_to_jsonl(csv_path, lang_map=language_codes):
     
     # get the filename and scenario name
     p = Path(csv_path)
+    parent = p.parent
     scenario = p.stem.split("_", 1)[1]
+    origin = p.stem.split("_", 1)[0]
     basename = p.stem
     json_filename = f"{basename}.jsonl"
-    jsonl_path = p.parent / json_filename
-    # jsonl_path = p.with_suffix(".jsonl")
+    # Build output directory by replacing the last folder of the input's parent
+    # with `processed`. For example, if CSV is `data/raw/xxx.csv`, this will
+    # produce `data/processed/xxx.jsonl`.
+    processed_parent = parent.parent / "processed"
+    processed_parent.mkdir(parents=True, exist_ok=True)
+    jsonl_path = processed_parent / json_filename
+
 
     with open(jsonl_path, "w", encoding="utf-8") as out:
         for i, row in df.iterrows():
@@ -40,9 +47,9 @@ def convert_csv_to_jsonl(csv_path, lang_map=language_codes):
                     translations[lang_map[col]] = str(val)
 
             record = {
-                "id": f"{scenario}_{i:03d}",
+                "id": f"{origin}-{scenario}-{i:03d}",
                 "scenario": scenario,
-                "source": {"lang": "eng", "text": source_text},
+                "source": {"eng": source_text},
                 "translations": translations
             }
 
@@ -52,16 +59,17 @@ def convert_csv_to_jsonl(csv_path, lang_map=language_codes):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Convert CSV to JSONL translation dataset.")
-    parser.add_argument("--csv", required=True, help="Input CSV file path")
+    # parser = argparse.ArgumentParser(description="Convert CSV to JSONL translation dataset.")
+    # parser.add_argument("--csv", required=True, help="Input CSV file path")
 
-    args = parser.parse_args()
+    # args = parser.parse_args()
 
-    csv_file = "/home/jen/TranslationsDataset/data/raw/portland_911_outage.csv"
+    csv_file = "translationsdataset/data/raw/portland_911_outage.csv"
+    
 
     # Load language mapping JSON
-    with open(args.langmap, "r", encoding="utf-8") as f:
-        lang_map = json.load(f)
+    # with open(language_codes, "r", encoding="utf-8") as f:
+    #     lang_map = json.load(f)
 
     #convert_csv_to_jsonl(args.csv)
-    convert_csv_to_jsonl(csv_file, lang_map=lang_map)
+    convert_csv_to_jsonl(csv_file, lang_map=language_codes)
