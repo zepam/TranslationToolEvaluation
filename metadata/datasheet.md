@@ -16,3 +16,6 @@ The dataset provides small, clean parallel corpora between English and XX langua
 
 ## Maintenance
 <!-- Maintained on GitHub; contributions welcome. -->
+
+## Data Management Tools
+https://dmptool.org/plans/148864
