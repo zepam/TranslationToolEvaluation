@@ -1,4 +1,31 @@
-{"id": "portland-911_outage-000", "scenario": "911_outage", "source": {"eng": "911 is not working in {county}."}, "translations": {"spa": "El 911 no está funcionando en {county}.", "amh": "በ{county} ውስጥ 911 አይሰራም ያለው።", "ara": "911 لا يعمل في مقاطعة {                    }.", "bur": "{county} တွင် 911 ခေါ်၍မရပါ။", "chk": "911 iwe ese chiwen mwo work non {county}.", "fra": "Le 911 ne fonctionne pas dans le {county}.", "hin": "{county} में 911 काम नहीं कर रहा है।", "jpn": "{county}では911が機能していません。", "khm": "911 មិនដំណើរការនៅក្នុង {county} ទេ។", "kor": "{county}에서 911은 작동하지 않습니다.", "lao": "911 ແມ່ນໃຊ້ງານບໍ່ໄດ້ໃນ {county}.", "nep": "{County} मा 911 मा फोन लागिरहेको छैन।", "ron": "911 nu funcționează în {county}.", "rus": "Служба 911 не работает в {county}.", "som": "911 kama shaqeynayo {county}.", "swa": "911 haifanyi kazi kwenye {kaunti}.", "tgl": "Ang 911 ay hindi gumagana sa {county}.", "tha": "911 ใช้งานไม่ได้ในพื้นที่ {county}", "ukr": "Служба 911 не працює в {county}.", "vie": "911 không hoạt động ở {county}."}}
+{"id": "portland-911_outage-000", 
+    "scenario": "911_outage",
+    "source": {
+        "eng": "911 is not working in {county}."
+    },
+    "translations": {
+        "spa": "El 911 no está funcionando en {county}.",
+        "amh": "በ{county} ውስጥ 911 አይሰራም ያለው።",
+        "ara": "911 لا يعمل في مقاطعة {                    }.",
+        "bur": "{county} တွင် 911 ခေါ်၍မရပါ။",
+        "chk": "911 iwe ese chiwen mwo work non {county}.",
+        "fra": "Le 911 ne fonctionne pas dans le {county}.",
+        "hin": "{county} में 911 काम नहीं कर रहा है।",
+        "jpn": "{county}では911が機能していません。",
+        "khm": "911 មិនដំណើរការនៅក្នុង {county} ទេ។",
+        "kor": "{county}에서 911은 작동하지 않습니다.",
+        "lao": "911 ແມ່ນໃຊ້ງານບໍ່ໄດ້ໃນ {county}.",
+        "nep": "{County} मा 911 मा फोन लागिरहेको छैन।",
+        "ron": "911 nu funcționează în {county}.",
+        "rus": "Служба 911 не работает в {county}.",
+        "som": "911 kama shaqeynayo {county}.", 
+        "swa": "911 haifanyi kazi kwenye {kaunti}.",
+        "tgl": "Ang 911 ay hindi gumagana sa {county}.",
+        "tha": "911 ใช้งานไม่ได้ในพื้นที่ {county}",
+        "ukr": "Служба 911 не працює в {county}.",
+        "vie": "911 không hoạt động ở {county}."
+    }
+}
 {"id": "portland-911_outage-001", "scenario": "911_outage", "source": {"eng": "Dial {number} for emergencies."}, "translations": {"spa": "Marque {number} para emergencias.", "amh": "በአደጋ ጊዜ {number} ይደውሉ።", "ara": "اطلب الرقم {                   } لحالات الطوارئ.", "bur": "အရေးပေါ်ကိစ္စများအတွက် {number} ကို ခေါ်ပါ။", "chk": "Kokori {number} ren emergencies.", "fra": "Composez le {numéro} pour les urgences.", "hin": "आपातकालीन स्थितियों के लिए {number} डायल करें।  ", "jpn": "緊急の場合は{number}に電話してください。", "khm": "ចុច {number} សម្រាប់​ភាពអាសន្ន។", "kor": "긴급 상황의 경우 {number}로 전화하십시오.", "lao": "ກົດ {number} ສຳລັບສະພາວະສຸກເສີນ.", "nep": "आपत्कालीन अवस्थामा {number} मा फोन गर्नुहोस्।", "ron": "Sunați la {number} pentru urgențe.", "rus": "Наберите {number} в экстренных случаях.", "som": "Wac {number} xaaladaha degdega ah. ", "swa": "Piga {nambari} kwa dharura.", "tgl": "I-dial ang {number} para sa mga emerhensiya.", "tha": "กดหมายเลข  {number} ถ้ามีเหตุฉุกเฉิน", "ukr": "Наберіть {number} в екстрених випадках.", "vie": "Quay số {number} trong trường hợp khẩn cấp."}}
 {"id": "portland-911_outage-002", "scenario": "911_outage", "source": {"eng": "{Company name(s)} phone customers are experiencing a 911 outage. "}, "translations": {"spa": "{Compnay name(s)} Los clientes de teléfonos están experimentando una interrupción del 911.", "amh": "{Company name(s)} የስልክ ደንበኞች ወደ 911 መገናኘት ችግር እያጋጠማቸው ነው። ", "ara": "{                              } يواجه عملاء الهاتف انقطاعًا في الخدمة 911. ", "bur": "{Company name(s)} ဖုန်းဝန်ဆောင်မှုအသုံးပြုသူများသည် 911 ပြတ်တောက်မှုနှင့် ကြုံတွေ့နေပါသည်။ ", "chk": "Nampan {Company name(s)} iwe noun kewe customers aa or osukosuekn ar kokonong ngeni ewe 911. ", "fra": "Les abonnés de {Company name(s)} ne peuvent pas joindre le 911. ", "hin": "{Company name(s)} के फोन ग्राहक 911 आउटेज का सामना कर रहे हैं। ", "jpn": "{Company name(s)}の電話を利用されている方は、現在911が停止しています。", "khm": "អតិថិជនទូរសព្ទ {Company name(s)}កំពុងជួបប្រទះការដាច់ចរន្ត 911។", "kor": "{회사 이름}의 전화 고객들이 911 서비스의 중단을 겪고 있습니다. ", "lao": "ລູກຄ້າຂອງໂທລະສັບ {Company name(s)} ກຳລັງປະສົບກັບສັນຍານຂັດຂ້ອງໃນການຕິດຕໍ່ຫາ 911. ", "nep": "{Company name(s)} फोनका ग्राहकहरूले 911 मा फोन गर्दा फोन लागिरहेको छैन। ", "ron": "Clienții operatorului/operatorilor de telefonie {Company name(s)} se confruntă cu o întrerupere a serviciului 911. ", "rus": "У клиентов телефонной компании {Company name(s)} произошел сбой в работе службы 911.", "som": "Macaamiisha telefoonka {Company name(s)} ayaa la kulmaya maqnaanshaha 911.  ", "swa": "Wateja wa simu za {Majina ya kampuni} wanakumbana na hitilafu ya 911. ", "tgl": "Ang mga customer ng telepono ng {Company name(s)} ay nakakaranas ng 911 outage. ", "tha": "ลูกค้าที่ใช้บริการโทรศัพท์ของ {Company name(s)} กำลังประสบปัญหา 911 ล่ม", "ukr": "У клієнтів телефонної компанії {Company name(s)} стався збій у роботі служби 911.", "vie": "Các khách hàng sử dụng điện thoại {Company name(s)} đang gặp sự cố ngừng hoạt động 911."}}
 {"id": "portland-911_outage-003", "scenario": "911_outage", "source": {"eng": "You can still send text messages to 911. "}, "translations": {"spa": "Todavía puede enviar mensajes de texto al 911.", "amh": "አሁንም ወደ 911 የጽሑፍ መልእክት መላክ ይቻላሉ። ", "ara": "لا يزال بإمكانك إرسال رسائل نصية إلى 911.", "bur": "911 သို့ တက်စ်မက်ဆေ့ဂျ် သင်ပို့နိုင်ပါသေးသည်။ ", "chk": "En mi tongeni send text messages ngeni 911. ", "fra": "Ils peuvent néanmoins envoyer des messages de texte au 911. ", "hin": "आप अब भी 911 पर टेक्स्ट संदेश भेज सकते हैं। ", "jpn": "テキストメッセージは911に引き続き送信できます。", "khm": "លោកអ្នកនៅតែអាចផ្ញើសារទៅកាន់លេខ 911។", "kor": "911에 문자 메시지는 아직 보낼 수 있습니다. ", "lao": "ທ່ານຍັງສາມາດສົ່ງຂໍ້ຄວາມໄປຫາ 911. ", "nep": "तर तपाईं अझै पनि 911 मा टेक्स्ट सन्देश पठाउन सक्नुहुन्छ। ", "ron": "Puteți trimite în continuare mesaje text la 911. ", "rus": "Вы по-прежнему можете отправлять текстовые сообщения на номер 911.", "som": "Waxaad wali farriin dhanka telefoonka ah u diri kartaa 911.  ", "swa": "Bado unaweza kutuma ujumbe wa maandishi kwa 911. ", "tgl": "Maaari ka pa ring magpadala ng mga text na mensahe sa 911. ", "tha": "คุณยังสามารถส่งข้อความหา 911 ได้", "ukr": "Ви, як і раніше, можете надсилати текстові повідомлення на номер 911.", "vie": "Quý vị vẫn có thể gửi tin nhắn văn bản tới 911."}}
