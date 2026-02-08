@@ -3,7 +3,14 @@ import json
 import argparse
 import pandas as pd
 from pathlib import Path
-from translationsdataset.data.language_codes import language_codes
+import sys
+
+# Ensure the project root is on sys.path so the `data` package can be imported
+# when this script is executed directly from the `scripts/` directory.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from data.language_codes import language_codes
+
 
 def convert_csv_to_jsonl(csv_path, lang_map=language_codes):
 
@@ -58,13 +65,14 @@ def convert_csv_to_jsonl(csv_path, lang_map=language_codes):
     print(f"✓ Wrote {len(df)} records to {jsonl_path}")
 
 
-if __name__ == "__main__":
+def main():
     # parser = argparse.ArgumentParser(description="Convert CSV to JSONL translation dataset.")
     # parser.add_argument("--csv", required=True, help="Input CSV file path")
 
     # args = parser.parse_args()
 
     csv_file = "translationsdataset/data/raw/portland_911_outage.csv"
+    print(csv_file)
     # go through all of the *.csv files in the translationsdataset/data/raw/ directory
     for csv_path in Path("translationsdataset/data/raw/").glob("*.csv"):
         csv_file = str(csv_path)
@@ -79,3 +87,7 @@ if __name__ == "__main__":
 
         #convert_csv_to_jsonl(args.csv)
         convert_csv_to_jsonl(csv_file, lang_map=language_codes)
+
+
+if __name__ == "__main__":
+    main()
