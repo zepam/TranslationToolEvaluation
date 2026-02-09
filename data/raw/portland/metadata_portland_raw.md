@@ -31,7 +31,7 @@
 - For exact column listings, look at each CSV file. Field presence/format may differ.
 
 ## Processing
-- These raw CSV files were converted to newline-delimited JSON (`.jsonl`) and placed in `data/processed/` using the project scripts (see `scripts/convert_csv_to_json_portland.py`). Processed files are available for evaluation and modeling.
+- These CSV files were converted to newline-delimited JSON (`.jsonl`) and placed in `data/processed/` using the script `scripts/convert_csv_to_json_portland.py`.
 - Encoding: CSVs are UTF-8 encoded.
 
 ## Related files
