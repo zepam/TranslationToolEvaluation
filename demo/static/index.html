@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Alerts demo</title>
+  <style>
+    body { 
+      font-family: system-ui, Arial, sans-serif; 
+      margin: 20px; 
+      max-width: 900px; 
+      background: #dbdbdb; 
+    }
+    .controls { 
+      margin-bottom: 12px; 
+    }
+    .alert { 
+      border: 1px solid #e1e1e1; 
+      padding: 10px; 
+      margin-bottom: 10px; 
+      border-radius: 6px; 
+      background: #fff; 
+    }
+    .meta { 
+      color: #666; 
+      font-size: 0.9em; 
+      margin-top: 8px; 
+    }
+    label { margin-right: 8px; }
+    select, input { margin-right: 8px; }
+    button { padding: 6px 10px; }
+  </style>
+</head>
+<body>
+  <h1>Alerts demo</h1>
+
+  <div class="controls">
+    <label>Scenario:
+      <select id="scenario"><option value="">(any)</option></select>
+    </label>
+    <label>Language:
+      <select id="lang"><option value="">(fallback to English)</option></select>
+    </label>
+    <label>Search:
+      <input id="q" placeholder="keyword" />
+    </label>
+    <button id="search">Search</button>
+  </div>
+
+  <div id="summary"></div>
+  <div id="results"></div>
+
+<script>
+const scenarioEl = document.getElementById("scenario");
+const langEl = document.getElementById("lang");
+const qEl = document.getElementById("q");
+const resultsEl = document.getElementById("results");
+const summaryEl = document.getElementById("summary");
+
+async function loadOptions() {
+  const [sc, lg] = await Promise.all([
+    fetch('/api/scenarios').then(r => r.json()),
+    fetch('/api/languages').then(r => r.json())
+  ]);
+  for (const s of sc) {
+    const o = document.createElement('option'); o.value = s; o.textContent = s; scenarioEl.appendChild(o);
+  }
+  for (const l of lg) {
+    const o = document.createElement('option'); o.value = l; o.textContent = l; langEl.appendChild(o);
+  }
+}
+
+function escapeHtml(s) {
+  if (!s) return '';
+  return s.replace(/[&<>"']/g, function(ch) {
+    return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[ch];
+  });
+}
+
+async function search(offset=0) {
+  const scenario = scenarioEl.value;
+  const lang = langEl.value;
+  const q = qEl.value;
+  const params = new URLSearchParams({limit: 50, offset, scenario, lang, q});
+  const res = await fetch('/api/alerts?' + params.toString());
+  const body = await res.json();
+  summaryEl.textContent = `Showing ${body.results.length} of ${body.total} results (offset ${body.offset})`;
+  resultsEl.innerHTML = '';
+  // for (const r of body.results) {
+  //   const div = document.createElement('div');
+  //   div.className = 'alert';
+  //   div.innerHTML = `<div><strong>${escapeHtml(r.id)}</strong> — <em>${escapeHtml(r.scenario)}</em></div>
+  //     <div style="margin-top:6px">${escapeHtml(r.text)}</div>
+  //     <div class="meta">available languages: ${escapeHtml(r.available_languages.join(', '))}</div>`;
+  //   resultsEl.appendChild(div);
+  // }
+  for (const r of body.results) {
+    const div = document.createElement('div');
+    div.className = 'alert';
+
+    // mark when translation was requested but not present
+    const missingBadge = (r.has_translation === false && document.getElementById('lang').value)
+      ? '<span style="color:#a00; font-weight:600; margin-left:8px;">(translation missing — showing English)</span>'
+      : '';
+
+    div.innerHTML = `
+      <div><strong>${escapeHtml(r.id)}</strong> — <em>${escapeHtml(r.scenario)}</em></div>
+      <div style="margin-top:6px">${escapeHtml(r.text)} ${missingBadge}</div>
+      <div class="meta" style="margin-top:6px"><strong>English (source):</strong> ${escapeHtml(r.english)}</div>
+
+    `;
+    resultsEl.appendChild(div);
+  }
+}
+
+// Bind events
+document.getElementById('search').addEventListener('click', () => search());
+window.addEventListener('load', () => {
+  loadOptions().then(() => search());
+});
+</script>
+</body>
+</html>
