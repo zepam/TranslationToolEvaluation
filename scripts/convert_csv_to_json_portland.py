@@ -1,6 +1,5 @@
 # import csv
 import json
-import argparse
 import pandas as pd
 from pathlib import Path
 import sys
@@ -65,11 +64,7 @@ def convert_csv_to_jsonl(csv_path, lang_map=language_codes):
     print(f"✓ Wrote {len(df)} records to {jsonl_path}")
 
 def main():
-    # parser = argparse.ArgumentParser(description="Convert CSV to JSONL translation dataset.")
-    # parser.add_argument("--csv", required=True, help="Input CSV file path")
-
-    # args = parser.parse_args()
-
+    # this is just for Portland data, select one file to set up the path
     csv_file = "data/raw/portland/portland_911_outage.csv"
     # make sure csv_file is a proper file path
     if not Path(csv_file).is_file():
@@ -81,7 +76,6 @@ def main():
         print(f"Processing {csv_file}...")
 
         convert_csv_to_jsonl(Path(csv_file), lang_map=language_codes)
-
 
 if __name__ == "__main__":
     main()
