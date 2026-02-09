@@ -11,7 +11,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from data.language_codes import language_codes
 
-
 def convert_csv_to_jsonl(csv_path, lang_map=language_codes):
 
     df = pd.read_csv(csv_path)
@@ -24,20 +23,16 @@ def convert_csv_to_jsonl(csv_path, lang_map=language_codes):
     if actual_english != "English":
         df = df.rename(columns={actual_english: "English"})
     
-    # get the filename and scenario name
+    # get the filepath, filename, and scenario name
     p = Path(csv_path)
     parent_filepath = p.parent
     scenario = p.stem.split("_", 1)[1]
     origin = p.stem.split("_", 1)[0]
     basename = p.stem
     json_filename = f"{basename}.jsonl"
-    # Build output directory by replacing the last folder of the input's parent
-    # with `processed`. For example, if CSV is `data/raw/xxx.csv`, this will
-    # produce `data/processed/xxx.jsonl`.
     processed_filepath= parent_filepath.parent.parent / "processed"
     processed_filepath.mkdir(parents=True, exist_ok=True)
     jsonl_path = processed_filepath / json_filename
-
 
     records = []
     for i, row in df.iterrows():
@@ -62,12 +57,12 @@ def convert_csv_to_jsonl(csv_path, lang_map=language_codes):
 
         records.append(record)
 
+    # use compact jsonl format
     with open(jsonl_path, "w", encoding="utf-8") as out:
         for record in records:
             out.write(json.dumps(record, ensure_ascii=False) + "\n")
 
     print(f"✓ Wrote {len(df)} records to {jsonl_path}")
-
 
 def main():
     # parser = argparse.ArgumentParser(description="Convert CSV to JSONL translation dataset.")
@@ -79,9 +74,6 @@ def main():
     # make sure csv_file is a proper file path
     if not Path(csv_file).is_file():
         raise ValueError(f"CSV file {csv_file} does not exist.")
-    
-
-    print("before loop")    
     
     # go through all of the *.csv files in the translationsdataset/data/raw/ directory
     for csv_path in Path(csv_file).parent.glob("*.csv"):
