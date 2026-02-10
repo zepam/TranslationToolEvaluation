@@ -29,7 +29,7 @@ def convert_csv_to_jsonl(csv_path, lang_map=language_codes):
     origin = p.stem.split("_", 1)[0]
     basename = p.stem
     json_filename = f"{basename}.jsonl"
-    processed_filepath= parent_filepath.parent.parent / "processed"
+    processed_filepath = parent_filepath.parent.parent / f"processed/{origin}"
     processed_filepath.mkdir(parents=True, exist_ok=True)
     jsonl_path = processed_filepath / json_filename
 
@@ -62,6 +62,7 @@ def convert_csv_to_jsonl(csv_path, lang_map=language_codes):
             out.write(json.dumps(record, ensure_ascii=False) + "\n")
 
     print(f"✓ Wrote {len(df)} records to {jsonl_path}")
+    return processed_filepath
 
 def main():
     # this is just for Portland data, select one file to set up the path
@@ -75,7 +76,11 @@ def main():
         csv_file = str(csv_path)
         print(f"Processing {csv_file}...")
 
-        convert_csv_to_jsonl(Path(csv_file), lang_map=language_codes)
+        processed_filepath = convert_csv_to_jsonl(Path(csv_file), lang_map=language_codes)
+
+    # then run the scripts/profile_of_data.py script to get the data profile for the Portland data
+    from scripts.profile_of_data import profile_data
+    profile_data(processed_filepath)
 
 if __name__ == "__main__":
     main()
