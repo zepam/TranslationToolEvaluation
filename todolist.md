@@ -5,6 +5,7 @@
 - Struggle/issues:
   - don’t have a good way to track notes of where each translation came from. They have multiple spreadsheets from the last four years to track provenance. Metadata is kind of messy.
   - Organized topically, but there are cross cutting themes. Ex: evacuation for fires, floods.
+- Also want to know how long ago the translations were done.
 
 - Portland was designed for all sorts of disaster related messaging. Very careful that each row is one discrete message.
 
