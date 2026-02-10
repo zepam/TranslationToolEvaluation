@@ -14,7 +14,7 @@
 - Lexical/semantic comparison
 - Cross-lingual evaluation
 
-## Recommended Use
+## Possible Uses
 - Small-scale MT evaluation
 - Classroom NLP demos
 - Exploration of lexical/morphological differences
