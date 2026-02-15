@@ -1,0 +1,17 @@
+scenario,count
+extreme_heat,264
+air_quality,186
+evacuation,156
+wildfire,135
+general,126
+winter_weather,120
+power_outage,70
+shelters,39
+boil_water,32
+flood,31
+alert_and_warning,28
+shelter_in_place,27
+power_lines,19
+reunification,14
+911_outage,8
+dam_failure,6

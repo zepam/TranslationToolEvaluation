@@ -79,7 +79,7 @@ def main():
         processed_filepath = convert_csv_to_jsonl(Path(csv_file), lang_map=language_codes)
 
     # then run the scripts/profile_of_data.py script to get the data profile for the Portland data
-    from scripts.profile_of_data import profile_data
+    from scripts.profile_of_translations import profile_data
     profile_data(processed_filepath)
 
 if __name__ == "__main__":
