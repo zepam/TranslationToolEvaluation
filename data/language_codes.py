@@ -33,3 +33,37 @@ language_codes = {
     "Ukrainian": "ukr",
     "Vietnamese": "vie",
 }
+
+language_codes_reversed = {v: k for k, v in language_codes.items()}
+
+language_codes_to_iso = {
+    "amh": "am",
+    "ara": "ar",
+    "bur": "my",
+    "chk": "chk",  # no ISO 639-1 code for Chuukese
+    "eng": "en",
+    "fas": "fa",
+    "fra": "fr",
+    "hin": "hi",
+    "hmn": "hmn",  # no ISO 639-1 code for Hmong
+    "jpn": "ja",
+    "kar": "kar",  # no ISO 639-1 code for Karen
+    "khm": "km",
+    "kor": "ko",
+    "lao": "lo",
+    "mah": "mah",  # no ISO 639-1 code for Marshallese
+    "nep": "ne",
+    "orm": "om",
+    "pus": "ps",
+    "ron": "ro",
+    "rhg": "rhg",  # no ISO 639-1 code for Rohingya
+    "rus": "ru",
+    "srp": "sr",
+    "som": "so",
+    "spa": "es",
+    "swa": "sw",
+    "tgl": "tl",
+    "tha": "th",
+    "ukr": "uk",
+    "vie": "vi",
+}
