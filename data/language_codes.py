@@ -14,7 +14,7 @@ language_codes = {
     "Korean": "kor",
     "Lao": "lao",
     "Marshallese": "mah",
-    #"Mien": "myn",        confirm this. the code for mien is ium, myn is the code for "Mayan languages"
+    "Mien": "ium",        # Iu Mien
     "Nepali": "nep",        # nepali macrolanguage
     "Oromo": "orm",
     "Pashto": "pus",        # pashto/pushto macrolanguage
@@ -22,14 +22,14 @@ language_codes = {
     "Rohingya": "rhg",
     "Russian": "rus",
     "Serbian": "srp",
-    # "Simplified Chinese": "zh-Hans", check to see which is being used
+    "Simplified Chinese": "zh-Hans", #check to see which is being used
     "Somali": "som",
     "Spanish": "spa",
     "Swahili": "swa",
     "Tagalog": "tgl",
-    #"Telugu": "tel",
+    "Telugu": "tel",
     "Thai": "tha",
-    # "Traditional Chinese": "zh-Hant", check to see which is being used
+    "Traditional Chinese": "zh-Hant", #check to see which is being used
     "Ukrainian": "ukr",
     "Vietnamese": "vie",
 }
@@ -62,6 +62,7 @@ language_codes_to_iso = {
     "som": "so",
     "spa": "es",
     "swa": "sw",
+    "tel": "te",
     "tgl": "tl",
     "tha": "th",
     "ukr": "uk",

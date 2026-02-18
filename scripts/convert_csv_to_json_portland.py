@@ -46,6 +46,17 @@ def convert_csv_to_jsonl(csv_path, lang_map=language_codes):
                 continue
             if col in lang_map:
                 translations[lang_map[col]] = str(val)
+            # these address quirks in the data where the language column names are inconsistent
+            elif col.lower().startswith("farsi") or col.lower().startswith("persian"):
+                translations[lang_map["Persian"]] = str(val)
+            elif col.lower().startswith("karen"):
+                translations[lang_map["Karen"]] = str(val)
+            # addresses misspelling in original data of Traditional Chinese as "Trasitional Chinese"
+            elif col.lower().startswith("trasitional chinese") or col.lower().startswith("traditional chinese"):    
+                translations[lang_map["Traditional Chinese"]] = str(val)
+            else:
+                print(f"Warning: Unrecognized language column '{col}' in CSV. Skipping this column.")
+                continue
 
         record = {
             "id": f"{origin}-{scenario}-{i:03d}",

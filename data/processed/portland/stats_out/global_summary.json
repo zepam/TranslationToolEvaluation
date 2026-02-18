@@ -1,15 +1,18 @@
 {
-  "total_docs": 1263,
+  "total_docs": 1264,
   "languages": [
     "amh",
     "ara",
     "bur",
     "chk",
     "eng",
+    "fas",
     "fra",
     "hin",
     "hmn",
+    "ium",
     "jpn",
+    "kar",
     "khm",
     "kor",
     "lao",
@@ -24,13 +27,16 @@
     "spa",
     "srp",
     "swa",
+    "tel",
     "tgl",
     "tha",
     "ukr",
-    "vie"
+    "vie",
+    "zh-Hans",
+    "zh-Hant"
   ],
-  "num_languages": 27,
-  "total_sentences_approx": 32905,
-  "total_tokens_approx": 428411,
-  "total_pairs": 26
+  "num_languages": 33,
+  "total_sentences_approx": 39318,
+  "total_tokens_approx": 753282,
+  "E-X_translation_total_pairs": 32
 }
