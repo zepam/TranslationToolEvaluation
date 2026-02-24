@@ -28,26 +28,26 @@ from tqdm import tqdm
 import pandas as pd
 #TODO convert language map to json for easier import
 # OPTIONAL imports; we handle missing packages gracefully
-try:
-    import stanza
-except Exception:
-    stanza = None
+# try:
+#     import stanza
+# except Exception:
+#     stanza = None
 
-try:
-    import jieba
-except Exception:
-    jieba = None
+# try:
+#     import jieba
+# except Exception:
+#     jieba = None
 
-try:
-    from pythainlp import word_tokenize as thai_word_tokenize
-except Exception:
-    thai_word_tokenize = None
+# try:
+#     from pythainlp import word_tokenize as thai_word_tokenize
+# except Exception:
+#     thai_word_tokenize = None
 
-try:
-    from fugashi import Tagger as FugashiTagger
+# try:
+#     from fugashi import Tagger as FugashiTagger
 
-except Exception:
-    FugashiTagger = None
+# except Exception:
+#     FugashiTagger = None
 
 # -------------------------
 # Tokenizer / Sentence Splitter Factory
@@ -101,13 +101,13 @@ LANG_CODE_MAP = {
 }
 
 # Which languages we consider for Stanza by default (common languages)
-DEFAULT_STANZA_LANGS = set([
-    'eng','spa','fra','ara','rus','ukr','hin','nep','jpn','kor','zh','vie','tha','khm','lao','bur','amh','ron','swa','som','tgl'
-])
+# DEFAULT_STANZA_LANGS = set([
+#     'eng','spa','fra','ara','rus','ukr','hin','nep','jpn','kor','zh','vie','tha','khm','lao','bur','amh','ron','swa','som','tgl'
+# ])
 
 # caches
 _pipeline_cache = {}
-_fugashi_tagger = None
+# _fugashi_tagger = None
 
 def protect_placeholders(text):
     """Replace {name} with sentinel tokens so tokenizers don't break them."""

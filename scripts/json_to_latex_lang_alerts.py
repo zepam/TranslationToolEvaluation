@@ -36,6 +36,8 @@ def json_to_latex_table(json_input, output_dir=None):
         
         alert_types = sorted(data['alert_types'])
         languages = sorted(data['languages'])
+        # replace all _ with a space and capitalize each word
+        languages = [lang.replace('_', ' ').title() for lang in languages]
         translations = data['translations_per_alert_type_per_language']
         
         # Start LaTeX table
@@ -58,7 +60,8 @@ def json_to_latex_table(json_input, output_dir=None):
         
         # Data rows
         for alert_type in alert_types:
-            row_data = [alert_type.replace('_', '\\_')]  # Escape underscores
+            row_data = [alert_type.replace('_', ' ')]  # replace underscores
+            row_data = [cell.title() for cell in row_data]  # capitalize each word
             for language in languages:
                 count = translations.get(alert_type, {}).get(language, '')
                 row_data.append(str(count) if count else '-')
