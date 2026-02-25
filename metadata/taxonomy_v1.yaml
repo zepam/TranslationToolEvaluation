@@ -1,0 +1,269 @@
+version: "1.0"
+name: "IPAWS Emergency Alert Taxonomy by UW Purple"
+date_created: "2026-02-25"
+scope: >
+  Multidimensional taxonomy for approximate, automated classification
+  of English-language IPAWS-style emergency alert messages.
+intent: >
+  Designed for analysis, comparison, and taxonomy development.
+  Not intended for operational or real-time public safety decision-making.
+
+design_principles:
+  - Multidimensional (no single hierarchy)
+  - Conservative classification
+  - Explicit UNKNOWN and NONE states
+  - Feature-driven and versionable
+  - Human- and machine-readable
+
+dimensions:
+
+  hazard:
+    description: >
+      Explicitly mentioned threats or incidents in the message text.
+      Hazards are assigned only when directly stated.
+    type: multi
+    allow_unknown: true
+    values:
+
+      FIRE:
+        description: Fire-related incidents
+        includes:
+          - wildfire
+          - structure_fire
+
+      SMOKE:
+        description: Smoke impacts without explicit fire mention
+
+      FLOOD:
+        description: Flooding events
+        includes:
+          - flood
+          - flash_flood
+
+      WEATHER:
+        description: Weather-related hazards
+        includes:
+          - storm
+          - tornado
+          - thunderstorm
+          - extreme_heat
+          - extreme_cold
+          - snow
+          - ice
+
+      EARTHQUAKE:
+        description: Seismic activity
+        includes:
+          - earthquake
+          - aftershock
+
+      HAZMAT:
+        description: Hazardous materials or industrial incidents
+        includes:
+          - chemical_release
+          - gas_leak
+          - explosion
+
+      INFRASTRUCTURE:
+        description: Failures of critical infrastructure
+        includes:
+          - power_outage
+          - water_system
+
+      SECURITY:
+        description: Human-caused security threats
+        includes:
+          - active_shooter
+          - lockdown
+
+      UNKNOWN:
+        description: No explicit hazard stated in the message
+
+  action:
+    description: >
+      Required or suggested actions directed at the recipient.
+      Actions may be suppressed by negation or conditional language.
+    type: multi
+    allow_none: true
+    values:
+
+      EVACUATE:
+        description: Leave the affected area
+
+      SHELTER:
+        description: Seek or remain in protective shelter
+        includes:
+          - shelter_in_place
+          - seek_shelter
+
+      AVOID_AREA:
+        description: Avoid entering or traveling through an area
+
+      LOCKDOWN:
+        description: Secure location and restrict movement
+
+      PREPARE:
+        description: Prepare for possible future action
+        includes:
+          - be_ready
+          - prepare_supplies
+
+      MONITOR:
+        description: Stay informed or monitor updates
+        includes:
+          - stay_informed
+          - follow_updates
+
+      NONE:
+        description: No action stated
+
+  urgency:
+    description: >
+      Implied severity and immediacy based on language cues.
+      Derived from textual signals, not CAP severity fields.
+    type: single
+    ordered: true
+    values:
+      EXTREME:
+        description: Immediate, life-threatening danger
+      HIGH:
+        description: Serious risk requiring near-term attention
+      MEDIUM:
+        description: Elevated risk over a longer timeframe
+      LOW:
+        description: Informational or low immediacy
+
+  temporal_scope:
+    description: >
+      Timeframe referenced by the alert.
+    type: single
+    values:
+
+      IMMEDIATE:
+        description: Now or immediately
+
+      SHORT:
+        description: Same day or night (e.g., today, tonight)
+
+      EXTENDED:
+        description: Longer duration (overnight, multiple days)
+
+      OPEN:
+        description: Until further notice
+
+      NONE:
+        description: No explicit temporal reference
+
+  geography:
+    description: >
+      Granularity of geographic specificity mentioned in the text.
+      No geocoding is performed at this stage.
+    type: single
+    values:
+
+      POINT:
+        description: Address or specific landmark
+
+      AREA:
+        description: City, town, or neighborhood
+
+      REGION:
+        description: County or equivalent region
+
+      BROAD:
+        description: Statewide or multi-region
+
+      NONE:
+        description: No location specified
+
+  function:
+    description: >
+      Primary communicative intent of the message.
+      Exactly one function is assigned.
+    type: single
+    priority_order:
+      - CLEAR
+      - UPDATE
+      - DIRECTIVE
+      - ALERT
+    values:
+
+      ALERT:
+        description: Initial warning or notification
+
+      DIRECTIVE:
+        description: Message primarily issuing instructions
+
+      UPDATE:
+        description: Modification or continuation of a prior alert
+
+      CLEAR:
+        description: All-clear, cancellation, or expiration
+
+supporting_feature_classes:
+  description: >
+    Extracted linguistic and structural features used to derive
+    taxonomy labels. These are not taxonomy values themselves.
+  classes:
+
+    authority_boilerplate:
+      examples:
+        - ipaws_phrase
+        - eas_phrase
+        - official_source_language
+
+    negation:
+      examples:
+        - no
+        - not_required
+        - no_longer
+
+    modality:
+      examples:
+        - may
+        - might
+        - should
+        - expected
+
+    conditionality:
+      examples:
+        - if
+        - when
+        - unless
+
+    urgency_language:
+      examples:
+        - life_threatening
+        - severe
+        - dangerous
+
+    lifecycle_language:
+      examples:
+        - remains_in_effect
+        - extended
+        - ended
+        - canceled
+
+    reassurance_language:
+      examples:
+        - no_immediate_danger
+        - safe
+
+constraints_and_notes:
+  - Multiple hazards and actions may be assigned.
+  - Urgency, temporal_scope, geography, and function are single-valued.
+  - UNKNOWN and NONE values are preferred over forced classification.
+  - Taxonomy versions may change without re-extracting features.
+  - Raw message text should always be preserved.
+
+output_recommendation:
+  format: JSON
+  required_fields:
+    - message_id
+    - taxonomy_version
+    - hazards
+    - actions
+    - urgency
+    - temporal_scope
+    - geography
+    - function
