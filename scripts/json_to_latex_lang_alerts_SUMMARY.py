@@ -2,6 +2,8 @@ import json
 import statistics
 from pathlib import Path
 
+#TODO replace And with &, In with in
+
 # Paths
 INPUT_PATH = Path("/home/jen/TranslationsDataset/data/processed/portland/portland_data_profile.json")
 OUTPUT_DIR = INPUT_PATH.parent
@@ -51,12 +53,12 @@ def generate_full_longtable(data: dict) -> str:
 
 def generate_summary_table(data: dict) -> str:
     lines = []
-    lines.append("\\begin{table}[t]")
+    lines.append("\\begin{table}")
     lines.append("\\centering")
-    lines.append("\\caption{Summary of translation coverage by alert type}")
-    lines.append("\\label{tab:translations_summary}")
-    lines.append("\\begin{tabular}{|l|r|r|r|r|r|}")
-    lines.append("\\hline")
+    lines.append("\\setlength{\\tabcolsep}{3pt}")
+    lines.append("\\renewcommand{\\arraystretch}{0.95}")
+    lines.append("\\begin{tabular}{lrrrrr}")
+    lines.append("\\toprule")
     lines.append(
         "\\textbf{Alert Type} & "
         "\\textbf{Total} & "
@@ -65,7 +67,7 @@ def generate_summary_table(data: dict) -> str:
         "\\textbf{Median} & "
         "\\textbf{Max} \\\\"
     )
-    lines.append("\\hline")
+    lines.append("\\midrule")
 
     for alert_type in sorted(data.keys()):
         counts = list(data[alert_type].values())
@@ -81,8 +83,10 @@ def generate_summary_table(data: dict) -> str:
             f"{total:,} & {n_lang} & {min_c} & {median_c} & {max_c} \\\\"
         )
 
-    lines.append("\\hline")
+    lines.append("\\bottomrule")
     lines.append("\\end{tabular}")
+    lines.append("\\caption{Summary of translation document coverage by alert type.}")
+    lines.append("\\label{tab:portland_translations_per_alert_lang_summary}")
     lines.append("\\end{table}")
     return "\n".join(lines)
 

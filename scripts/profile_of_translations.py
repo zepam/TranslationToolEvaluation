@@ -9,7 +9,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).parent.parent / "data"))
 from language_codes import language_codes
 
-def profile_data(jsonl_folder):
+def profile_translations(jsonl_folder):
     jsonl_folder = Path(jsonl_folder)
     if not jsonl_folder.is_dir():
         raise ValueError(f"{jsonl_folder} is not a valid directory.")
@@ -50,7 +50,7 @@ def profile_data(jsonl_folder):
     profile["languages"] = list(profile["languages"])
 
     # Create reverse mapping from code to language name
-    convert_language_codes(profile)
+    # convert_language_codes(profile)
 
     # Save the profile to a JSON file
     output_path = jsonl_folder / "portland_data_profile.json"
@@ -76,7 +76,7 @@ def convert_language_codes(profile):
 
 def main():
     jsonl_folder = "data/processed/portland"
-    profile_data(jsonl_folder)
+    profile_translations(jsonl_folder)
 
 if __name__ == "__main__":
     main()

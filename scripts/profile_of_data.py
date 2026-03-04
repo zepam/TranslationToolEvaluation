@@ -343,17 +343,19 @@ def save_outputs(results, out_dir):
         json.dump(results['global_summary'], fh, ensure_ascii=False, indent=2)
     print("Wrote outputs to", out_dir)
 
-def main():
+def main(processed_filepath=None):
     # ap = argparse.ArgumentParser()
     # ap.add_argument('--input-folder', required=True, help='Folder containing JSON/JSONL files')
     # ap.add_argument('--output-dir', default='./stats_out', help='Output directory for CSV/JSON results')
     # args = ap.parse_args()
 
 
-    input_folder = '/home/jen/TranslationsDataset/data/processed/portland'
-    output_dir = '/home/jen/TranslationsDataset/data/processed/portland'
-    results = process_folder(input_folder)
-    save_outputs(results, output_dir)
+    # input_folder = '/home/jen/TranslationsDataset/data/processed/portland'
+    # output_dir = '/home/jen/TranslationsDataset/data/processed/portland/stats'
+    # results = process_folder(input_folder)
+    # save_outputs(results, output_dir)
+    results = process_folder(processed_filepath)
+    save_outputs(results, os.path.join(processed_filepath, 'stats'))
 
 if __name__ == '__main__':
     main()

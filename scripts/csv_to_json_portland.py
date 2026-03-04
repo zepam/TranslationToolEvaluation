@@ -1,4 +1,26 @@
-# import csv
+"""
+Module for converting CSV translation files to JSONL format.
+
+This module processes CSV files containing translations in multiple languages
+and converts them to JSONL (JSON Lines) format for the TranslationsDataset project.
+It handles language code mapping, validates required columns, and generates structured
+records with source text and translations.
+
+Functions:
+    find_language_code(column_name, lang_map): Matches a CSV column name to a language code
+        with support for exact matches, case-insensitive matching, and language-specific quirks.
+    convert_csv_to_jsonl(csv_path, lang_map): Converts a CSV file to JSONL format,
+        creating records with English source text and translations in other languages.
+        Returns the path to the processed output directory.
+    main(): Entry point that processes all CSV files in the Portland data directory,
+        converts them to JSONL, and generates data profile reports.
+
+The module expects CSV files with an 'English' column (case-insensitive) and uses
+the language_codes mapping from the data package to identify language columns.
+Records are skipped if they contain only the source language without translations.
+Output JSONL files are written in compact format to a processed/ directory structure.
+"""
+
 import json
 import pandas as pd
 from pathlib import Path
@@ -9,6 +31,27 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from data.language_codes import language_codes
+
+def find_language_code(column_name, lang_map):
+    # Check for exact match first
+    if column_name in lang_map:
+        return lang_map[column_name]["iso639-1"] or lang_map[column_name]["iso639-2"]
+    
+    # Check for case-insensitive match
+    for lang, codes in lang_map.items():
+        if lang.lower() == column_name.lower():
+            return codes["iso639-1"] or codes["iso639-2"]
+    
+    # Handle specific quirks in the data
+    if column_name.lower().startswith("farsi") or column_name.lower().startswith("persian"):
+        return lang_map["Persian"]["iso639-1"] or lang_map["Persian"]["iso639-2"]
+    elif column_name.lower().startswith("karen"):
+        return lang_map["Karen"]["iso639-1"] or lang_map["Karen"]["iso639-2"]
+    elif column_name.lower().startswith("trasitional chinese") or column_name.lower().startswith("traditional chinese"):
+        return lang_map["Traditional Chinese"]["iso639-1"] or lang_map["Traditional Chinese"]["iso639-2"]
+    
+    print(f"Warning: Unrecognized language column '{column_name}' in CSV. Skipping this column.")
+    return None
 
 def convert_csv_to_jsonl(csv_path, lang_map=language_codes):
 
@@ -40,24 +83,19 @@ def convert_csv_to_jsonl(csv_path, lang_map=language_codes):
 
         translations = {}
         for col, val in row.items():
-            if col == "English":
-                continue
             if pd.isna(val):
                 continue
-            if col in lang_map:
-                translations[lang_map[col]] = str(val)
-            # these address quirks in the data where the language column names are inconsistent
-            elif col.lower().startswith("farsi") or col.lower().startswith("persian"):
-                translations[lang_map["Persian"]] = str(val)
-            elif col.lower().startswith("karen"):
-                translations[lang_map["Karen"]] = str(val)
-            # addresses misspelling in original data of Traditional Chinese as "Trasitional Chinese"
-            elif col.lower().startswith("trasitional chinese") or col.lower().startswith("traditional chinese"):    
-                translations[lang_map["Traditional Chinese"]] = str(val)
+            lang_code = find_language_code(col, lang_map)
+            if lang_code:
+                translations[lang_code] = str(val)
             else:
                 print(f"Warning: Unrecognized language column '{col}' in CSV. Skipping this column.")
                 continue
 
+        # if length of translations is 1, skip this record since it doesn't have any translations
+        if len(translations) <= 1:
+            #print(f"Warning: Record {i} has only one translation (English). Skipping this record.")
+            continue
         record = {
             "id": f"{origin}-{scenario}-{i:03d}",
             "scenario": scenario,
@@ -90,8 +128,12 @@ def main():
         processed_filepath = convert_csv_to_jsonl(Path(csv_file), lang_map=language_codes)
 
     # then run the scripts/profile_of_data.py script to get the data profile for the Portland data
-    from scripts.profile_of_translations import profile_data
-    profile_data(processed_filepath)
+    from scripts.profile_of_translations import profile_translations
+    profile_translations(processed_filepath)
+    import scripts.profile_of_data
+    scripts.profile_of_data.main(processed_filepath=processed_filepath)
+    # import scripts.domain_counts_csv_to_latex
+    # scripts.domain_counts_csv_to_latex.make_beautiful_files()
 
 if __name__ == "__main__":
     main()
