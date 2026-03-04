@@ -75,7 +75,7 @@ def domain_counts(csv_file, output_file=None):
 
 def make_beautiful_files():
     input_csv = "data/processed/portland/stats/domain_counts.csv"
-    output_tex = "data/processed/portland/domain_counts_table.tex"
+    output_tex = "data/processed/portland/tables/domain_counts_table.tex"
     domain_counts(input_csv, output_tex)
 
 def main():

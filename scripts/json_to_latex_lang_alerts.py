@@ -93,7 +93,7 @@ def json_to_latex_table(json_input, output_dir=None):
 
 def main():
     input_folder = "data/processed/portland"
-    output_dir = "data/processed/portland"
+    output_dir = "data/processed/portland/tables"
     json_to_latex_table(input_folder, output_dir)
 
 

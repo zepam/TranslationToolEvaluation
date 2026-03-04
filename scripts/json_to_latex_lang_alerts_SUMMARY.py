@@ -6,7 +6,7 @@ from pathlib import Path
 
 # Paths
 INPUT_PATH = Path("/home/jen/TranslationsDataset/data/processed/portland/portland_data_profile.json")
-OUTPUT_DIR = INPUT_PATH.parent
+OUTPUT_DIR = INPUT_PATH.parent / "tables"
 
 FULL_TABLE_PATH = OUTPUT_DIR / "translations_per_alert_language_full.tex"
 SUMMARY_TABLE_PATH = OUTPUT_DIR / "translations_per_alert_language_summary.tex"
