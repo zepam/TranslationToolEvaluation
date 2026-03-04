@@ -1,0 +1,1051 @@
+[
+  {
+    "metadata": {
+      "skip": 0,
+      "select": null,
+      "rundate": "2026-02-28T00:41:53.987Z",
+      "top": 10,
+      "filter": "",
+      "format": "json",
+      "metadata": true,
+      "orderby": "sent DESC",
+      "entityname": "IpawsArchivedAlerts",
+      "version": "v1",
+      "url": "/api/open/v1/IpawsArchivedAlerts?%24orderby=sent+desc&%24top=10",
+      "count": 0
+    },
+    "IpawsArchivedAlerts": [
+      {
+        "originalMessage": "<alert xmlns=\"urn:oasis:names:tc:emergency:cap:1.2\"><identifier>2373400538383406</identifier><sender>201198_AMA_Alerts_Amarillo_Area_OEM</sender><sent>2026-02-26T17:24:40-06:00</sent><status>Actual</status><msgType>Alert</msgType><source>Everbridge</source><scope>Public</scope><code>IPAWSv1.0</code><info><language>en-US</language><category>Fire</category><event>Fire Warning</event><urgency>Immediate</urgency><severity>Extreme</severity><certainty>Observed</certainty><eventCode><valueName>SAME</valueName><value>FRW</value></eventCode><expires>2026-02-26T18:24:40-06:00</expires><senderName>201198,AMA Alerts,Amarillo Area OEM</senderName><headline>Prepare to Evacuate</headline><instruction>Prepare personal belongings, go bags, important documents and prepare to evacuate if order is given via text message.</instruction><parameter><valueName>BLOCKCHANNEL</valueName><value>CAPEXCH</value></parameter><parameter><valueName>BLOCKCHANNEL</valueName><value>NWEM</value></parameter><parameter><valueName>BLOCKCHANNEL</valueName><value>EAS</value></parameter><parameter><valueName>EAS-ORG</valueName><value>CIV</value></parameter><parameter><valueName>CMAMtext</valueName><value>Amarillo Area Office of Emergency Management: Prepare to evacuate from fire moving NNE</value></parameter><parameter><valueName>WEAHandling</valueName><value>Imminent Threat</value></parameter><parameter><valueName>timezone</valueName><value>CST</value></parameter><area><areaDesc>Potter County</areaDesc><polygon>35.2908,-101.9264 35.237,-101.9573 35.2235,-102.0686 35.2381,-102.0919 35.2779,-102.0905 35.3121,-102.0761 35.33,-102.0328 35.3312,-101.982 35.3284,-101.9793 35.2908,-101.9264</polygon><geocode><valueName>SAME</valueName><value>048375</value></geocode></area></info><Signature xmlns=\"http://www.w3.org/2000/09/xmldsig#\" xmlns:cap=\"http://gov.fema.ipaws.services/IPAWS_CAPService/\" xmlns:resp=\"http://gov.fema.ipaws.services/capresponse\" xmlns:ns10=\"urn:oasis:names:tc:emergency:cap:1.2\" xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:req=\"http://gov.fema.ipaws.services/caprequest\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><SignedInfo><CanonicalizationMethod Algorithm=\"http://www.w3.org/2001/10/xml-exc-c14n#\"/><SignatureMethod Algorithm=\"http://www.w3.org/2001/04/xmldsig-more#rsa-sha256\"/><Reference URI=\"\"><Transforms><Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\"/></Transforms><DigestMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#sha256\"/><DigestValue>SjUBJHHQjydg4VQZ+BvVTHPZz/7OaE4L/cR75S0iTDc=</DigestValue></Reference></SignedInfo><SignatureValue>fUHecyFBmpeicgXFccGa11FDejIJaF9TBYgMM5Kb7pp85xfU+Gv8fBwIYgK4HnmhkbRya0q3EWXlqHr62QwsgnIzsh+sesyxT2Ib/y9bhtaAmu7nc78IsjojlQh/aQQJ8fjojYlI5oXm8TogP4ZTdlOQ5r5HbA5KLDz8UjCZPtmr7Qyv6czcguUlnsjqRou2f9zUWxN+wx11fv6ETLJGYTCg4zrvqB3MThaaZR2ZpAv3EzjaitMANxXn/9BJD9aUjY7en3l36FVsLbP7hN+AAU+LBD6/OzjarVclTiSgHN0gC23Mt7vWE8E4LmfsfBYcKp0z3vScUUFNNc9X58ZCCQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>CN=IPAWSOPEN201198,OU=A01410D0000018AEFFB556200008BED,OU=Devices IPAWS,OU=National Continuity Programs,O=FEMA IPAWS,C=US</X509SubjectName><X509Certificate>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</X509Certificate></X509Data></KeyInfo></Signature></alert>",
+        "identifier": "2373400538383406",
+        "sender": "201198_AMA_Alerts_Amarillo_Area_OEM",
+        "sent": "2026-02-26T23:24:40.000Z",
+        "status": "Actual",
+        "msgType": "Alert",
+        "source": "Everbridge",
+        "scope": "Public",
+        "restriction": null,
+        "addresses": null,
+        "code": [
+          "IPAWSv1.0"
+        ],
+        "note": null,
+        "searchGeometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -101.9264,
+                35.2908
+              ],
+              [
+                -101.9793,
+                35.3284
+              ],
+              [
+                -101.982,
+                35.3312
+              ],
+              [
+                -102.0328,
+                35.33
+              ],
+              [
+                -102.0761,
+                35.3121
+              ],
+              [
+                -102.0905,
+                35.2779
+              ],
+              [
+                -102.0919,
+                35.2381
+              ],
+              [
+                -102.0686,
+                35.2235
+              ],
+              [
+                -101.9573,
+                35.237
+              ],
+              [
+                -101.9264,
+                35.2908
+              ]
+            ]
+          ]
+        },
+        "incidents": null,
+        "cogId": 201198,
+        "id": "8eba7f68-a17e-48cb-b004-657854a51be5",
+        "xmlns": "urn:oasis:names:tc:emergency:cap:1.2",
+        "info": [
+          {
+            "area": [
+              {
+                "geocode": [
+                  {
+                    "id": 285,
+                    "name": "SAME",
+                    "value": "048375"
+                  }
+                ],
+                "polygon": {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [
+                      [
+                        -101.9264,
+                        35.2908
+                      ],
+                      [
+                        -101.9573,
+                        35.237
+                      ],
+                      [
+                        -102.0686,
+                        35.2235
+                      ],
+                      [
+                        -102.0919,
+                        35.2381
+                      ],
+                      [
+                        -102.0905,
+                        35.2779
+                      ],
+                      [
+                        -102.0761,
+                        35.3121
+                      ],
+                      [
+                        -102.0328,
+                        35.33
+                      ],
+                      [
+                        -101.982,
+                        35.3312
+                      ],
+                      [
+                        -101.9793,
+                        35.3284
+                      ],
+                      [
+                        -101.9264,
+                        35.2908
+                      ]
+                    ]
+                  ]
+                },
+                "areaDesc": "Potter County"
+              }
+            ],
+            "event": "Fire Warning",
+            "expires": "2026-02-26T18:24:40-06:00",
+            "urgency": "Immediate",
+            "category": [
+              "Fire"
+            ],
+            "headline": "Prepare to Evacuate",
+            "language": "en-US",
+            "severity": "Extreme",
+            "certainty": "Observed",
+            "eventCode": [
+              {
+                "id": 2427,
+                "name": "SAME",
+                "value": "FRW"
+              }
+            ],
+            "parameter": [
+              {
+                "name": "BLOCKCHANNEL",
+                "value": "CAPEXCH"
+              },
+              {
+                "name": "BLOCKCHANNEL",
+                "value": "NWEM"
+              },
+              {
+                "name": "BLOCKCHANNEL",
+                "value": "EAS"
+              },
+              {
+                "name": "EAS-ORG",
+                "value": "CIV"
+              },
+              {
+                "name": "CMAMtext",
+                "value": "Amarillo Area Office of Emergency Management: Prepare to evacuate from fire moving NNE"
+              },
+              {
+                "name": "WEAHandling",
+                "value": "Imminent Threat"
+              },
+              {
+                "name": "timezone",
+                "value": "CST"
+              }
+            ],
+            "senderName": "201198,AMA Alerts,Amarillo Area OEM",
+            "instruction": "Prepare personal belongings, go bags, important documents and prepare to evacuate if order is given via text message."
+          }
+        ]
+      },
+      {
+        "originalMessage": "<alert xmlns=\"urn:oasis:names:tc:emergency:cap:1.2\"><identifier>17721472700001393402073</identifier><sender>St_Mary_Parish_LA_Government</sender><sent>2026-02-26T17:07:50-06:00</sent><status>Actual</status><msgType>Alert</msgType><scope>Public</scope><code>IPAWSv1.0</code><info><language>en-US</language><category>Health</category><event>FRANKLIN BOIL WATER LIFTED</event><responseType>Monitor</responseType><urgency>Immediate</urgency><severity>Extreme</severity><certainty>Observed</certainty><eventCode><valueName>SAME</valueName><value>LAE</value></eventCode><effective>2025-12-06T11:24:00-06:00</effective><onset>2025-12-06T11:24:00-06:00</onset><expires>2026-02-26T18:07:50-06:00</expires><senderName>St_Mary_Parish_LA_Government</senderName><headline>FRANKLIN BOIL WATER LIFTED</headline><description>FRANKLIN BOIL WATER LIFTED</description><instruction>Franklin boil water lifted</instruction><parameter><valueName>WEAHandling</valueName><value>Public Safety</value></parameter><parameter><valueName>CMAMtext</valueName><value>FRANKLIN BOIL WATER LIFTED</value></parameter><parameter><valueName>CMAMlongtext</valueName><value>FRANKLIN BOIL WATER LIFTED</value></parameter><parameter><valueName>EAS-ORG</valueName><value>CIV</value></parameter><parameter><valueName>EAS-ORG</valueName><value>CIV</value></parameter><area><areaDesc>FRANKLIN LA WATER SYSTEM</areaDesc><polygon>29.6036,-91.0566 29.3477,-91.3242 29.7306,-91.9545 30.0009,-91.5513 29.7352,-91.0372 29.6036,-91.0566</polygon><geocode><valueName>SAME</valueName><value>022101</value></geocode></area></info><Signature xmlns=\"http://www.w3.org/2000/09/xmldsig#\" xmlns:ns4=\"http://gov.fema.ipaws.services/capresponse\" xmlns:ns3=\"urn:oasis:names:tc:emergency:cap:1.2\"><SignedInfo><CanonicalizationMethod Algorithm=\"http://www.w3.org/2001/10/xml-exc-c14n#\"/><SignatureMethod Algorithm=\"http://www.w3.org/2001/04/xmldsig-more#rsa-sha256\"/><Reference URI=\"\"><Transforms><Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\"/></Transforms><DigestMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#sha256\"/><DigestValue>8p6gXUxJcRKOIA1uYWT9l25315bppECGur5+paEGyHQ=</DigestValue></Reference></SignedInfo><SignatureValue>YYqLi1ds2EXn6d8dsKCHrxY3veWJjECE9OpcGH5hURds4OeDyL9+zmLD1ZmtFsYR6RqT5QI9zjNm&#13;\n/gRkGYjIcxocQF9hHQI6/Fn2JJ40P1ZXt452iF3W9qhII2bqoulWwUPTOP4qIxpJfy6HpBDtoTv2&#13;\nDJ5oL3BmtAsykDq4oHxwcnMfX8/Fu6xY+79/jgoGEyAU+7w6gUpfJLCQ3RHcgUcSyFfMhZrkXuUZ&#13;\nBwetkyTP5/+oGrVhMgne5DN2pTjnsQet8GD9lfkJgFE5s53nJKXdIQmfS03jY1+LAKFNR1ZlbpVK&#13;\nS7JwBw4bhmKm9ZsE/ZFzO2zUMI8K4d90ZPrzdA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>CN=IPAWSOPEN201895,OU=A01410C00000198E757305E0002775E,OU=Devices IPAWS,OU=National Continuity Programs,O=FEMA IPAWS,C=US</X509SubjectName><X509Certificate>MIIHPzCCBSegAwIBAgIQQAGY51cwbr7dtLbH/YiI8zANBgkqhkiG9w0BAQsFADBdMQswCQYDVQQG&#13;\nEwJVUzESMBAGA1UEChMJSWRlblRydXN0MSAwHgYDVQQLExdJZGVuVHJ1c3QgR2xvYmFsIENvbW1v&#13;\nbjEYMBYGA1UEAxMPSUdDIERldmljZSBDQSAyMB4XDTI1MDgyNjE3MDUwN1oXDTI4MDgyNTE3MDQw&#13;\nN1owgaUxCzAJBgNVBAYTAlVTMRMwEQYDVQQKEwpGRU1BIElQQVdTMSUwIwYDVQQLExxOYXRpb25h&#13;\nbCBDb250aW51aXR5IFByb2dyYW1zMRYwFAYDVQQLEw1EZXZpY2VzIElQQVdTMSgwJgYDVQQLEx9B&#13;\nMDE0MTBDMDAwMDAxOThFNzU3MzA1RTAwMDI3NzVFMRgwFgYDVQQDEw9JUEFXU09QRU4yMDE4OTUw&#13;\nggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDAGO70jT1yQirRCjAseudkbEU7JPzmdk32&#13;\nCly5croKQ/K8tgzQIK7mnzH8wFZ5Gw3MYnsjRc1hK5BM13Xb9M2g/q29F5XB1zpsHy9Hq5mQBo5Y&#13;\n2CgbzBPiSf8KRrfu0n8VLanRyrh+AjFCp4QZeuHqJ0ynw3T6IntQMadaYELJvAM5mDSaKjpUV/d5&#13;\nmVN5kPpSiRCX4Tm2xtSpfgZMZ0f6ROA/Kx+zzbAk8gRH5SOjKDzwmT0gRGztg9HNuyjXE1AwNlIB&#13;\n2Pxzw66s/5HVBJdPp1Yrg6GedY6b338jplrC8dM8S7oTxCUdmUnBpb6ausdklQHLwOmjtueCv3cd&#13;\nAT/TAgMBAAGjggKwMIICrDAOBgNVHQ8BAf8EBAMCBaAwfQYIKwYBBQUHAQEEcTBvMCkGCCsGAQUF&#13;\nBzABhh1odHRwOi8vaWdjLm9jc3AuaWRlbnRydXN0LmNvbTBCBggrBgEFBQcwAoY2aHR0cDovL3Zh&#13;\nbGlkYXRpb24uaWRlbnRydXN0LmNvbS9jZXJ0cy9pZ2NkZXZpY2VjYTIucDdjMB8GA1UdIwQYMBaA&#13;\nFD+LR65hHetlI5XEOi3tu0jVIykiMIIBQwYDVR0gBIIBOjCCATYwDQYLYIZIAYb5LwBkJQEwggEj&#13;\nBgtghkgBhvkvAGQmATCCARIwSwYIKwYBBQUHAgEWP2h0dHBzOi8vc2VjdXJlLmlkZW50cnVzdC5j&#13;\nb20vY2VydGlmaWNhdGVzL3BvbGljeS9JR0MvaW5kZXguaHRtbDCBwgYIKwYBBQUHAgIwgbUMgbJD&#13;\nZXJ0aWZpY2F0ZSB1c2UgcmVzdHJpY3RlZCB0byBSZWx5aW5nIFBhcnR5KHMpIGluIGFjY29yZGFu&#13;\nY2Ugd2l0aCBJR0MtQ1AgKHNlZSBodHRwczovL3NlY3VyZS5pZGVudHJ1c3QuY29tL2NlcnRpZmlj&#13;\nYXRlcy9wb2xpY3kvaWdjL2luZGV4Lmh0bWwpLiBJR0MtQ1BTIGluY29ycG9yYXRlZCBieSByZWZl&#13;\ncmVuY2UuMEUGA1UdHwQ+MDwwOqA4oDaGNGh0dHA6Ly92YWxpZGF0aW9uLmlkZW50cnVzdC5jb20v&#13;\nY3JsL2lnY2RldmljZWNhMi5jcmwwGgYDVR0RBBMwEYIPSVBBV1NPUEVOMjAxODk1MB0GA1UdDgQW&#13;\nBBQmkG9h//r1iVhuhx+r8c9wkN7HeDAxBgNVHSUEKjAoBggrBgEFBQcDAgYIKwYBBQUHAwUGCCsG&#13;\nAQUFBwMGBggrBgEFBQcDBzANBgkqhkiG9w0BAQsFAAOCAgEAF7pnyOucycFYgY0ORq5Z646T2ku0&#13;\nj0ZJTatFjZvdV5B22OTbarcSQkjycYCk/NqShISGhFMsQJAPA8YDdgMlgu5yMGC6YtJRci2cKMdy&#13;\na3YMXyZIaaPsa1Nohdj3miTSiW06fIfYGxvakIvdSFBPpRAHnHjlliZrfeWafyq/0JfNc52G+h/f&#13;\nV5OxSUr8Ucqfwu0Glu24r2jGrMHKbG4j/mvTK8AGyKBPr2JuyY6M1XX4REQ/EZRMeS2drFgh8FWs&#13;\nPQT1RSGzOTCxNTDa4Fz+wn4bgtH+9RQcMPOLyidsM1RkQFBXIiGxUPgDrmPyrGmnNU1HzfbtP6B6&#13;\nEW6lTYBPmFnMNzaoDjWaTAv4kfE0YXhVIJZ3rmQJURP/0tQIVdLIYPXVYWl6h04xV73Ir8EKp3dn&#13;\n/V187HTHCULK3gNB+AqxkI2NpAMV8veCLwZsrt4rZbxUSZ3pq/VPiSdjOp9mL91Mg3wVAzizT/jP&#13;\nhmtCdinv40nSmOknfyQZJ7t+wIP41oRuXavbey/ZMGK699AV14pF0TipGpDz3pd+e4+yybh5dJF0&#13;\n1AIdn4xiFI0aHPq0ITYAveq0kK9kVCCtYboiSzrCnVgetdDftZJixHHUjlzQlCUF9FdvVOZcsCT8&#13;\nbKJAcLGoLXRIrEw/POzB3dby5BCoB2rA+WYHEuaUWIsft7w=</X509Certificate></X509Data></KeyInfo></Signature></alert>",
+        "identifier": "17721472700001393402073",
+        "sender": "St_Mary_Parish_LA_Government",
+        "sent": "2026-02-26T23:07:50.000Z",
+        "status": "Actual",
+        "msgType": "Alert",
+        "source": null,
+        "scope": "Public",
+        "restriction": null,
+        "addresses": null,
+        "code": [
+          "IPAWSv1.0"
+        ],
+        "note": null,
+        "searchGeometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -91.0566,
+                29.6036
+              ],
+              [
+                -91.0372,
+                29.7352
+              ],
+              [
+                -91.5513,
+                30.0009
+              ],
+              [
+                -91.9545,
+                29.7306
+              ],
+              [
+                -91.3242,
+                29.3477
+              ],
+              [
+                -91.0566,
+                29.6036
+              ]
+            ]
+          ]
+        },
+        "incidents": null,
+        "cogId": 201895,
+        "id": "0e43bc93-f1e2-4d45-8874-2b203b3e5c4a",
+        "xmlns": "urn:oasis:names:tc:emergency:cap:1.2",
+        "info": [
+          {
+            "area": [
+              {
+                "geocode": [
+                  {
+                    "id": 3545,
+                    "name": "SAME",
+                    "value": "022101"
+                  }
+                ],
+                "polygon": {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [
+                      [
+                        -91.0566,
+                        29.6036
+                      ],
+                      [
+                        -91.3242,
+                        29.3477
+                      ],
+                      [
+                        -91.9545,
+                        29.7306
+                      ],
+                      [
+                        -91.5513,
+                        30.0009
+                      ],
+                      [
+                        -91.0372,
+                        29.7352
+                      ],
+                      [
+                        -91.0566,
+                        29.6036
+                      ]
+                    ]
+                  ]
+                },
+                "areaDesc": "FRANKLIN LA WATER SYSTEM"
+              }
+            ],
+            "event": "FRANKLIN BOIL WATER LIFTED",
+            "onset": "2025-12-06T11:24:00-06:00",
+            "expires": "2026-02-26T18:07:50-06:00",
+            "urgency": "Immediate",
+            "category": [
+              "Health"
+            ],
+            "headline": "FRANKLIN BOIL WATER LIFTED",
+            "language": "en-US",
+            "severity": "Extreme",
+            "certainty": "Observed",
+            "effective": "2025-12-06T11:24:00-06:00",
+            "eventCode": [
+              {
+                "id": 2640,
+                "name": "SAME",
+                "value": "LAE"
+              }
+            ],
+            "parameter": [
+              {
+                "name": "WEAHandling",
+                "value": "Public Safety"
+              },
+              {
+                "name": "CMAMtext",
+                "value": "FRANKLIN BOIL WATER LIFTED"
+              },
+              {
+                "name": "CMAMlongtext",
+                "value": "FRANKLIN BOIL WATER LIFTED"
+              },
+              {
+                "name": "EAS-ORG",
+                "value": "CIV"
+              },
+              {
+                "name": "EAS-ORG",
+                "value": "CIV"
+              }
+            ],
+            "senderName": "St_Mary_Parish_LA_Government",
+            "description": "FRANKLIN BOIL WATER LIFTED",
+            "instruction": "Franklin boil water lifted",
+            "responseType": [
+              "Monitor"
+            ]
+          }
+        ]
+      },
+      {
+        "originalMessage": "<alert xmlns=\"urn:oasis:names:tc:emergency:cap:1.2\"><identifier>TXDOT-6bcab660-474e-417e-852c-a853eddbf268</identifier><sender>helpalerts@ilogcorp.com</sender><sent>2026-02-26T16:11:39-06:00</sent><status>Actual</status><msgType>Cancel</msgType><source>ILOG-IRIS</source><scope>Public</scope><code>IPAWSv1.0</code><references>helpalerts@ilogcorp.com,TXDOT-975c7cfa-3eea-42d4-b6a1-164366803126,2026-02-26T11:20:57-06:00</references><Signature xmlns=\"http://www.w3.org/2000/09/xmldsig#\"><SignedInfo><CanonicalizationMethod Algorithm=\"http://www.w3.org/2001/10/xml-exc-c14n#\"/><SignatureMethod Algorithm=\"http://www.w3.org/2001/04/xmldsig-more#rsa-sha256\"/><Reference URI=\"\"><Transforms><Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\"/></Transforms><DigestMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#sha256\"/><DigestValue>NrLhRVoxO+ZyWLPFVayoAqrcqBmzu27WPVMq95r0uOI=</DigestValue></Reference></SignedInfo><SignatureValue>FtQGNlajLKL4OUPMedBgE+A1VLCYkds35uDzr2oNJ94U1dvWxafqSblCphejZhdwOudA1jLLssdiyJeZwm+/EMBb0colA+kDNCFRDYNCC7qlfiNecOVMUFUiSxwiMRkJgkZYYUfuRdnl43pIPbj6pI5iiM68Gh7Ad2WCAjgad5G6TQVGky/1uv1eXoh5ebZg86plH+bfgysiXpLpJyCJRt0hJHBs8vwq48aifEfj1FcOIfFyC1FTfSrblh7yauON7DBBWWrVeSwSOjw8jL+p7qNWoFfCnT72S6CJPciyrgdUDaDokxNFGcnWjVXnuf3JJBcdUDtJyFJPnuBa6JlEcA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>CN=IPAWSOPEN201960, OU=A01410D0000019446134CEF0021F950, OU=Devices IPAWS, OU=National Continuity Programs, O=FEMA IPAWS, C=US</X509SubjectName><X509Certificate>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</X509Certificate></X509Data></KeyInfo></Signature></alert>",
+        "identifier": "TXDOT-6bcab660-474e-417e-852c-a853eddbf268",
+        "sender": "helpalerts@ilogcorp.com",
+        "sent": "2026-02-26T22:11:39.000Z",
+        "status": "Actual",
+        "msgType": "Cancel",
+        "source": "ILOG-IRIS",
+        "scope": "Public",
+        "restriction": null,
+        "addresses": null,
+        "code": [
+          "IPAWSv1.0"
+        ],
+        "note": null,
+        "searchGeometry": null,
+        "incidents": null,
+        "cogId": 201960,
+        "id": "da7715e5-f883-4b4a-afc3-67e0b737cdca",
+        "xmlns": "urn:oasis:names:tc:emergency:cap:1.2",
+        "info": null
+      },
+      {
+        "originalMessage": "<alert xmlns=\"urn:oasis:names:tc:emergency:cap:1.2\"><identifier>CAPNET-0-2586-20260226155000</identifier><sender>KYEOC</sender><sent>2026-02-26T15:50:00-05:00</sent><status>Actual</status><msgType>Alert</msgType><source>KYEOC</source><scope>Public</scope><code>IPAWSv1.0</code><info><language>en-US</language><category>Safety</category><event>REQUIRED MONTHLY TEST</event><urgency>Immediate</urgency><severity>Minor</severity><certainty>Observed</certainty><audience>All</audience><eventCode><valueName>SAME</valueName><value>RMT</value></eventCode><effective>2026-02-26T15:50:00-05:00</effective><expires>2026-02-26T16:50:00-05:00</expires><senderName>KYEOC</senderName><headline>Emergency Alert System Test</headline><description>This is a coordinated monthly test of the Kentucky Emergency Alert System. In cooperation with Federal, State, and local officials, broadcasters are testing equipment to ensure that you may be quickly warned, in the event of an emergency. This has been a Required Monthly Test of the E A S Network.</description><instruction>No action is needed. This is only a test.</instruction><parameter><valueName>EAS-ORG</valueName><value>CIV</value></parameter><parameter><valueName>BLOCKCHANNEL</valueName><value>NWEM</value></parameter><parameter><valueName>BLOCKCHANNEL</valueName><value>CMAS</value></parameter><parameter><valueName>EAS-STN-ID</valueName><value>KYEOC</value></parameter><area><areaDesc>Kentucky</areaDesc><geocode><valueName>SAME</valueName><value>021000</value></geocode></area></info><capsig:Signature xmlns:capsig=\"http://www.w3.org/2000/09/xmldsig#\"><capsig:SignedInfo><capsig:CanonicalizationMethod Algorithm=\"http://www.w3.org/2001/10/xml-exc-c14n#\"/><capsig:SignatureMethod Algorithm=\"http://www.w3.org/2001/04/xmldsig-more#rsa-sha256\"/><capsig:Reference URI=\"\"><capsig:Transforms><capsig:Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\"/></capsig:Transforms><capsig:DigestMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#sha256\"/><capsig:DigestValue>y9sp+pwjLthFHSvjF/XaBI8MDlf86WpncT2eTTpmeR4=</capsig:DigestValue></capsig:Reference></capsig:SignedInfo><capsig:SignatureValue>oUZvpaI+EzdsD21Q0WW2i/U2WtheVfMvYG25Bt7v2YMhXDLKthmuWuWzy9kZ89U1metd+I0nQ2+1U5RwLuVNDcdoI3e9M7cO3fdFMMR+Io9g30mk4sCyUV0wGeueVm7+misK+UV1vIhgIe9Fh3UTJe08hITiMNyktPgZH4kttmB33gFeChwh/FYth/exX86WDrwtcUSAM4zoBONh9ozcg7xtnekgigCgE3M7agt7bKDsyRIbQwNS8YVQ12Fm0K5AmdqCwUUDugqTNDcv5cBBG/9bFEgRURhfrQMXiFXLpkLRP7aCby4SlBYayqunUL2J1LWs8QJUfjNcgBpW/Ibylg==</capsig:SignatureValue><capsig:KeyInfo><capsig:X509Data><capsig:X509SubjectName>CN=IPAWSOPEN200025,OU=A01410C000001995CBE438200147CB4,OU=Devices IPAWS,OU=National Continuity Programs,O=FEMA IPAWS,C=US</capsig:X509SubjectName><capsig:X509Certificate>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</capsig:X509Certificate></capsig:X509Data></capsig:KeyInfo></capsig:Signature></alert>",
+        "identifier": "CAPNET-0-2586-20260226155000",
+        "sender": "KYEOC",
+        "sent": "2026-02-26T20:50:00.000Z",
+        "status": "Actual",
+        "msgType": "Alert",
+        "source": "KYEOC",
+        "scope": "Public",
+        "restriction": null,
+        "addresses": null,
+        "code": [
+          "IPAWSv1.0"
+        ],
+        "note": null,
+        "searchGeometry": null,
+        "incidents": null,
+        "cogId": 200025,
+        "id": "6967a70c-6425-4471-96eb-c81804b8743f",
+        "xmlns": "urn:oasis:names:tc:emergency:cap:1.2",
+        "info": [
+          {
+            "area": [
+              {
+                "geocode": [
+                  {
+                    "id": 14956,
+                    "name": "SAME",
+                    "value": "021000"
+                  }
+                ],
+                "areaDesc": "Kentucky"
+              }
+            ],
+            "event": "REQUIRED MONTHLY TEST",
+            "expires": "2026-02-26T16:50:00-05:00",
+            "urgency": "Immediate",
+            "audience": "All",
+            "category": [
+              "Safety"
+            ],
+            "headline": "Emergency Alert System Test",
+            "language": "en-US",
+            "severity": "Minor",
+            "certainty": "Observed",
+            "effective": "2026-02-26T15:50:00-05:00",
+            "eventCode": [
+              {
+                "id": 650,
+                "name": "SAME",
+                "value": "RMT"
+              }
+            ],
+            "parameter": [
+              {
+                "name": "EAS-ORG",
+                "value": "CIV"
+              },
+              {
+                "name": "BLOCKCHANNEL",
+                "value": "NWEM"
+              },
+              {
+                "name": "BLOCKCHANNEL",
+                "value": "CMAS"
+              },
+              {
+                "name": "EAS-STN-ID",
+                "value": "KYEOC"
+              }
+            ],
+            "senderName": "KYEOC",
+            "description": "This is a coordinated monthly test of the Kentucky Emergency Alert System. In cooperation with Federal, State, and local officials, broadcasters are testing equipment to ensure that you may be quickly warned, in the event of an emergency. This has been a Required Monthly Test of the E A S Network.",
+            "instruction": "No action is needed. This is only a test."
+          }
+        ]
+      },
+      {
+        "originalMessage": "<alert xmlns=\"urn:oasis:names:tc:emergency:cap:1.2\"><identifier>CAPNET-0-1979-20260226110200</identifier><sender>eas.localdomain@10.42.8.18</sender><sent>2026-02-26T11:02:00-08:00</sent><status>Actual</status><msgType>Alert</msgType><source>OEM,1,OR</source><scope>Public</scope><code>IPAWSv1.0</code><info><language>en-US</language><category>Safety</category><event>REQUIRED WEEKLY TEST</event><urgency>Immediate</urgency><severity>Minor</severity><certainty>Observed</certainty><audience>All</audience><eventCode><valueName>SAME</valueName><value>RWT</value></eventCode><effective>2026-02-26T11:02:00-08:00</effective><expires>2026-02-26T14:02:00-08:00</expires><senderName>Oregon-Emergency-Management</senderName><headline>Emergency Alert System Test</headline><description>This is a test of the Emergency Alert System. This is only a test</description><instruction>No action is needed. This is only a test.</instruction><parameter><valueName>EAS-ORG</valueName><value>CIV</value></parameter><parameter><valueName>BLOCKCHANNEL</valueName><value>NWEM</value></parameter><parameter><valueName>BLOCKCHANNEL</valueName><value>CMAS</value></parameter><parameter><valueName>EAS-STN-ID</valueName><value>OEM,1,OR</value></parameter><area><areaDesc>Oregon,Clark, WA</areaDesc><geocode><valueName>SAME</valueName><value>041000</value></geocode><geocode><valueName>SAME</valueName><value>053011</value></geocode></area></info><info><language>es-US</language><category>Safety</category><event>REQUIRED WEEKLY TEST</event><urgency>Immediate</urgency><severity>Minor</severity><certainty>Observed</certainty><audience>All</audience><eventCode><valueName>SAME</valueName><value>RWT</value></eventCode><effective>2026-02-26T11:02:00-08:00</effective><expires>2026-02-26T14:02:00-08:00</expires><senderName>Oregon-Emergency-Management</senderName><headline>Emergency Alert System Test</headline><description></description><instruction></instruction><parameter><valueName>EAS-ORG</valueName><value>CIV</value></parameter><parameter><valueName>BLOCKCHANNEL</valueName><value>NWEM</value></parameter><parameter><valueName>BLOCKCHANNEL</valueName><value>CMAS</value></parameter><parameter><valueName>EAS-STN-ID</valueName><value>OEM,1,OR</value></parameter><area><areaDesc>Oregon,Clark, WA</areaDesc><geocode><valueName>SAME</valueName><value>041000</value></geocode><geocode><valueName>SAME</valueName><value>053011</value></geocode></area></info><capsig:Signature xmlns:capsig=\"http://www.w3.org/2000/09/xmldsig#\"><capsig:SignedInfo><capsig:CanonicalizationMethod Algorithm=\"http://www.w3.org/2001/10/xml-exc-c14n#\"/><capsig:SignatureMethod Algorithm=\"http://www.w3.org/2001/04/xmldsig-more#rsa-sha256\"/><capsig:Reference URI=\"\"><capsig:Transforms><capsig:Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\"/></capsig:Transforms><capsig:DigestMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#sha256\"/><capsig:DigestValue>zLfyo45/JTkmmOzKUOdSHaA6NYmR1HaiBPnnuihHtmo=</capsig:DigestValue></capsig:Reference></capsig:SignedInfo><capsig:SignatureValue>MPA4V46pECAsh204SCI7WlnBXz8rdRnqWJ0xji4cE1WOngqhAuEnXC0alkCWeRaVBjKGxKMj7EIDIYWu9whgt+BtnUp24MnuhBxIXXNbq+/4K1/6wVLA9GdoVAoBZCqMfHgDg9PWEmi42KZ9TOv7iBiVXD5F11nZFRKTqGSbYii4lSzMBXHdoox2vK6zcSneTiRBKtY6en7vO6X+7oxgyNcieY+hCAQGRXtcAFn0o/xrqt1VDqj31SJxxcDfTGDBgnv/QUI2d0aEkwfVITgfRdg1B6yhx4kNmcbu7asSr6ZJUW5gh32K01v/Fg0X06NmCPZ27b/z8XGGUgJJopMjxw==</capsig:SignatureValue><capsig:KeyInfo><capsig:X509Data><capsig:X509SubjectName>CN=IPAWSOPEN200296,OU=A01410D00000190595E623B0008AC9D,OU=Devices IPAWS,OU=National Continuity Programs,O=FEMA IPAWS,C=US</capsig:X509SubjectName><capsig:X509Certificate>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</capsig:X509Certificate></capsig:X509Data></capsig:KeyInfo></capsig:Signature></alert>",
+        "identifier": "CAPNET-0-1979-20260226110200",
+        "sender": "eas.localdomain@10.42.8.18",
+        "sent": "2026-02-26T19:02:00.000Z",
+        "status": "Actual",
+        "msgType": "Alert",
+        "source": "OEM,1,OR",
+        "scope": "Public",
+        "restriction": null,
+        "addresses": null,
+        "code": [
+          "IPAWSv1.0"
+        ],
+        "note": null,
+        "searchGeometry": null,
+        "incidents": null,
+        "cogId": 200296,
+        "id": "b8de09ee-d3a8-40f4-8d3f-9c0e6e3f8fca",
+        "xmlns": "urn:oasis:names:tc:emergency:cap:1.2",
+        "info": [
+          {
+            "area": [
+              {
+                "geocode": [
+                  {
+                    "id": 24614,
+                    "name": "SAME",
+                    "value": "041000"
+                  },
+                  {
+                    "id": 48546,
+                    "name": "SAME",
+                    "value": "053011"
+                  }
+                ],
+                "areaDesc": "Oregon,Clark, WA"
+              }
+            ],
+            "event": "REQUIRED WEEKLY TEST",
+            "expires": "2026-02-26T14:02:00-08:00",
+            "urgency": "Immediate",
+            "audience": "All",
+            "category": [
+              "Safety"
+            ],
+            "headline": "Emergency Alert System Test",
+            "language": "en-US",
+            "severity": "Minor",
+            "certainty": "Observed",
+            "effective": "2026-02-26T11:02:00-08:00",
+            "eventCode": [
+              {
+                "id": 1,
+                "name": "SAME",
+                "value": "RWT"
+              }
+            ],
+            "parameter": [
+              {
+                "name": "EAS-ORG",
+                "value": "CIV"
+              },
+              {
+                "name": "BLOCKCHANNEL",
+                "value": "NWEM"
+              },
+              {
+                "name": "BLOCKCHANNEL",
+                "value": "CMAS"
+              },
+              {
+                "name": "EAS-STN-ID",
+                "value": "OEM,1,OR"
+              }
+            ],
+            "senderName": "Oregon-Emergency-Management",
+            "description": "This is a test of the Emergency Alert System. This is only a test",
+            "instruction": "No action is needed. This is only a test."
+          },
+          {
+            "area": [
+              {
+                "geocode": [
+                  {
+                    "id": 24614,
+                    "name": "SAME",
+                    "value": "041000"
+                  },
+                  {
+                    "id": 48546,
+                    "name": "SAME",
+                    "value": "053011"
+                  }
+                ],
+                "areaDesc": "Oregon,Clark, WA"
+              }
+            ],
+            "event": "REQUIRED WEEKLY TEST",
+            "expires": "2026-02-26T14:02:00-08:00",
+            "urgency": "Immediate",
+            "audience": "All",
+            "category": [
+              "Safety"
+            ],
+            "headline": "Emergency Alert System Test",
+            "language": "es-US",
+            "severity": "Minor",
+            "certainty": "Observed",
+            "effective": "2026-02-26T11:02:00-08:00",
+            "eventCode": [
+              {
+                "id": 1,
+                "name": "SAME",
+                "value": "RWT"
+              }
+            ],
+            "parameter": [
+              {
+                "name": "EAS-ORG",
+                "value": "CIV"
+              },
+              {
+                "name": "BLOCKCHANNEL",
+                "value": "NWEM"
+              },
+              {
+                "name": "BLOCKCHANNEL",
+                "value": "CMAS"
+              },
+              {
+                "name": "EAS-STN-ID",
+                "value": "OEM,1,OR"
+              }
+            ],
+            "senderName": "Oregon-Emergency-Management",
+            "description": "",
+            "instruction": ""
+          }
+        ]
+      },
+      {
+        "originalMessage": "<alert xmlns=\"urn:oasis:names:tc:emergency:cap:1.2\"><identifier>ALABA-20b402dd-2bdd-41cc-8166-be9122c4acde</identifier><sender>helpalerts@ilogcorp.com</sender><sent>2026-02-26T12:38:03-06:00</sent><status>Actual</status><msgType>Cancel</msgType><source>ILOG-IRIS</source><scope>Public</scope><code>IPAWSv1.0</code><references>helpalerts@ilogcorp.com,ALABA-d972c370-385e-4ced-be66-bf56880280a7,2026-02-26T09:16:50-06:00</references><Signature xmlns=\"http://www.w3.org/2000/09/xmldsig#\"><SignedInfo><CanonicalizationMethod Algorithm=\"http://www.w3.org/2001/10/xml-exc-c14n#\"/><SignatureMethod Algorithm=\"http://www.w3.org/2001/04/xmldsig-more#rsa-sha256\"/><Reference URI=\"\"><Transforms><Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\"/></Transforms><DigestMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#sha256\"/><DigestValue>do1S4sDYircKuv8G7WwLVA14halNEk8yAAJVqqx6KIk=</DigestValue></Reference></SignedInfo><SignatureValue>KmMC7shJG0uPTZnoUKVSh1/5uT0zoiXL5dsRlwERCCbTXnLOC2zkUvHqFljVKQaoNF8priZjTpLT1UvDbXyReZmSGw6zpRJts2+hh8RSiXGADVJKICro1BLRzrhPfBwxhBApSDOO1uyQQSzmV7lyKHIh6jiOes7pmmqEKQEu6r3U8+6/OyCAVfENcnG0R+Sz2s8B+eH5z4AfLE1UZuh2G9QWs82LcF4jVbEpgXoNS+KyGshDLUQzpMpdUAvg+vLnE7ETIdHDNgdbgYnQ1HAGHmg7LeazZVcQ+0UVzfIV3vowarcPQRrqLU6LJHTtIOgYB2CI3noeuLnesQlZxrZ8Jg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>CN=IPAWSOPEN202225, OU=A01410C00000198E75AC214000277F1, OU=Devices IPAWS, OU=National Continuity Programs, O=FEMA IPAWS, C=US</X509SubjectName><X509Certificate>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</X509Certificate></X509Data></KeyInfo></Signature></alert>",
+        "identifier": "ALABA-20b402dd-2bdd-41cc-8166-be9122c4acde",
+        "sender": "helpalerts@ilogcorp.com",
+        "sent": "2026-02-26T18:38:03.000Z",
+        "status": "Actual",
+        "msgType": "Cancel",
+        "source": "ILOG-IRIS",
+        "scope": "Public",
+        "restriction": null,
+        "addresses": null,
+        "code": [
+          "IPAWSv1.0"
+        ],
+        "note": null,
+        "searchGeometry": null,
+        "incidents": null,
+        "cogId": 202225,
+        "id": "3902b317-7e6c-4af0-b805-ec3b63b8c32b",
+        "xmlns": "urn:oasis:names:tc:emergency:cap:1.2",
+        "info": null
+      },
+      {
+        "originalMessage": "<alert xmlns=\"urn:oasis:names:tc:emergency:cap:1.2\"><identifier>2371132795670892</identifier><sender>200198_Michigan_State_Police_Michigan_State_Police</sender><sent>2026-02-26T13:03:55-05:00</sent><status>Actual</status><msgType>Alert</msgType><source>Everbridge</source><scope>Public</scope><code>IPAWSv1.0</code><info><language>en-US</language><category>Other</category><event>Required Weekly Test</event><urgency>Immediate</urgency><severity>Extreme</severity><certainty>Observed</certainty><eventCode><valueName>SAME</valueName><value>RWT</value></eventCode><expires>2026-02-26T14:03:55-05:00</expires><senderName>200198,Michigan State Police,Michigan State Police</senderName><headline>Required Weekly Test</headline><description>This is a required weekly test of the Emergency Alert System, originating from the Michigan State Police State Emergency Operations Center in Lansing.  \n \nIf this had been an actual emergency, such as a tornado, toxic material release, nuclear plant incident, widespread phone or power outages, or other state or local emergency that affects your safety, official messages would have followed the alert tone.\n\n \nThis concludes this test of the Emergency Alert System.</description><parameter><valueName>BLOCKCHANNEL</valueName><value>CAPEXCH</value></parameter><parameter><valueName>BLOCKCHANNEL</valueName><value>NWEM</value></parameter><parameter><valueName>BLOCKCHANNEL</valueName><value>CMAS</value></parameter><parameter><valueName>EAS-ORG</valueName><value>CIV</value></parameter><parameter><valueName>timezone</valueName><value>EST</value></parameter><area><areaDesc>Michigan, MI</areaDesc><geocode><valueName>SAME</valueName><value>026000</value></geocode></area></info><Signature xmlns=\"http://www.w3.org/2000/09/xmldsig#\" xmlns:cap=\"http://gov.fema.ipaws.services/IPAWS_CAPService/\" xmlns:resp=\"http://gov.fema.ipaws.services/capresponse\" xmlns:ns10=\"urn:oasis:names:tc:emergency:cap:1.2\" xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:req=\"http://gov.fema.ipaws.services/caprequest\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><SignedInfo><CanonicalizationMethod Algorithm=\"http://www.w3.org/2001/10/xml-exc-c14n#\"/><SignatureMethod Algorithm=\"http://www.w3.org/2001/04/xmldsig-more#rsa-sha256\"/><Reference URI=\"\"><Transforms><Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\"/></Transforms><DigestMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#sha256\"/><DigestValue>adKmvbZVOwnoBsxxw45bW5czeM8n1L1s3p+/jTzIG94=</DigestValue></Reference></SignedInfo><SignatureValue>fJfhJ8ikYGZzpyjXKkWYDppLW1TZGy6QhJoww3uXrkx/GbP/Lyl6yD1oW0qXbHehKm/P/92qnbcAbT0QcNnEooxFWLADvFGvF0vrTdEIAvPFCwYWyn8dCifGWp5npbrwCQ9ThbvR6IciVgoFqR91vRmDEPWTKMxnnhJ/1sfp+GGo3WVmEp03nJMOqsBUcUE17u4VyxoW8+pXQ/U/tiv24yB3Ils7n1gGrA8Pqfg7vIEsgBDacP/dRlgOv3Wyww133LQMeFErZ0tb9RgNym815DbKhVcXKWol7k2qqzU0lCsYlnkLjvhTrGaaPUAacnTTroNdVdOIFU2u4m9ApcuAOQ==</SignatureValue><KeyInfo><X509Data><X509SubjectName>CN=IPAWSOPEN200198,OU=A01410C0000019A937904FB000F3597,OU=Devices IPAWS,OU=National Continuity Programs,O=FEMA IPAWS,C=US</X509SubjectName><X509Certificate>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</X509Certificate></X509Data></KeyInfo></Signature></alert>",
+        "identifier": "2371132795670892",
+        "sender": "200198_Michigan_State_Police_Michigan_State_Police",
+        "sent": "2026-02-26T18:03:55.000Z",
+        "status": "Actual",
+        "msgType": "Alert",
+        "source": "Everbridge",
+        "scope": "Public",
+        "restriction": null,
+        "addresses": null,
+        "code": [
+          "IPAWSv1.0"
+        ],
+        "note": null,
+        "searchGeometry": null,
+        "incidents": null,
+        "cogId": 200198,
+        "id": "0c9212e2-09a3-4da4-9d5e-e19241dc8894",
+        "xmlns": "urn:oasis:names:tc:emergency:cap:1.2",
+        "info": [
+          {
+            "area": [
+              {
+                "geocode": [
+                  {
+                    "id": 15158,
+                    "name": "SAME",
+                    "value": "026000"
+                  }
+                ],
+                "areaDesc": "Michigan, MI"
+              }
+            ],
+            "event": "Required Weekly Test",
+            "expires": "2026-02-26T14:03:55-05:00",
+            "urgency": "Immediate",
+            "category": [
+              "Other"
+            ],
+            "headline": "Required Weekly Test",
+            "language": "en-US",
+            "severity": "Extreme",
+            "certainty": "Observed",
+            "eventCode": [
+              {
+                "id": 1,
+                "name": "SAME",
+                "value": "RWT"
+              }
+            ],
+            "parameter": [
+              {
+                "name": "BLOCKCHANNEL",
+                "value": "CAPEXCH"
+              },
+              {
+                "name": "BLOCKCHANNEL",
+                "value": "NWEM"
+              },
+              {
+                "name": "BLOCKCHANNEL",
+                "value": "CMAS"
+              },
+              {
+                "name": "EAS-ORG",
+                "value": "CIV"
+              },
+              {
+                "name": "timezone",
+                "value": "EST"
+              }
+            ],
+            "senderName": "200198,Michigan State Police,Michigan State Police",
+            "description": "This is a required weekly test of the Emergency Alert System, originating from the Michigan State Police State Emergency Operations Center in Lansing.  \n \nIf this had been an actual emergency, such as a tornado, toxic material release, nuclear plant incident, widespread phone or power outages, or other state or local emergency that affects your safety, official messages would have followed the alert tone.\n\n \nThis concludes this test of the Emergency Alert System."
+          }
+        ]
+      },
+      {
+        "originalMessage": "<alert xmlns=\"urn:oasis:names:tc:emergency:cap:1.2\"><identifier>GA.507_445_2026-02-26T12:32:19-05:00</identifier><sender>EMnet-GA.507</sender><sent>2026-02-26T12:32:19-05:00</sent><status>Actual</status><msgType>Alert</msgType><scope>Public</scope><code>IPAWSv1.0</code><info><language>en-US</language><category>Rescue</category><event>child abduction emergency</event><urgency>Immediate</urgency><severity>Severe</severity><certainty>Likely</certainty><eventCode><valueName>SAME</valueName><value>CAE</value></eventCode><effective>2026-02-26T12:32:19-05:00</effective><expires>2026-02-26T18:32:19-05:00</expires><senderName>SWP156</senderName><headline>EAS Child Abduction Emergency</headline><description>We interrupt this program to bring you this important announcement. This is an emergency missing child alert, or Levis Call, the Georgia version of an Amber Alert. The Barrow County Sheriffs Office and the GEORGIA BUREAU OF INVESTIGATION are looking for a 2020 Toyota Camery, red in color Georgia tag unknown. On February 26, 2026, Rafael Aguilar Rubio, a 1year old Hispanic male with black hair and brown eyes and was last seen wearing long monkey style pajamas and brown socks. He was abducted by Cezar N. Martinez, a 20 year old Hispanic male, 5 foot 10 inches, weighing 200 pounds, with black hair and brown eyes and was last seen wearing tee shirt, black adidas slides and a shorts. They were last seen at 681 Carla Court winder, GA West toward Gwinnett County. Rafael Aguilar Rubio is believed to be in extreme danger. If you have any information on the whereabouts of Rafael Aguilar Rubio or the 2020 Toyota Camery, red in color Georgia tag unknown., please dial 911. The public can also provide information to the GBI tip line at 1-800-597-TIPS or the See Send app for smartphone users.</description><parameter><valueName>OriginatingSystem</valueName><value>EMnet</value></parameter><parameter><valueName>MessagePriority</valueName><value>3</value></parameter><parameter><valueName>EASHeader</valueName><value>ZCZC-CIV-CAE-013000+0600-0571732-GA507   -</value></parameter><parameter><valueName>ReceiptsRequested</valueName><value>yes</value></parameter><parameter><valueName>PostToWeb</valueName><value>GA</value></parameter><parameter><valueName>EAS-ORG</valueName><value>CIV</value></parameter><parameter><valueName>EASText</valueName><value>A civil authority has issued A child abduction emergency for All Georgia, effective until 06:32 PM.We interrupt this program to bring you this important announcement. This is an emergency missing child alert, or Levis Call, the Georgia version of an Amber Alert. The Barrow County Sheriffs Office and the GEORGIA BUREAU OF INVESTIGATION are looking for a 2020 Toyota Camery, red in color Georgia tag unknown. On February 26, 2026, Rafael Aguilar Rubio, a 1year old Hispanic male with black hair and brown eyes and was last seen wearing long monkey style pajamas and brown socks. He was abducted by Cezar N. Martinez, a 20 year old Hispanic male, 5 foot 10 inches, weighing 200 pounds, with black hair and brown eyes and was last seen wearing tee shirt, black adidas slides and a shorts. They were last seen at 681 Carla Court winder, GA West toward Gwinnett County. Rafael Aguilar Rubio is believed to be in extreme danger. If you have any information on the whereabouts of Rafael Aguilar Rubio or the 2020 Toyota Camery, red in color Georgia tag unknown., please dial 911. The public can also provide information to the GBI tip line at 1-800-597-TIPS or the See Send app for smartphone users.</value></parameter><parameter><valueName>WEAHandling</valueName><value>Amber</value></parameter><parameter><valueName>ShortText</valueName><value>A child abduction emergency is in effect for All Georgia, tune to your local TV or radio s</value></parameter><parameter><valueName>CMAMtext</valueName><value>A child abduction emergency is in effect for All Georgia, tune to your local TV or radio s</value></parameter><parameter><valueName>CMAMlongtext</valueName><value>A child abduction emergency is in effect for All Georgia, tune to your local TV or radio s</value></parameter><parameter><valueName>StationID</valueName><value>GA507   </value></parameter><parameter><valueName>SirenDuration</valueName><value>0</value></parameter><parameter><valueName>VoiceRepeat</valueName><value>0</value></parameter><parameter><valueName>AudioSource</valueName><value>Attached</value></parameter><parameter><valueName>AssignedAddress</valueName><value>GA.507</value></parameter><parameter><valueName>UserName</valueName><value>operator156</value></parameter><parameter><valueName>BLOCKCHANNEL</valueName><value>NWEM</value></parameter><parameter><valueName>BLOCKCHANNEL</valueName><value>CMAS</value></parameter><resource><resourceDesc>EAS Broadcast Content</resourceDesc><mimeType>audio/x-ipaws-audio-mp3</mimeType><size>812974</size><uri>http://publicwarning.us/capresources/GA_507_ID445_TM69A0827D_en-US.mp3</uri></resource><area><areaDesc>All Georgia</areaDesc><geocode><valueName>SAME</valueName><value>013000</value></geocode></area></info><Signature xmlns=\"http://www.w3.org/2000/09/xmldsig#\"><SignedInfo><CanonicalizationMethod Algorithm=\"http://www.w3.org/2001/10/xml-exc-c14n#\"/><SignatureMethod Algorithm=\"http://www.w3.org/2001/04/xmldsig-more#rsa-sha256\"/><Reference URI=\"\"><Transforms><Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\"/></Transforms><DigestMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#sha256\"/><DigestValue>+zZDpOrtlIxJadJcUGsSeVx2+2d4viPyMcbrAT6Ls1E=</DigestValue></Reference></SignedInfo><SignatureValue>T5Y4TtKb45taqq9Lfu4uG9KGD79F+XT86jJa+FRJ5jtnGXPOB+gIQ256OwAugYB+pSGQMzLLooI9yqykO0DTWITAhnC4f+mhY+MzLVAuu8HEL//eEioNdwinsVPzVqpESZ2yViMGkHqfK8MCfMRdjnhD1q5RJpDPBHwpQmFMEY+OsSI97kd0CFVcweFOsk+onhRbLJnGGmC5Vk8PFDZOVuV5s7X9MxZsNGwYHuCwMtDAebnnFNDw2f+Pb0duqoEC4GriunT4kiLIc/eha9Ymb66GjQjeL8Z8TogDiiWA8+KEApMPYYgmTS+anJ9EFJYMXd1d5qms2V3rHJsoCCWDxg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>CN=IPAWSOPEN200115,OU=A01410C0000019AFE175873003DE750,OU=Devices IPAWS,OU=National Continuity Programs,O=FEMA IPAWS,C=US</X509SubjectName><X509Certificate>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</X509Certificate></X509Data></KeyInfo></Signature></alert>",
+        "identifier": "GA.507_445_2026-02-26T12:32:19-05:00",
+        "sender": "EMnet-GA.507",
+        "sent": "2026-02-26T17:32:19.000Z",
+        "status": "Actual",
+        "msgType": "Alert",
+        "source": null,
+        "scope": "Public",
+        "restriction": null,
+        "addresses": null,
+        "code": [
+          "IPAWSv1.0"
+        ],
+        "note": null,
+        "searchGeometry": null,
+        "incidents": null,
+        "cogId": 200115,
+        "id": "dc434ae0-8397-4387-bf8d-1d9a8d685123",
+        "xmlns": "urn:oasis:names:tc:emergency:cap:1.2",
+        "info": [
+          {
+            "area": [
+              {
+                "geocode": [
+                  {
+                    "id": 14859,
+                    "name": "SAME",
+                    "value": "013000"
+                  }
+                ],
+                "areaDesc": "All Georgia"
+              }
+            ],
+            "event": "child abduction emergency",
+            "expires": "2026-02-26T18:32:19-05:00",
+            "urgency": "Immediate",
+            "category": [
+              "Rescue"
+            ],
+            "headline": "EAS Child Abduction Emergency",
+            "language": "en-US",
+            "resource": [
+              {
+                "uri": "http://publicwarning.us/capresources/GA_507_ID445_TM69A0827D_en-US.mp3",
+                "size": "812974",
+                "mimeType": "audio/x-ipaws-audio-mp3",
+                "resourceDesc": "EAS Broadcast Content"
+              }
+            ],
+            "severity": "Severe",
+            "certainty": "Likely",
+            "effective": "2026-02-26T12:32:19-05:00",
+            "eventCode": [
+              {
+                "id": 5,
+                "name": "SAME",
+                "value": "CAE"
+              }
+            ],
+            "parameter": [
+              {
+                "name": "OriginatingSystem",
+                "value": "EMnet"
+              },
+              {
+                "name": "MessagePriority",
+                "value": "3"
+              },
+              {
+                "name": "EASHeader",
+                "value": "ZCZC-CIV-CAE-013000+0600-0571732-GA507   -"
+              },
+              {
+                "name": "ReceiptsRequested",
+                "value": "yes"
+              },
+              {
+                "name": "PostToWeb",
+                "value": "GA"
+              },
+              {
+                "name": "EAS-ORG",
+                "value": "CIV"
+              },
+              {
+                "name": "EASText",
+                "value": "A civil authority has issued A child abduction emergency for All Georgia, effective until 06:32 PM.We interrupt this program to bring you this important announcement. This is an emergency missing child alert, or Levis Call, the Georgia version of an Amber Alert. The Barrow County Sheriffs Office and the GEORGIA BUREAU OF INVESTIGATION are looking for a 2020 Toyota Camery, red in color Georgia tag unknown. On February 26, 2026, Rafael Aguilar Rubio, a 1year old Hispanic male with black hair and brown eyes and was last seen wearing long monkey style pajamas and brown socks. He was abducted by Cezar N. Martinez, a 20 year old Hispanic male, 5 foot 10 inches, weighing 200 pounds, with black hair and brown eyes and was last seen wearing tee shirt, black adidas slides and a shorts. They were last seen at 681 Carla Court winder, GA West toward Gwinnett County. Rafael Aguilar Rubio is believed to be in extreme danger. If you have any information on the whereabouts of Rafael Aguilar Rubio or the 2020 Toyota Camery, red in color Georgia tag unknown., please dial 911. The public can also provide information to the GBI tip line at 1-800-597-TIPS or the See Send app for smartphone users."
+              },
+              {
+                "name": "WEAHandling",
+                "value": "Amber"
+              },
+              {
+                "name": "ShortText",
+                "value": "A child abduction emergency is in effect for All Georgia, tune to your local TV or radio s"
+              },
+              {
+                "name": "CMAMtext",
+                "value": "A child abduction emergency is in effect for All Georgia, tune to your local TV or radio s"
+              },
+              {
+                "name": "CMAMlongtext",
+                "value": "A child abduction emergency is in effect for All Georgia, tune to your local TV or radio s"
+              },
+              {
+                "name": "StationID",
+                "value": "GA507   "
+              },
+              {
+                "name": "SirenDuration",
+                "value": "0"
+              },
+              {
+                "name": "VoiceRepeat",
+                "value": "0"
+              },
+              {
+                "name": "AudioSource",
+                "value": "Attached"
+              },
+              {
+                "name": "AssignedAddress",
+                "value": "GA.507"
+              },
+              {
+                "name": "UserName",
+                "value": "operator156"
+              },
+              {
+                "name": "BLOCKCHANNEL",
+                "value": "NWEM"
+              },
+              {
+                "name": "BLOCKCHANNEL",
+                "value": "CMAS"
+              }
+            ],
+            "senderName": "SWP156",
+            "description": "We interrupt this program to bring you this important announcement. This is an emergency missing child alert, or Levis Call, the Georgia version of an Amber Alert. The Barrow County Sheriffs Office and the GEORGIA BUREAU OF INVESTIGATION are looking for a 2020 Toyota Camery, red in color Georgia tag unknown. On February 26, 2026, Rafael Aguilar Rubio, a 1year old Hispanic male with black hair and brown eyes and was last seen wearing long monkey style pajamas and brown socks. He was abducted by Cezar N. Martinez, a 20 year old Hispanic male, 5 foot 10 inches, weighing 200 pounds, with black hair and brown eyes and was last seen wearing tee shirt, black adidas slides and a shorts. They were last seen at 681 Carla Court winder, GA West toward Gwinnett County. Rafael Aguilar Rubio is believed to be in extreme danger. If you have any information on the whereabouts of Rafael Aguilar Rubio or the 2020 Toyota Camery, red in color Georgia tag unknown., please dial 911. The public can also provide information to the GBI tip line at 1-800-597-TIPS or the See Send app for smartphone users."
+          }
+        ]
+      },
+      {
+        "originalMessage": "<alert xmlns=\"urn:oasis:names:tc:emergency:cap:1.2\"><identifier>TXDOT-975c7cfa-3eea-42d4-b6a1-164366803126</identifier><sender>helpalerts@ilogcorp.com</sender><sent>2026-02-26T11:20:57-06:00</sent><status>Actual</status><msgType>Alert</msgType><source>ILOG-IRIS</source><scope>Public</scope><addresses>201960</addresses><code>IPAWSv1.0</code><info><language>en-US</language><category>Transport</category><event>Local Area Emergency</event><urgency>Immediate</urgency><severity>Severe</severity><certainty>Observed</certainty><eventCode><valueName>SAME</valueName><value>LAE</value></eventCode><effective>2026-02-26T11:20:57-06:00</effective><expires>2026-02-26T17:20:57-06:00</expires><senderName>TXDOT,Austin,TX</senderName><headline>MAJOR ACCIDENT IH-10 EAST CLOSED BEFORE DOMINION DR</headline><description>MAJOR ACCIDENT IH-10 EAST CLOSED BEFORE DOMINION DR USE ALT ROUTE</description><parameter><valueName>BLOCKCHANNEL</valueName><value>EAS</value></parameter><parameter><valueName>BLOCKCHANNEL</valueName><value>NWEM</value></parameter><parameter><valueName>WEAHandling</valueName><value>Public Safety</value></parameter><parameter><valueName>CMAMtext</valueName><value>MAJOR ACCIDENT IH-10 EAST CLOSED BEFORE DOMINION DR</value></parameter><parameter><valueName>CMAMlongtext</valueName><value>MAJOR ACCIDENT IH-10 EAST CLOSED BEFORE DOMINION DR USE ALT ROUTE</value></parameter><area><areaDesc>AffectedArea</areaDesc><polygon>29.7811412,-98.7115733 29.7587902,-98.7438456 29.6027759,-98.6264292 29.6248632,-98.5759608 29.7811412,-98.7115733</polygon><geocode><valueName>SAME</valueName><value>048029</value></geocode><geocode><valueName>SAME</valueName><value>048259</value></geocode></area></info><Signature xmlns=\"http://www.w3.org/2000/09/xmldsig#\"><SignedInfo><CanonicalizationMethod Algorithm=\"http://www.w3.org/2001/10/xml-exc-c14n#\"/><SignatureMethod Algorithm=\"http://www.w3.org/2001/04/xmldsig-more#rsa-sha256\"/><Reference URI=\"\"><Transforms><Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\"/></Transforms><DigestMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#sha256\"/><DigestValue>lDjVqlFppwouDscQXaIwj+Eg6nFxiWvpucOzOvEP188=</DigestValue></Reference></SignedInfo><SignatureValue>fZDtfbwc7iKVH/jdmRY59wJ53ovDsId4I+x5CzohpSFbBbuB/Y7rOjKEErqHKUEWGGDxzKdyzCtOPVsbvZvA8d+bOz0IUtSe1s5L01hi72PutxTavdHO/y9CPFrLZTaQdQeeNLQEwU0Ejvn/8ylmD9vDxpKfuxR+Yxz0cwfF/DKYsXhitpmFF7Oth5R43N7OyJZDo4rIZFvc3ubPxp3po+YqOKWg/AIXaUZVijbs76r8qg7p+gkMhnEJXYzxarMCmxeyiRN/OMj8VkW6lrxjnEVqHJ4OLq5PT8efOzcdvrYhfcICmJg+UYlT/+Wd1uWx8Pzs1vysOzOw6L/ZdboMJg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>CN=IPAWSOPEN201960, OU=A01410D0000019446134CEF0021F950, OU=Devices IPAWS, OU=National Continuity Programs, O=FEMA IPAWS, C=US</X509SubjectName><X509Certificate>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</X509Certificate></X509Data></KeyInfo></Signature></alert>",
+        "identifier": "TXDOT-975c7cfa-3eea-42d4-b6a1-164366803126",
+        "sender": "helpalerts@ilogcorp.com",
+        "sent": "2026-02-26T17:20:57.000Z",
+        "status": "Actual",
+        "msgType": "Alert",
+        "source": "ILOG-IRIS",
+        "scope": "Public",
+        "restriction": null,
+        "addresses": "201960",
+        "code": [
+          "IPAWSv1.0"
+        ],
+        "note": null,
+        "searchGeometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -98.7115733,
+                29.7811412
+              ],
+              [
+                -98.7438456,
+                29.7587902
+              ],
+              [
+                -98.6264292,
+                29.6027759
+              ],
+              [
+                -98.5759608,
+                29.6248632
+              ],
+              [
+                -98.7115733,
+                29.7811412
+              ]
+            ]
+          ]
+        },
+        "incidents": null,
+        "cogId": 201960,
+        "id": "12cf15c2-a62c-41e2-99cc-72c153615691",
+        "xmlns": "urn:oasis:names:tc:emergency:cap:1.2",
+        "info": [
+          {
+            "area": [
+              {
+                "geocode": [
+                  {
+                    "id": 80799,
+                    "name": "SAME",
+                    "value": "048029"
+                  },
+                  {
+                    "id": 97887,
+                    "name": "SAME",
+                    "value": "048259"
+                  }
+                ],
+                "polygon": {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [
+                      [
+                        -98.7115733,
+                        29.7811412
+                      ],
+                      [
+                        -98.7438456,
+                        29.7587902
+                      ],
+                      [
+                        -98.6264292,
+                        29.6027759
+                      ],
+                      [
+                        -98.5759608,
+                        29.6248632
+                      ],
+                      [
+                        -98.7115733,
+                        29.7811412
+                      ]
+                    ]
+                  ]
+                },
+                "areaDesc": "AffectedArea"
+              }
+            ],
+            "event": "Local Area Emergency",
+            "expires": "2026-02-26T17:20:57-06:00",
+            "urgency": "Immediate",
+            "category": [
+              "Transport"
+            ],
+            "headline": "MAJOR ACCIDENT IH-10 EAST CLOSED BEFORE DOMINION DR",
+            "language": "en-US",
+            "severity": "Severe",
+            "certainty": "Observed",
+            "effective": "2026-02-26T11:20:57-06:00",
+            "eventCode": [
+              {
+                "id": 2640,
+                "name": "SAME",
+                "value": "LAE"
+              }
+            ],
+            "parameter": [
+              {
+                "name": "BLOCKCHANNEL",
+                "value": "EAS"
+              },
+              {
+                "name": "BLOCKCHANNEL",
+                "value": "NWEM"
+              },
+              {
+                "name": "WEAHandling",
+                "value": "Public Safety"
+              },
+              {
+                "name": "CMAMtext",
+                "value": "MAJOR ACCIDENT IH-10 EAST CLOSED BEFORE DOMINION DR"
+              },
+              {
+                "name": "CMAMlongtext",
+                "value": "MAJOR ACCIDENT IH-10 EAST CLOSED BEFORE DOMINION DR USE ALT ROUTE"
+              }
+            ],
+            "senderName": "TXDOT,Austin,TX",
+            "description": "MAJOR ACCIDENT IH-10 EAST CLOSED BEFORE DOMINION DR USE ALT ROUTE"
+          }
+        ]
+      },
+      {
+        "originalMessage": "<alert xmlns=\"urn:oasis:names:tc:emergency:cap:1.2\"><identifier>1b685a8b64ba9f4fe99357b3896ac3</identifier><sender>clarkcountynv</sender><sent>2026-02-26T08:54:10-08:00</sent><status>Actual</status><msgType>Alert</msgType><source>clarkcountynv</source><scope>Public</scope><code>IPAWSv1.0</code><info><language>en-US</language><category>Other</category><event>Required Weekly Test</event><responseType>Prepare</responseType><urgency>Expected</urgency><severity>Severe</severity><certainty>Observed</certainty><audience>Public</audience><eventCode><valueName>SAME</valueName><value>RWT</value></eventCode><effective>2026-02-26T08:54:10-08:00</effective><expires>2026-02-26T09:09:10-08:00</expires><senderName>City of Las Vegas Office of Emergency Management</senderName><headline>REQUIRED WEEKLY TEST OF THE SOUTHERN NEVADA OPERATIONAL AREA EMERGENCY ALERT SYSTEM.</headline><description>THIS IS A REQUIRED WEEKLY TEST OF THE SOUTHERN NEVADA OPERATIONAL AREA EMERGENCY ALERT SYSTEM. THIS MESSAGE IS ORIGINATING FROM THE CITY OF LAS VEGAS EMERGENCY OPERATIONS CENTER IN LAS VEGAS NEVADA. THIS SYSTEM IS USED FOR WARNINGS AND ESSENTIAL SAFETY INFORMATION. DURING EMERGENCIES TUNE TO A PARTICIPATING RADIO OR TELEVISION STATION FOR DIRECTIONS, SAFETY INSTRUCTIONS, AND OTHER OFFICIAL INFORMATION.</description><instruction>NO ACTION IS REQUIRED AT THIS TIME.</instruction><parameter><valueName>EAS-ORG</valueName><value>CIV</value></parameter><parameter><valueName>timezone</valueName><value>PST</value></parameter><parameter><valueName>BLOCKCHANNEL</valueName><value>CMAS</value></parameter><parameter><valueName>BLOCKCHANNEL</valueName><value>NWEM</value></parameter><resource><resourceDesc>EAS Broadcast Content</resourceDesc><mimeType>audio/x-ipaws-audio-mp3</mimeType><uri>https://clarkcountynv.app.regroup.com/get_file/eas_broadcast_content/1767884593_EAS_RWT_Message_7-8-21.mp3</uri></resource><area><areaDesc>Clark, NV</areaDesc><geocode><valueName>SAME</valueName><value>032003</value></geocode></area></info><Signature xmlns=\"http://www.w3.org/2000/09/xmldsig#\"><SignedInfo><CanonicalizationMethod Algorithm=\"http://www.w3.org/2001/10/xml-exc-c14n#\"/><SignatureMethod Algorithm=\"http://www.w3.org/2001/04/xmldsig-more#rsa-sha256\"/><Reference URI=\"\"><Transforms><Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\"/></Transforms><DigestMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#sha256\"/><DigestValue>sf3yAEfxJdKeRXoMXLLOH3jDML5G1jT7zoeogftYvGE=</DigestValue></Reference></SignedInfo><SignatureValue>NMS6Hx2DxagUsMp5FA0M9q3kloefyo6d7UAcfkJAxJsKmHuweHvunuWEVFDI5HaAX3ekZtcA0Baw&#13;\neCaSZOwjXia84yNsiN4qnBsaoz+Xd/1nhn8r5V14cHP8S6kmeTTckGHoxzY4kLUc2FrAh1V2/Nn6&#13;\n58t+NmorJcyRa723Nd7IgmbkyX081v2SBF/Log6sWzhg7mVy6MQkEfd0sxxOb8v/UrnA/cKlwOlZ&#13;\n0m0G1V8ooGBjeAUrNkePSA8FrFQQ+FJDgv/PKwxqK1qgTslxMnJH0VOUVwUDnWzlaHJ3nwyOLZPm&#13;\nBAKkax47JD5rB5HoLp/P8pvJn95oobIIkYcgLg==</SignatureValue><KeyInfo><X509Data><X509SubjectName>CN=IPAWSOPEN200091,OU=A01410D0000019A93753598002DCABC,OU=Devices IPAWS,OU=National Continuity Programs,O=FEMA IPAWS,C=US</X509SubjectName><X509Certificate>MIIHPzCCBSegAwIBAgIQQAGak3U1qf9oyzMFDgSYTzANBgkqhkiG9w0BAQsFADBdMQswCQYDVQQG&#13;\nEwJVUzESMBAGA1UEChMJSWRlblRydXN0MSAwHgYDVQQLExdJZGVuVHJ1c3QgR2xvYmFsIENvbW1v&#13;\nbjEYMBYGA1UEAxMPSUdDIERldmljZSBDQSAyMB4XDTI1MTExNzIwMTUyM1oXDTI4MTExNjIwMTQy&#13;\nM1owgaUxCzAJBgNVBAYTAlVTMRMwEQYDVQQKEwpGRU1BIElQQVdTMSUwIwYDVQQLExxOYXRpb25h&#13;\nbCBDb250aW51aXR5IFByb2dyYW1zMRYwFAYDVQQLEw1EZXZpY2VzIElQQVdTMSgwJgYDVQQLEx9B&#13;\nMDE0MTBEMDAwMDAxOUE5Mzc1MzU5ODAwMkRDQUJDMRgwFgYDVQQDEw9JUEFXU09QRU4yMDAwOTEw&#13;\nggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCNZa9dZQN76kDfc0k0RMMJNOtb2OfIAo1I&#13;\n/me0+I5JxbzZ5uqU7BWun6h0Sq2PNZ/xXoGMVTHsftTduUg34b1Kt6A/nn3IYi5p6xjwpjogcUQV&#13;\nVxOrWF1hELJw0dwD4i8lm/W1dEdvXHmls1ZvQoSggZskUAScFibQJaIbsyiBSI5pe9fZ5Rp68zD/&#13;\n0f8fjn+hHObX0KkS10jdZUcRJ5xOrcAeOHhfP2IHbDkrpFiQqbFnuDU67PcleIZHKLpJCYoj4/ze&#13;\nw3DKz4wIdDpKCaiEz6kWsJFTSMqo0LLmwfO7E5W8MRij54j7DghPCCh/GtJ+N2mMm7jNaJWGagtL&#13;\nvbWNAgMBAAGjggKwMIICrDAOBgNVHQ8BAf8EBAMCBaAwfQYIKwYBBQUHAQEEcTBvMCkGCCsGAQUF&#13;\nBzABhh1odHRwOi8vaWdjLm9jc3AuaWRlbnRydXN0LmNvbTBCBggrBgEFBQcwAoY2aHR0cDovL3Zh&#13;\nbGlkYXRpb24uaWRlbnRydXN0LmNvbS9jZXJ0cy9pZ2NkZXZpY2VjYTIucDdjMB8GA1UdIwQYMBaA&#13;\nFD+LR65hHetlI5XEOi3tu0jVIykiMIIBQwYDVR0gBIIBOjCCATYwDQYLYIZIAYb5LwBkJQEwggEj&#13;\nBgtghkgBhvkvAGQmATCCARIwSwYIKwYBBQUHAgEWP2h0dHBzOi8vc2VjdXJlLmlkZW50cnVzdC5j&#13;\nb20vY2VydGlmaWNhdGVzL3BvbGljeS9JR0MvaW5kZXguaHRtbDCBwgYIKwYBBQUHAgIwgbUMgbJD&#13;\nZXJ0aWZpY2F0ZSB1c2UgcmVzdHJpY3RlZCB0byBSZWx5aW5nIFBhcnR5KHMpIGluIGFjY29yZGFu&#13;\nY2Ugd2l0aCBJR0MtQ1AgKHNlZSBodHRwczovL3NlY3VyZS5pZGVudHJ1c3QuY29tL2NlcnRpZmlj&#13;\nYXRlcy9wb2xpY3kvaWdjL2luZGV4Lmh0bWwpLiBJR0MtQ1BTIGluY29ycG9yYXRlZCBieSByZWZl&#13;\ncmVuY2UuMEUGA1UdHwQ+MDwwOqA4oDaGNGh0dHA6Ly92YWxpZGF0aW9uLmlkZW50cnVzdC5jb20v&#13;\nY3JsL2lnY2RldmljZWNhMi5jcmwwGgYDVR0RBBMwEYIPSVBBV1NPUEVOMjAwMDkxMB0GA1UdDgQW&#13;\nBBRZj5L/5jYOvcj0swyHMtz9zZFBzDAxBgNVHSUEKjAoBggrBgEFBQcDAgYIKwYBBQUHAwUGCCsG&#13;\nAQUFBwMGBggrBgEFBQcDBzANBgkqhkiG9w0BAQsFAAOCAgEAKvabwK9uJe7+VLJ+FnTeyormFXNY&#13;\npucMIvoCWkMNU67DmohD/e+DIa8oX+WCIEaysGfRYXq24aVNupa7wrHAqbPaitIBu3+RQfG644Gd&#13;\nLi/txrVP/wrhBriALBZQ1KpFAUJeU05PzkdPYXeNcx4t7uWJQnwvzmdcuE70mKdORzIf4WC6feAi&#13;\nR9biHlvPT3fJweVRca43TjhMQii9FrfRuiROluCHjrsg51qi3KJ7pYVC5/6oqrk2hMjGRMX29WaR&#13;\ngchPnlmOTRVB/BAMmhwiP+A9RADXaXiwRGoUMXV8ROHTOllI4ow+r2geUTUy+xAfc98uNcYYB+VB&#13;\nsliZ3fruprGCuSaYlj1KgzDYigseQ7/W0VMFHZ22WxHWi9N3cRHdJoSgUJwLM4c/iugpFtekuY8M&#13;\n9IsYMjR/lyL31qGuTfVaopZauhM55gjRjQkf+HgRCH/LPpiv+hbPkZnhK4l57uoae/f0s/CQqbEY&#13;\nIKCdIPqUQXXn4CIs5E+TMmF9dyDJKa8QFQlJzdQU79HBW5lKVkytVI+F/MJ5PCf1SnlCw8i1WwHa&#13;\n0EnLsMrSArvtaeN06ymKH3fW/UKZXPfPfTrqQiimk9ZfT4B0rWz2AJyRv/tpeNPvMcSWVV+xpR9y&#13;\nwxnUmVhJrC6/Ne37ct/m9Ws9zhUYGypn0YdL9NnTsgdAQlo=</X509Certificate></X509Data></KeyInfo></Signature></alert>",
+        "identifier": "1b685a8b64ba9f4fe99357b3896ac3",
+        "sender": "clarkcountynv",
+        "sent": "2026-02-26T16:54:10.000Z",
+        "status": "Actual",
+        "msgType": "Alert",
+        "source": "clarkcountynv",
+        "scope": "Public",
+        "restriction": null,
+        "addresses": null,
+        "code": [
+          "IPAWSv1.0"
+        ],
+        "note": null,
+        "searchGeometry": null,
+        "incidents": null,
+        "cogId": 200091,
+        "id": "e8ebee09-c05a-46d5-ba6a-a6716cd578d6",
+        "xmlns": "urn:oasis:names:tc:emergency:cap:1.2",
+        "info": [
+          {
+            "area": [
+              {
+                "geocode": [
+                  {
+                    "id": 12330,
+                    "name": "SAME",
+                    "value": "032003"
+                  }
+                ],
+                "areaDesc": "Clark, NV"
+              }
+            ],
+            "event": "Required Weekly Test",
+            "expires": "2026-02-26T09:09:10-08:00",
+            "urgency": "Expected",
+            "audience": "Public",
+            "category": [
+              "Other"
+            ],
+            "headline": "REQUIRED WEEKLY TEST OF THE SOUTHERN NEVADA OPERATIONAL AREA EMERGENCY ALERT SYSTEM.",
+            "language": "en-US",
+            "resource": [
+              {
+                "uri": "https://clarkcountynv.app.regroup.com/get_file/eas_broadcast_content/1767884593_EAS_RWT_Message_7-8-21.mp3",
+                "mimeType": "audio/x-ipaws-audio-mp3",
+                "resourceDesc": "EAS Broadcast Content"
+              }
+            ],
+            "severity": "Severe",
+            "certainty": "Observed",
+            "effective": "2026-02-26T08:54:10-08:00",
+            "eventCode": [
+              {
+                "id": 1,
+                "name": "SAME",
+                "value": "RWT"
+              }
+            ],
+            "parameter": [
+              {
+                "name": "EAS-ORG",
+                "value": "CIV"
+              },
+              {
+                "name": "timezone",
+                "value": "PST"
+              },
+              {
+                "name": "BLOCKCHANNEL",
+                "value": "CMAS"
+              },
+              {
+                "name": "BLOCKCHANNEL",
+                "value": "NWEM"
+              }
+            ],
+            "senderName": "City of Las Vegas Office of Emergency Management",
+            "description": "THIS IS A REQUIRED WEEKLY TEST OF THE SOUTHERN NEVADA OPERATIONAL AREA EMERGENCY ALERT SYSTEM. THIS MESSAGE IS ORIGINATING FROM THE CITY OF LAS VEGAS EMERGENCY OPERATIONS CENTER IN LAS VEGAS NEVADA. THIS SYSTEM IS USED FOR WARNINGS AND ESSENTIAL SAFETY INFORMATION. DURING EMERGENCIES TUNE TO A PARTICIPATING RADIO OR TELEVISION STATION FOR DIRECTIONS, SAFETY INSTRUCTIONS, AND OTHER OFFICIAL INFORMATION.",
+            "instruction": "NO ACTION IS REQUIRED AT THIS TIME.",
+            "responseType": [
+              "Prepare"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
