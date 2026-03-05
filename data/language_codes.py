@@ -49,7 +49,7 @@ language_codes = {
     "Khmer": {"iso639-2": "khm", "iso639-1": "km"},
     "Korean": {"iso639-2": "kor", "iso639-1": "ko"},
     "Lao": {"iso639-2": "lao", "iso639-1": "lo"},
-    "Marshallese": {"iso639-2": "mah", "iso639-1": None},
+    "Marshallese": {"iso639-2": "mah", "iso639-1": "mh"},
     "Mien": {"iso639-2": "ium", "iso639-1": None},
     "Nepali": {"iso639-2": "nep", "iso639-1": "ne"},
     "Oromo": {"iso639-2": "orm", "iso639-1": "om"},
