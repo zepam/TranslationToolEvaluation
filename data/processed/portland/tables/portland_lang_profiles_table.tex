@@ -1,0 +1,46 @@
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{l l r r r r r r r}
+\toprule
+\textbf{Language} & \textbf{Lang} & \textbf{Num of} & \textbf{Sents} & \textbf{Tokens} & \textbf{Chars} & \textbf{Avg Tokens} & \textbf{Avg Chars} & \textbf{Vocab} \\
+\textbf{Name} & \textbf{Code} & \textbf{Docs} &  &  &  & \textbf{per Sent} & \textbf{per Sent} & \textbf{Size} \\
+\midrule
+Amharic* & amh & 1,209 & 1,297 & 9,851 & 49,455 & 7.59 & 38.13 & 3,010 \\
+Arabic & ara & 1,213 & 1,375 & 11,511 & 67,107 & 8.37 & 48.80 & 3,394 \\
+Burmese* & bur & 1,209 & 1,291 & 84,819 & 90,831 & 65.70 & 70.36 & 143 \\
+Chuukese\textbackslash\{\}\# & chk & 1,214 & 1,377 & 16,488 & 97,822 & 11.97 & 71.04 & 2,391 \\
+English & eng & 1,216 & 1,377 & 11,547 & 65,132 & 8.39 & 47.30 & 1,676 \\
+French & fra & 1,214 & 1,369 & 15,708 & 90,783 & 11.47 & 66.31 & 2,299 \\
+Hindi & hin & 1,216 & 1,373 & 15,087 & 73,870 & 10.99 & 53.80 & 2,119 \\
+Hmong\textbackslash\{\}\# & hmn & 749 & 794 & 8,800 & 49,667 & 11.08 & 62.55 & 2,024 \\
+Japanese & jpn & 1,214 & 1,298 & 32,716 & 33,672 & 25.20 & 25.94 & 1,071 \\
+Karen\textbackslash\{\}\# & kar & 1,214 & 1,370 & 3,908 & 88,693 & 2.85 & 64.74 & 2,791 \\
+Khmer* & khm & 1,214 & 1,283 & 73,304 & 75,728 & 57.13 & 59.02 & 158 \\
+Korean & kor & 1,215 & 1,386 & 29,063 & 37,528 & 20.97 & 27.08 & 757 \\
+Lao* & lao & 1,215 & 1,375 & 72,316 & 75,400 & 52.59 & 54.84 & 137 \\
+Mien\textbackslash\{\}\# & ium & 749 & 794 & 13,490 & 65,395 & 16.99 & 82.36 & 1,150 \\
+Nepali* & nep & 1,214 & 1,372 & 11,365 & 75,054 & 8.28 & 54.70 & 2,850 \\
+Oromo* & orm & 748 & 794 & 9,454 & 55,677 & 11.91 & 70.12 & 2,123 \\
+Pashto* & pus & 471 & 498 & 5,161 & 29,760 & 10.36 & 59.76 & 1,492 \\
+Persian & fas & 1,215 & 1,377 & 14,407 & 70,815 & 10.46 & 51.43 & 1,939 \\
+Rohingya\textbackslash\{\}\# & rhg & 471 & 496 & 4,599 & 29,096 & 9.27 & 58.66 & 1,364 \\
+Romanian & ron & 1,215 & 1,430 & 13,443 & 83,561 & 9.40 & 58.43 & 2,454 \\
+Russian & rus & 1,215 & 1,391 & 11,328 & 82,790 & 8.14 & 59.52 & 3,327 \\
+Serbian* & srp & 471 & 499 & 5,240 & 27,541 & 10.50 & 55.19 & 1,447 \\
+Somali* & som & 1,214 & 1,376 & 13,649 & 86,540 & 9.92 & 62.89 & 2,645 \\
+Spanish & spa & 1,215 & 1,384 & 13,738 & 83,120 & 9.93 & 60.06 & 2,224 \\
+Swahili & swa & 1,214 & 1,376 & 12,266 & 75,333 & 8.91 & 54.75 & 2,116 \\
+Tagalog & tgl & 1,216 & 1,379 & 14,742 & 88,194 & 10.69 & 63.95 & 2,040 \\
+Telugu* & tel & 1,216 & 1,381 & 9,949 & 75,065 & 7.20 & 54.36 & 2,939 \\
+Thai & tha & 1,215 & 1,304 & 61,485 & 63,817 & 47.15 & 48.94 & 176 \\
+Traditional Chinese & zh & 1,216 & 1,302 & 21,287 & 22,623 & 16.35 & 17.38 & 1,315 \\
+Ukrainian & ukr & 1,215 & 1,377 & 10,977 & 79,648 & 7.97 & 57.84 & 3,146 \\
+Vietnamese & vie & 1,215 & 1,379 & 16,993 & 74,252 & 12.32 & 53.84 & 1,424 \\
+mah & mah & 1,111 & 1,242 & 13,418 & 70,643 & 10.80 & 56.88 & 1,424 \\
+\bottomrule
+\caption{Statistics per language: Number of documents, Number of Sentences, Tokens, Characters, Average Tokens per Sentence, Average Characters per Sentence, Vocabulary Size. NOTE: Calculated using a regex tokenizer. \textbackslash\{\} \{*\}: indicated as low resource in NLLB paper or due to lack of Google Translate coverage. \textbackslash\{\}\#: not included in NLLB.. \\\\ *: indicated as low resource in NLLB paper. \\\\ \#: not included in NLLB.}
+\label{tab:portland\_per\_language\_stats}
+\end{tabular}
+\end{table}
