@@ -1,0 +1,152 @@
+#!/usr/bin/env python3
+import pandas as pd
+import importlib.util
+from pathlib import Path
+
+def load_language_codes_py(py_path: str, var_name: str = "langauge_codes") -> dict:
+    spec = importlib.util.spec_from_file_location("language_codes_module", py_path)
+    module = importlib.util.module_from_spec(spec)
+    assert spec and spec.loader
+    spec.loader.exec_module(module)
+    return getattr(module, var_name)
+
+def latex_escape(s: str) -> str:
+    # minimal escaping for table cells
+    return (s.replace("\\", r"\textbackslash{}").replace("&", r"\&").replace("%", r"\%").replace("$", r"\$").replace("#", r"\#").replace("_", r"\_").replace("{", r"\{").replace("}", r"\}")
+            )
+
+def format_int(x):
+    try:
+        return f"{int(x):,}"
+    except Exception:
+        return str(x)
+
+def format_float(x, nd=2):
+    try:
+        return f"{float(x):.{nd}f}"
+    except Exception:
+        return str(x)
+
+def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    # ap.add_argument("--csv", required=True, help="Input per-language CSV (from your profiler)")
+    ap.add_argument("--csv", default="/home/jen/TranslationsDataset/data/processed/portland/stats/per_language_profile.csv", help="Input per-language CSV (from your profiler)")
+    ap.add_argument("--lang-codes-py", default="/home/jen/TranslationsDataset/data/language_codes.py",
+                    help="Path to language_codes.py")
+    # ap.add_argument("--out-tex", required=True, help="Output.tex file")
+    ap.add_argument("--out-tex", default="/home/jen/TranslationsDataset/data/processed/portland/tables/portland_lang_profiles_table.tex", help="Output.tex file")
+    ap.add_argument("--table-label", default="tab:portland_per_language_stats", help="LaTeX label")
+    ap.add_argument("--table-caption", default="Statistics per language: Number of documents, Number of Sentences, Tokens, Characters, Average Tokens per Sentence, Average Characters per Sentence, Vocabulary Size. NOTE: Calculated using a regex tokenizer. \\ {*}: indicated as low resource in NLLB paper or due to lack of Google Translate coverage. \#: not included in NLLB.", help="Caption")
+    ap.add_argument("--sort-by", default="Language Name", help="Column to sort by")
+    args = ap.parse_args()
+
+    # Load CSV
+    df = pd.read_csv(args.csv)
+
+    # Expect these columns from your profiler:
+    # Language Name, Lang Code, Num of Docs, Num of Sentences, Num of Tokens, Num of Characters,
+    # Avg Tokens per Sentence, Avg Characters per Sentence, Vocabulary Size
+    # Normalize column names to match the figure
+    rename = {
+        "Num of Sentences": "Sents",
+        "Num of Tokens": "Tokens",
+        "Num of Characters": "Chars",
+        "Avg Tokens per Sentence": "Avg Tokens per Sent",
+        "Avg Characters per Sentence": "Avg Chars per Sent",
+        "Vocabulary Size": "Vocab Size"
+    }
+    df = df.rename(columns=rename)
+
+    # Load your mapping (LanguageName -> iso codes)
+    lang_codes = load_language_codes_py(args.lang_codes_py, var_name="language_codes")
+
+    # Build a name -> displayed code mapping for the LaTeX table:
+    # prefer iso639-2 if present, else iso639-1, else keep the existing code.
+    def display_code(row):
+        name = str(row["Language Name"])
+        info = lang_codes.get(name)
+        if isinstance(info, dict):
+            return info.get("iso639-2") or info.get("iso639-1") or row["Lang Code"]
+        return row["Lang Code"]
+
+    df["Lang Code"] = df.apply(display_code, axis=1)
+
+    # ---- Add your markers (* and #) ----
+    # Provide these sets based on your definition:
+    # * = indicated low-resource in NLLB paper
+    # # = not included in NLLB
+    # Edit these lists to match your current decisions.
+    STAR_LANGS = {
+        "Amharic", "Burmese", "Khmer", "Lao", "Nepali",
+        "Oromo", "Pashto", "Serbian", "Somali", "Telugu"
+    }
+    HASH_LANGS = {
+        "Chuukese", "Hmong", "Marshallese", "Mien", "Rohingya", "Karen"
+    }
+
+    def name_with_markers(name: str) -> str:
+        if name in STAR_LANGS:
+            return f"{name}*"
+        if name in HASH_LANGS:
+            return f"{name}\\#"
+        return name
+
+    df["Language Name"] = df["Language Name"].apply(name_with_markers)
+
+    # Sort
+    if args.sort_by in df.columns:
+        df = df.sort_values(args.sort_by, ascending=True)
+
+    # Column order like your figure
+    cols = [
+        "Language Name", "Lang Code", "Num of Docs", "Sents", "Tokens", "Chars",
+        "Avg Tokens per Sent", "Avg Chars per Sent", "Vocab Size"
+    ]
+    df = df[cols]
+
+    # Format values and escape LaTeX
+    lines = []
+    header = (
+        r"\begin{table}[t]" "\n"
+        r"\centering" "\n"
+        r"\small" "\n"
+        r"\setlength{\tabcolsep}{4pt}" "\n"
+        r"\begin{tabular}{l l r r r r r r r}" "\n"
+        r"\toprule" "\n"
+        r"\textbf{Language} & \textbf{Lang} & \textbf{Num of} & \textbf{Sents} & \textbf{Tokens} & \textbf{Chars} & "
+        r"\textbf{Avg Tokens} & \textbf{Avg Chars} & \textbf{Vocab} \\" "\n"
+        r"\textbf{Name} & \textbf{Code} & \textbf{Docs} &  &  &  & "
+        r"\textbf{per Sent} & \textbf{per Sent} & \textbf{Size} \\" "\n"
+        r"\midrule" "\n"
+    )
+    lines.append(header)
+
+    for _, row in df.iterrows():
+        lang = latex_escape(str(row["Language Name"]))
+        code = latex_escape(str(row["Lang Code"]))
+
+        ndocs = format_int(row["Num of Docs"])
+        sents = format_int(row["Sents"])
+        toks = format_int(row["Tokens"])
+        chars = format_int(row["Chars"])
+        avg_toks = format_float(row["Avg Tokens per Sent"], 2)
+        avg_chars = format_float(row["Avg Chars per Sent"], 2)
+        vocab = format_int(row["Vocab Size"])
+
+        lines.append(f"{lang} & {code} & {ndocs} & {sents} & {toks} & {chars} & {avg_toks} & {avg_chars} & {vocab} \\\\\n")
+
+    footer = (
+        r"\bottomrule" "\n"
+        rf"\caption{{{latex_escape(args.table_caption)}. \\\\ *: indicated as low resource in NLLB paper. \\\\ \#: not included in NLLB.}}" "\n"
+        rf"\label{{{latex_escape(args.table_label)}}}" "\n"
+        r"\end{tabular}" "\n"
+        r"\end{table}" "\n"
+    )
+    lines.append(footer)
+
+    Path(args.out_tex).write_text("".join(lines), encoding="utf-8")
+    print(f"Wrote LaTeX table to {args.out_tex}")
+
+if __name__ == "__main__":
+    main()
