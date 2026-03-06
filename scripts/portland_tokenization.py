@@ -1,10 +1,19 @@
-# USAGE:
-# python tokenize_folder.py \
-#   --in-dir /home/jen/TranslationsDataset/data/processed/portland \
-#   --out-dir /home/jen/TranslationsDataset/data/processed/portland/token_stats
-
-
 #!/usr/bin/env python3
+"""Multilingual tokenization and token count statistics generator.
+
+Processes JSONL files containing multilingual alert data and generates token-level
+statistics by language and scenario. Produces JSON records with per-document token
+counts and CSV summary statistics aggregated by scenario and language.
+
+Supports multiple tokenization strategies: character-level for CJK and Southeast
+Asian languages, word-level for alphabetic languages. Handles placeholders as
+atomic tokens and deduplicates by preferring translations over source text.
+
+Usage:
+    python portland_tokenization.py \
+      --in-dir /path/to/processed/alerts \
+      --out-dir /path/to/output
+"""
 import json
 from pathlib import Path
 from typing import Dict, Any, List, Optional
@@ -17,11 +26,17 @@ import pandas as pd
 PLACEHOLDER_RE = re.compile(r"\{([^{}]*)\}")
 
 def normalize_placeholders(text: str) -> str:
-    """
-    Normalize placeholders {...}:
-    - collapse whitespace inside braces
-    - if inner contains at least one letter/number, uppercase inner
-    - if empty/whitespace-only, replace with {}
+    """Normalize placeholder format in text.
+    
+    Standardizes placeholders by collapsing internal whitespace, converting
+    placeholders containing letters or numbers to uppercase, and removing empty
+    placeholders. Input None returns None unchanged.
+    
+    Args:
+        text (str | None): Text containing placeholders in {key} format.
+    
+    Returns:
+        str | None: Text with normalized placeholders.
     """
     if text is None:
         return text
@@ -48,7 +63,18 @@ WORDLIKE_OR_PLACEHOLDER_RE = re.compile(
 )
 
 def _char_tokens_keep_placeholders(s: str) -> List[str]:
-    """Character tokens excluding whitespace, but keep {...} as a single token."""
+    """Tokenize text into individual characters while preserving placeholders.
+    
+    Splits text into character tokens suitable for languages without word
+    boundaries (CJK, Thai, Lao, Khmer, Burmese). Preserves {placeholder} sequences
+    as single tokens and skips whitespace.
+    
+    Args:
+        s (str): Text to tokenize.
+    
+    Returns:
+        list[str]: List of character tokens and placeholder strings.
+    """
     out: List[str] = []
     i = 0
     while i < len(s):
@@ -64,8 +90,21 @@ def _char_tokens_keep_placeholders(s: str) -> List[str]:
     return out
 
 def tokenize_translation(text: str, lang_code: Optional[str] = None) -> List[str]:
-    """
-    Approximate multilingual tokenizer for translated alert text.
+    """Tokenize text with language-specific handling.
+    
+    Applies language-appropriate tokenization: character-level for CJK and
+    Southeast Asian languages (Thai, Lao, Khmer, Burmese), word-level for others.
+    Preserves placeholders as single tokens in all cases.
+    
+    Args:
+        text (str | None): Text to tokenize.
+        lang_code (str | None): ISO 639-1 or 639-2 language code (e.g., 'zh', 'en').
+            Used to select appropriate tokenization strategy. Subcomponents after
+            '-' are ignored (e.g., 'zh-Hans' -> 'zh').
+    
+    Returns:
+        list[str]: List of word or character tokens. Returns empty list for
+            None or empty input.
     """
     if text is None:
         return []
@@ -87,17 +126,23 @@ def tokenize_translation(text: str, lang_code: Optional[str] = None) -> List[str
     return WORDLIKE_OR_PLACEHOLDER_RE.findall(t)
 
 def build_doc_texts(obj: dict) -> dict:
-    """
-    The initial data sources will have English as a source and not translation. Hopefully future data
-    will have a different source and English as a translation. this should handle both.
-    Returns a dict: lang_code -> text, with no duplicate languages per doc.
-
-    Preference:
-      - translations[lang] wins if present
-      - source[lang] is used only if translations[lang] is missing
-
-    Also maps source key 'eng' -> 'en' (common in your data).
-
+    """Extract language->text mappings from an alert document.
+    
+    Builds a deduplicated mapping of language codes to text content. Translations
+    take priority over source text. English source language code 'eng' is normalized
+    to 'en'. Skips None or empty values.
+    
+    Handles multiple data formats: current data typically has English as source,
+    but future data may have different sources with English as translation. This
+    function adapts to both patterns.
+    
+    Args:
+        obj (dict): Alert document with optional 'translations' and 'source' fields,
+            each containing language code -> text mappings.
+    
+    Returns:
+        dict: Mapping of normalized language codes to text strings. At most one
+            text per language (translations preferred over source).
     """
     texts = {}
 
@@ -124,6 +169,19 @@ def build_doc_texts(obj: dict) -> dict:
 # Folder processing
 # -----------------------
 def iter_jsonl_records(folder: Path):
+    """Iterate through JSON objects from JSONL files in a directory.
+    
+    Loads JSONL files (not recursive) in alphabetical order. Yields file path,
+    line number, and parsed object for each line. Skips empty lines and silently
+    ignores lines with JSON parsing errors.
+    
+    Args:
+        folder (Path): Directory containing .jsonl files.
+    
+    Yields:
+        tuple: (filepath, line_num, obj) where filepath is the source file Path,
+            line_num is the 1-based line number, and obj is the parsed JSON dict.
+    """
     # ONLY files directly in `folder`, not subfolders
     for fp in sorted(folder.glob("*.jsonl")):
         with fp.open("r", encoding="utf-8") as f:
@@ -138,6 +196,22 @@ def iter_jsonl_records(folder: Path):
                     continue
 
 def process_folder(in_dir: str, out_dir: str) -> None:
+    """Process JSONL folder and generate tokenization statistics.
+    
+    Reads all JSONL files from input directory, tokenizes text by language,
+    and generates both per-document and aggregated statistics. Output includes
+    detailed JSONL records with per-document token counts and CSV summary with
+    per-scenario/language aggregates.
+    
+    Args:
+        in_dir (str): Directory containing .jsonl alert files to process.
+        out_dir (str): Output directory for results. Created if missing.
+    
+    Returns:
+        None. Produces two output files:
+            - token_counts.records.jsonl: Per-document record with token counts
+            - token_counts.summary.csv: Aggregated statistics by scenario/language
+    """
     in_dir_p = Path(in_dir)
     out_dir_p = Path(out_dir)
     out_dir_p.mkdir(parents=True, exist_ok=True)
@@ -224,6 +298,15 @@ def process_folder(in_dir: str, out_dir: str) -> None:
 
 
 def main():
+    """Command-line interface for tokenization pipeline.
+    
+    Parses arguments and runs the complete tokenization and statistics
+    generation pipeline on the specified input directory.
+    
+    Command-line arguments:
+        --in-dir: Directory containing .jsonl files (default: processed/portland).
+        --out-dir: Output directory for results (default: processed/portland/token_stats).
+    """
     import argparse
     from pathlib import Path
 

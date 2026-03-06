@@ -1,4 +1,16 @@
 #!/usr/bin/env python3
+"""Language profile analyzer for multilingual alert dataset.
+
+This module processes JSONL files containing multilingual alert data and generates
+per-language statistics including document counts, token counts, vocabulary size,
+and average sentence metrics. Supports CJK languages and character-based tokenization.
+
+Key features:
+    - Loads language code mappings from Python files
+    - Normalizes and tokenizes text with language-specific handling
+    - Deduplicates documents by ID
+    - Generates per-language statistical profiles
+"""
 import json
 from pathlib import Path
 from collections import Counter, defaultdict
@@ -11,12 +23,20 @@ import importlib.util
 # Import language codes
 # -----------------------
 def load_code_to_name_from_py(py_path: str, var_name: str = "langauge_codes") -> dict:
-    """
-    Loads a Python file containing a dict called `langauge_codes`:
-      langauge_codes = {"Amharic": {"iso639-2": "amh", "iso639-1": "am"},...}
-
-    Returns: { "am": "Amharic", "ar": "Arabic",... }
-    Prefers iso639-1, falls back to iso639-2.
+    """Load language code mappings from a Python file.
+    
+    Imports a Python module containing a dictionary of language definitions and
+    converts it to a code->name mapping. Prioritizes ISO 639-1 codes, falls back
+    to ISO 639-2 if ISO 639-1 is unavailable.
+    
+    Args:
+        py_path (str): Path to the Python file containing the language codes dictionary.
+        var_name (str): Name of the dictionary variable in the Python file.
+            Defaults to "langauge_codes".
+    
+    Returns:
+        dict: Dictionary mapping language codes (e.g., 'am', 'ar') to language names
+            (e.g., 'Amharic', 'Arabic'). Only includes languages with valid codes.
     """
     py_path = str(Path(py_path))
 
@@ -42,6 +62,18 @@ def load_code_to_name_from_py(py_path: str, var_name: str = "langauge_codes") ->
 PLACEHOLDER_RE = re.compile(r"\{([^{}]*)\}")
 
 def normalize_placeholders(text: str) -> str:
+    """Normalize placeholder format in text.
+    
+    Standardizes placeholders by collapsing internal whitespace, converting
+    placeholders containing letters or numbers to uppercase, and removing empty
+    placeholders. Input None returns None unchanged.
+    
+    Args:
+        text (str | None): Text containing placeholders in {key} format.
+    
+    Returns:
+        str | None: Text with normalized placeholders.
+    """
     if text is None:
         return text
 
@@ -63,6 +95,19 @@ def normalize_placeholders(text: str) -> str:
 SENT_END_RE = re.compile(r'(?<=[\.\!\?\u0964\u061F\u3002\uFF01\uFF1F])\s+|\n+')
 
 def split_sentences(text: str) -> List[str]:
+    """Split text into sentences using multilingual punctuation markers.
+    
+    Splits on common sentence delimiters including periods, exclamation marks,
+    question marks, and their Unicode equivalents in various scripts (Devanagari,
+    Arabic, CJK, etc.). Whitespace variations are handled consistently.
+    
+    Args:
+        text (str | None): Text to split into sentences.
+    
+    Returns:
+        list[str]: List of sentences, stripped of whitespace. Returns empty list
+            for None or empty input.
+    """
     if text is None:
         return []
     t = text.strip()
@@ -78,6 +123,18 @@ CJK_RE = re.compile(r'[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Sc
 WORDLIKE_OR_PLACEHOLDER_RE = re.compile(r"\{[^{}]+\}|[\p{L}\p{M}]+|\p{N}+", flags=re.UNICODE)
 
 def _char_tokens_keep_placeholders(s: str) -> List[str]:
+    """Tokenize text into individual characters while preserving placeholders.
+    
+    Splits text into character tokens suitable for languages without word
+    boundaries (CJK, Thai, Lao, Khmer, Burmese). Preserves {placeholder} sequences
+    as single tokens and skips whitespace.
+    
+    Args:
+        s (str): Text to tokenize.
+    
+    Returns:
+        list[str]: List of character tokens and placeholder strings.
+    """
     out: List[str] = []
     i = 0
     while i < len(s):
@@ -93,6 +150,22 @@ def _char_tokens_keep_placeholders(s: str) -> List[str]:
     return out
 
 def tokenize_translation(text: str, lang_code: Optional[str] = None) -> List[str]:
+    """Tokenize text with language-specific handling.
+    
+    Applies language-appropriate tokenization: character-level for CJK and
+    Southeast Asian languages (Thai, Lao, Khmer, Burmese), word-level for others.
+    Preserves placeholders as single tokens in all cases.
+    
+    Args:
+        text (str | None): Text to tokenize.
+        lang_code (str | None): ISO 639-1 or 639-2 language code (e.g., 'zh', 'en').
+            Used to select appropriate tokenization strategy. Subcomponents after
+            '-' are ignored (e.g., 'zh-Hans' -> 'zh').
+    
+    Returns:
+        list[str]: List of word or character tokens. Returns empty list for
+            None or empty input.
+    """
     if text is None:
         return []
     t = normalize_placeholders(text).strip()
@@ -113,10 +186,19 @@ def tokenize_translation(text: str, lang_code: Optional[str] = None) -> List[str
 # No double-counting across source/translations
 # -----------------------
 def build_doc_texts(obj: Dict[str, Any]) -> Dict[str, str]:
-    """
-    Returns lang_code -> text with at most one text per language per doc.
-    Preference: translations wins; source fills gaps.
-    Maps source 'eng' -> 'en'.
+    """Extract language->text mappings from an alert document.
+    
+    Builds a deduplicated mapping of language codes to text content. Translations
+    take priority over source text. English source language code 'eng' is normalized
+    to 'en'. Skips None or empty values.
+    
+    Args:
+        obj (dict): Alert document with optional 'translations' and 'source' fields,
+            each containing language code -> text mappings.
+    
+    Returns:
+        dict: Mapping of normalized language codes to text strings. At most one
+            text per language (translations preferred over source).
     """
     texts: Dict[str, str] = {}
 
@@ -140,8 +222,17 @@ def build_doc_texts(obj: Dict[str, Any]) -> Dict[str, str]:
 # -----------------------
 # Folder reading (non-recursive)
 # -----------------------
-def iter_jsonl_objects(in_dir: Path):
-    for fp in sorted(in_dir.glob("*.jsonl")):  # NOT recursive
+def iter_jsonl_objects(in_dir: Path):    """Iterate through JSON objects from JSONL files in a directory.
+    
+    Loads JSONL files (not recursive) in alphabetical order. Skips empty lines
+    and silently ignores lines with JSON parsing errors.
+    
+    Args:
+        in_dir (Path): Directory containing .jsonl files.
+    
+    Yields:
+        dict: Parsed JSON object from each valid line.
+    """    for fp in sorted(in_dir.glob("*.jsonl")):  # NOT recursive
         with fp.open("r", encoding="utf-8") as f:
             for line in f:
                 line = line.strip()
@@ -156,6 +247,24 @@ def iter_jsonl_objects(in_dir: Path):
 # Main profiling
 # -----------------------
 def profile_languages(in_dir: str, out_csv: str, lang_code_to_name: Dict[str, str], dedupe_ids: bool = True):
+    """Generate per-language statistics from JSONL alert documents.
+    
+    Processes all JSONL files in a directory and computes per-language statistics:
+    document count, sentence count, token count, character count, vocabulary size,
+    and derived metrics (avg tokens/sentence, avg chars/sentence). Results are
+    saved to CSV sorted by token count (descending).
+    
+    Args:
+        in_dir (str): Directory containing JSONL files to process.
+        out_csv (str): Path to output CSV file. Parent directories are created
+            if they don't exist.
+        lang_code_to_name (dict): Mapping of language codes to human-readable
+            language names.
+        dedupe_ids (bool): If True, skips documents with duplicate IDs (default True).
+    
+    Returns:
+        None. Writes CSV file and prints confirmation message.
+    """
     in_dir_p = Path(in_dir)
     ids_seen = set()
 
@@ -215,6 +324,17 @@ def profile_languages(in_dir: str, out_csv: str, lang_code_to_name: Dict[str, st
     print(f"Wrote: {out_csv}")
 
 def main():
+    """Command-line interface for language profiling.
+    
+    Parses arguments and runs the language profiling pipeline on JSONL files
+    from the specified directory.
+    
+    Command-line arguments:
+        --in-dir: Directory containing .jsonl files (default: processed/portland).
+        --out-csv: Output CSV path (default: processed/portland/stats/per_language_profile.csv).
+        --no-dedupe: If set, do not deduplicate documents by ID.
+        --lang-map: Path to language code mapping file (default: language_codes.py).
+    """
     import argparse
 
     ap = argparse.ArgumentParser()
