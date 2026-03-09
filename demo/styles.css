@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Alert Translation Search</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 10px;
+        }.search-container {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }.search-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }.search-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        select, input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        select:focus, input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }.button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }.search-btn {
+            background: #4CAF50;
+            color: white;
+        }.search-btn:hover {
+            background: #45a049;
+        }.reset-btn {
+            background: #f44336;
+            color: white;
+        }.reset-btn:hover {
+            background: #da190b;
+        }.results-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #1976d2;
+        }.alert-card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            border-left: 4px solid #4CAF50;
+        }.alert-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }.alert-id {
+            font-weight: 700;
+            color: #333;
+            font-size: 16px;
+        }.alert-scenario {
+            background: #4CAF50;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }.source-text {
+            background: #fff3cd;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            border-left: 3px solid #ffc107;
+        }.source-label {
+            font-weight: 600;
+            color: #856404;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }.translations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 12px;
+        }.translation-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+        }.lang-code {
+            font-weight: 700;
+            color: #1976d2;
+            text-transform: uppercase;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }.translation-text {
+            color: #333;
+            line-height: 1.5;
+        }.no-results {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 8px;
+            color: #666;
+        }.loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚨 Emergency Alert Translation Search</h1>
+    
+    <div class="search-container">
+        <div class="search-row">
+            <div class="search-group">
+                <label for="scenarioFilter">Alert Type (Scenario):</label>
+                <select id="scenarioFilter">
+                    <option value="">All Scenarios</option>
+                </select>
+            </div>
+            
+            <div class="search-group">
+                <label for="sourceFilter">Source Language:</label>
+                <select id="sourceFilter">
+                    <option value="">All Source Languages</option>
+                </select>
+            </div>
+            
+            <div class="search-group">
+                <label for="targetFilter">Target Language:</label>
+                <select id="targetFilter">
+                    <option value="">All Target Languages</option>
+                </select>
+            </div>
+            
+            <div class="search-group">
+                <label for="textSearch">Search Text:</label>
+                <input type="text" id="textSearch" placeholder="Search in translations...">
+            </div>
+        </div>
+        
+        <div class="button-group">
+            <button class="search-btn" onclick="filterAlerts()">🔍 Search</button>
+            <button class="reset-btn" onclick="resetFilters()">↻ Reset</button>
+        </div>
+    </div>
+    
+    <div id="resultsInfo" class="results-info" style="display: none;"></div>
+    <div id="output"></div>
+
+    <script>
+        let alertsData = [];
+        
+        // Load JSON data
+        async function loadData() {
+            try {
+                const response = await fetch('alerts.json');
+                const text = await response.text();
+                
+                // Parse JSONL (JSON Lines format)
+                alertsData = text.trim().split('\n').map(line => JSON.parse(line));
+                
+                populateFilters();
+                displayAlerts(alertsData);
+            } catch (error) {
+                document.getElementById('output').innerHTML = 
+                    `<div class="no-results">
+                        <h2>Error Loading Data</h2>
+                        <p>${error.message}</p>
+                        <p>Make sure alerts.json is in the same directory.</p>
+                    </div>`;
+            }
+        }
+        
+        // Populate filter dropdowns
+        function populateFilters() {
+            // Get unique scenarios
+            const scenarios = [...new Set(alertsData.map(alert => alert.scenario))].sort();
+            const scenarioSelect = document.getElementById('scenarioFilter');
+            scenarios.forEach(scenario => {
+                const option = document.createElement('option');
+                option.value = scenario;
+                option.textContent = scenario.replace(/_/g, ' ').toUpperCase();
+                scenarioSelect.appendChild(option);
+            });
+            
+            // Get unique source languages
+            const sourceLanguages = [...new Set(alertsData.map(alert => 
+                Object.keys(alert.source)[0]
+            ))].sort();
+            const sourceSelect = document.getElementById('sourceFilter');
+            sourceLanguages.forEach(lang => {
+                const option = document.createElement('option');
+                option.value = lang;
+                option.textContent = lang.toUpperCase();
+                sourceSelect.appendChild(option);
+            });
+            
+            // Get unique target languages
+            const targetLanguages = [...new Set(alertsData.flatMap(alert => 
+                Object.keys(alert.translations)
+            ))].sort();
+            const targetSelect = document.getElementById('targetFilter');
+            targetLanguages.forEach(lang => {
+                const option = document.createElement('option');
+                option.value = lang;
+                option.textContent = lang.toUpperCase();
+                targetSelect.appendChild(option);
+            });
+        }
+        
+        // Filter alerts based on search criteria
+        function filterAlerts() {
+            const scenario = document.getElementById('scenarioFilter').value;
+            const sourceLang = document.getElementById('sourceFilter').value;
+            const targetLang = document.getElementById('targetFilter').value;
+            const searchText = document.getElementById('textSearch').value.toLowerCase();
+            
+            let filtered = alertsData.filter(alert => {
+                // Filter by scenario
+                if (scenario && alert.scenario !== scenario) return false;
+                
+                // Filter by source language
+                if (sourceLang && !alert.source[sourceLang]) return false;
+                
+                // Filter by target language
+                if (targetLang && !alert.translations[targetLang]) return false;
+                
+                // Filter by search text
+                if (searchText) {
+                    const sourceText = Object.values(alert.source).join(' ').toLowerCase();
+                    const translationText = Object.values(alert.translations).join(' ').toLowerCase();
+                    if (!sourceText.includes(searchText) && !translationText.includes(searchText)) {
+                        return false;
+                    }
+                }
+                
+                return true;
+            });
+            
+            displayAlerts(filtered);
+            showResultsInfo(filtered.length, alertsData.length);
+        }
+        
+        // Display results info
+        function showResultsInfo(filtered, total) {
+            const info = document.getElementById('resultsInfo');
+            info.style.display = 'block';
+            info.textContent = `Showing ${filtered} of ${total} alerts`;
+        }
+        
+        // Display alerts
+        function displayAlerts(alerts) {
+            const output = document.getElementById('output');
+            
+            if (alerts.length === 0) {
+                output.innerHTML = `
+                    <div class="no-results">
+                        <h2>No Results Found</h2>
+                        <p>Try adjusting your search criteria.</p>
+                    </div>`;
+                return;
+            }
+            
+            let html = '';
+            alerts.forEach(alert => {
+                const sourceLang = Object.keys(alert.source)[0];
+                const sourceText = alert.source[sourceLang];
+                
+                html += `
+                    <div class="alert-card">
+                        <div class="alert-header">
+                            <span class="alert-id">${alert.id}</span>
+                            <span class="alert-scenario">${alert.scenario.replace(/_/g, ' ')}</span>
+                        </div>
+                        
+                        <div class="source-text">
+                            <div class="source-label">Source (${sourceLang.toUpperCase()})</div>
+                            <div>${sourceText}</div>
+                        </div>
+                        
+                        <div class="translations-grid">
+                `;
+                
+                // Display translations
+                for (const [lang, text] of Object.entries(alert.translations)) {
+                    html += `
+                        <div class="translation-item">
+                            <div class="lang-code">${lang}</div>
+                            <div class="translation-text">${text}</div>
+                        </div>
+                    `;
+                }
+                
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+            
+            output.innerHTML = html;
+        }
+        
+        // Reset filters
+        function resetFilters() {
+            document.getElementById('scenarioFilter').value = '';
+            document.getElementById('sourceFilter').value = '';
+            document.getElementById('targetFilter').value = '';
+            document.getElementById('textSearch').value = '';
+            document.getElementById('resultsInfo').style.display = 'none';
+            displayAlerts(alertsData);
+        }
+        
+        // Add enter key support for text search
+        document.getElementById('textSearch').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                filterAlerts();
+            }
+        });
+        
+        // Load data on page load
+        window.addEventListener('DOMContentLoaded', loadData);
+    </script>
+</body>
+</html>
