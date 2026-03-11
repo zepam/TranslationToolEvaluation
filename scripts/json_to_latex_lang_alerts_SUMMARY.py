@@ -113,7 +113,7 @@ def generate_summary_table(data: dict) -> str:
     lines.append(
         "\\textbf{Alert Type} & "
         "\\textbf{Total} & "
-        "\\textbf{\\# Lang.} & "
+        "\\textbf{\\# Langs} & "
         "\\textbf{Min} & "
         "\\textbf{Median} & "
         "\\textbf{Max} \\\\"
@@ -136,7 +136,7 @@ def generate_summary_table(data: dict) -> str:
 
     lines.append("\\bottomrule")
     lines.append("\\end{tabular}")
-    lines.append("\\caption{Summary of translation document coverage by alert type.}")
+    lines.append("\\caption{Summary of translation document language coverage by alert type.}")
     lines.append("\\label{tab:portland_translations_per_alert_lang_summary}")
     lines.append("\\end{table}")
     return "\n".join(lines)
