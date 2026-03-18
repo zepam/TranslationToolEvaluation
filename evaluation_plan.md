@@ -9,17 +9,31 @@
     - `reference_translation` (human)
     - `translation_source` metadata
 
-### 2) Run Reference-Based Automatic MT Metrics
+### 2) Baseline systems
+    - Commercial APIs: Google Translate, DeepL, Azure Translator
+    - Open-source models: NLLB, M2M-100, or mBART
 
-- Compute:
-    - **sacreBLEU** (include signature)
-    - **chrF / chrF++**
-    - **TER**
-    - **COMET / BLEURT** (if available)
+    Note the version, parameters, preprocessing steps
+
+### 3) Run Reference-Based Automatic MT Metrics
+
+- **Options**:
+    - sacreBLEU
+    - chrF / chrF++
+    - METEOR
+    - COMET
+    - BLEURT
+    - BERTScore
+  
 - Report results per language and aggregated.
 - Document exact preprocessing/tokenizer name and version.
 
-### 3) Run Domain-Aware Automatic Checks (Essential)
+- **Also?**
+  - Readability?
+  - evaluate small sample. track errors by type and severity?
+  - Translation error rate
+
+### 4) Run Domain-Aware Automatic Checks
 
 - **Placeholder fidelity:** percent preserving placeholders exactly (regex: `r'{[^}]+}'`); treat as must-pass for operations.
 - **Critical-term preservation:** verify key terms (e.g., “evacuate”, “shelter”, locations, times, phone numbers) appear in outputs.
@@ -27,15 +41,15 @@
 - **Slot Error Rate (SER):**  
     `SER = (#missing + #incorrect slots) / total_slots`
 
-### 4) Produce Summary Tables and Error Examples
+### 5) Produce Summary Tables and Error Examples
 
-- Recommended table columns:
-    - `#docs`, `#sentences`, `BLEU`, `chrF`, `COMET`,
+- Probable table columns:
+    - `#docs`, `#sentences`, `BLEU`, `chrF`, `COMET`, `Other Metrics`
     - `placeholder_fidelity(%)`, `critical_term_preserve(%)`,
     - `avg_tokens`, `vocab_size`
 - Include representative failure examples per language and event type.
 
-Also provide error category breakdowns (e.g., omitted action, mistranslated location, placeholder corruption) with examples.
+If done in Step 3, provide error category breakdowns (e.g., omitted action, mistranslated location, placeholder corruption) with examples.
 
 ---
 
