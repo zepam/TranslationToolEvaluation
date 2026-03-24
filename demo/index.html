@@ -213,8 +213,12 @@
     <script>
         let alertsData = [];
         let filteredAlerts = [];
+        let manifest = null;
+        let allAlertsCache = null;
+        const scenarioCache = {};
         let currentPage = 1;
         const PAGE_SIZE = 25;
+        const MANIFEST_PATH = 'data/manifest.json';
         let searchDebounceTimer = null;
         
         function debounceFilter() {
@@ -251,41 +255,99 @@
             renderPaginationControls();
         }
 
+        function setOutputLoading(message) {
+            document.getElementById('output').innerHTML = `<div class="loading">${message}</div>`;
+        }
+
+        async function parseJsonlText(text) {
+            const lines = text.trim().split('\n');
+            const parsedAlerts = [];
+
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line) {
+                    continue;
+                }
+                try {
+                    parsedAlerts.push(preloadAlertMetadata(JSON.parse(line)));
+                } catch (parseError) {
+                    console.warn('Skipping malformed JSONL line', parseError);
+                }
+
+                if (i > 0 && i % 250 === 0) {
+                    await new Promise(resolve => setTimeout(resolve, 0));
+                }
+            }
+
+            return parsedAlerts;
+        }
+
+        async function loadScenarioData(scenario) {
+            if (scenarioCache[scenario]) {
+                return scenarioCache[scenario];
+            }
+
+            const path = manifest.files[scenario];
+            const response = await fetch(path);
+            if (!response.ok) {
+                throw new Error(`Failed to load scenario file: ${scenario}`);
+            }
+
+            const text = await response.text();
+            const parsed = await parseJsonlText(text);
+            scenarioCache[scenario] = parsed;
+            return parsed;
+        }
+
+        async function getAllAlerts() {
+            if (allAlertsCache) {
+                return allAlertsCache;
+            }
+
+            const combined = [];
+            for (let i = 0; i < manifest.scenarios.length; i++) {
+                const scenario = manifest.scenarios[i];
+                setOutputLoading(`Loading scenario ${i + 1} of ${manifest.scenarios.length}...`);
+                const scenarioAlerts = await loadScenarioData(scenario);
+                combined.push(...scenarioAlerts);
+            }
+
+            allAlertsCache = combined;
+            return allAlertsCache;
+        }
+
+        async function ensureAlertsForSelection() {
+            const scenario = document.getElementById('scenarioFilter').value;
+            if (scenario) {
+                alertsData = await loadScenarioData(scenario);
+                return;
+            }
+            alertsData = await getAllAlerts();
+        }
+
         // Load JSON data
         async function loadData() {
             try {
-                document.getElementById('output').innerHTML = '<div class="loading">Loading alerts...</div>';
-                const response = await fetch('alerts.json');
-                const text = await response.text();
-                
-                // Parse JSONL (JSON Lines format)
-                const lines = text.trim().split('\n');
-                alertsData = [];
-                for (let i = 0; i < lines.length; i++) {
-                    const line = lines[i].trim();
-                    if (!line) {
-                        continue;
-                    }
-                    try {
-                        const parsed = JSON.parse(line);
-                        alertsData.push(preloadAlertMetadata(parsed));
-                    } catch (parseError) {
-                        console.warn('Skipping malformed JSONL line', parseError);
-                    }
-
-                    if (i > 0 && i % 300 === 0) {
-                        await new Promise(resolve => setTimeout(resolve, 0));
-                    }
+                setOutputLoading('Loading metadata...');
+                const response = await fetch(MANIFEST_PATH);
+                if (!response.ok) {
+                    throw new Error('Could not load data manifest.');
                 }
-                
+
+                manifest = await response.json();
                 populateFilters();
-                filterAlerts();
+
+                if (manifest.scenarios.length > 0) {
+                    document.getElementById('scenarioFilter').value = manifest.scenarios[0];
+                }
+
+                await filterAlerts();
             } catch (error) {
                 document.getElementById('output').innerHTML = 
                     `<div class="no-results">
                         <h2>Error Loading Data</h2>
                         <p>${error.message}</p>
-                        <p>Make sure alerts.json is in the same directory.</p>
+                        <p>Make sure demo/data/manifest.json and scenario JSONL files exist.</p>
                     </div>`;
             }
         }
@@ -293,7 +355,7 @@
         // Populate filter dropdowns
         function populateFilters() {
             // Get unique scenarios
-            const scenarios = [...new Set(alertsData.map(alert => alert.scenario))].sort();
+            const scenarios = [...(manifest?.scenarios || [])].sort();
             const scenarioSelect = document.getElementById('scenarioFilter');
             scenarios.forEach(scenario => {
                 const option = document.createElement('option');
@@ -303,9 +365,7 @@
             });
             
             // Get unique source languages
-            const sourceLanguages = [...new Set(alertsData.map(alert => 
-                Object.keys(alert.source)[0]
-            ))].sort();
+            const sourceLanguages = [...(manifest?.source_languages || [])].sort();
             const sourceSelect = document.getElementById('sourceFilter');
             sourceLanguages.forEach(lang => {
                 const option = document.createElement('option');
@@ -315,9 +375,7 @@
             });
             
             // Get unique target languages
-            const targetLanguages = [...new Set(alertsData.flatMap(alert => 
-                Object.keys(alert.translations)
-            ))].sort();
+            const targetLanguages = [...(manifest?.target_languages || [])].sort();
             const targetSelect = document.getElementById('targetFilter');
             targetLanguages.forEach(lang => {
                 const option = document.createElement('option');
@@ -328,16 +386,15 @@
         }
         
         // Filter alerts based on search criteria
-        function filterAlerts() {
-            const scenario = document.getElementById('scenarioFilter').value;
+        async function filterAlerts() {
             const sourceLang = document.getElementById('sourceFilter').value;
             const targetLang = document.getElementById('targetFilter').value;
             const searchText = document.getElementById('textSearch').value.toLowerCase();
+
+            setOutputLoading('Loading alerts...');
+            await ensureAlertsForSelection();
             
             filteredAlerts = alertsData.filter(alert => {
-                // Filter by scenario
-                if (scenario && alert.scenario !== scenario) return false;
-                
                 // Filter by source language
                 if (sourceLang && !alert.source[sourceLang]) return false;
                 
@@ -441,12 +498,12 @@
         }
         
         // Reset filters
-        function resetFilters() {
+        async function resetFilters() {
             document.getElementById('scenarioFilter').value = '';
             document.getElementById('sourceFilter').value = '';
             document.getElementById('targetFilter').value = '';
             document.getElementById('textSearch').value = '';
-            filterAlerts();
+            await filterAlerts();
         }
         
         // Add enter key and debounce support for text search
@@ -456,6 +513,7 @@
             }
         });
         document.getElementById('textSearch').addEventListener('input', debounceFilter);
+        document.getElementById('scenarioFilter').addEventListener('change', filterAlerts);
         
         // Load data on page load
         window.addEventListener('DOMContentLoaded', loadData);

@@ -50,7 +50,8 @@ This repository includes a static demo at [demo/index.html](demo/index.html) tha
 2. In repository settings, open `Pages`.
 3. Set `Build and deployment` source to `GitHub Actions`.
 4. The workflow at [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml) will:
-	- combine `data/stable/portland_*.jsonl` into `demo/alerts.json`
+	- copy `data/stable/portland_*.jsonl` into `demo/data/`
+	- generate `demo/data/manifest.json` for lazy loading in the browser
 	- deploy the `demo` folder to GitHub Pages
 
 Your page URL will be:
