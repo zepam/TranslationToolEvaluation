@@ -150,6 +150,21 @@
             padding: 40px;
             font-size: 18px;
             color: #666;
+        }.pagination-controls {
+            margin: 20px 0 40px;
+            display: flex;
+            justify-content: center;
+        }.load-more-btn {
+            background: #1976d2;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }.load-more-btn:hover {
+            background: #125ca1;
         }
     </style>
 </head>
@@ -193,21 +208,78 @@
     
     <div id="resultsInfo" class="results-info" style="display: none;"></div>
     <div id="output"></div>
+    <div id="paginationControls" class="pagination-controls"></div>
 
     <script>
         let alertsData = [];
+        let filteredAlerts = [];
+        let currentPage = 1;
+        const PAGE_SIZE = 25;
+        let searchDebounceTimer = null;
         
-        // Load I data
+        function debounceFilter() {
+            if (searchDebounceTimer) {
+                clearTimeout(searchDebounceTimer);
+            }
+            searchDebounceTimer = setTimeout(filterAlerts, 250);
+        }
+
+        function preloadAlertMetadata(alert) {
+            const sourceText = Object.values(alert.source || {}).join(' ').toLowerCase();
+            const translationsText = Object.values(alert.translations || {}).join(' ').toLowerCase();
+            alert.__searchBlob = `${sourceText} ${translationsText}`;
+            alert.__sourceLang = Object.keys(alert.source || {})[0] || 'eng';
+            return alert;
+        }
+
+        function renderPaginationControls() {
+            const controls = document.getElementById('paginationControls');
+            const shown = Math.min(currentPage * PAGE_SIZE, filteredAlerts.length);
+
+            if (shown >= filteredAlerts.length) {
+                controls.innerHTML = '';
+                return;
+            }
+
+            controls.innerHTML = `<button class="load-more-btn" onclick="loadMoreAlerts()">Load more (${shown}/${filteredAlerts.length})</button>`;
+        }
+
+        function loadMoreAlerts() {
+            currentPage += 1;
+            displayAlerts(filteredAlerts);
+            showResultsInfo(filteredAlerts.length, alertsData.length);
+            renderPaginationControls();
+        }
+
+        // Load JSON data
         async function loadData() {
             try {
+                document.getElementById('output').innerHTML = '<div class="loading">Loading alerts...</div>';
                 const response = await fetch('alerts.json');
                 const text = await response.text();
                 
                 // Parse JSONL (JSON Lines format)
-                alertsData = text.trim().split('\n').map(line => JSON.parse(line));
+                const lines = text.trim().split('\n');
+                alertsData = [];
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    if (!line) {
+                        continue;
+                    }
+                    try {
+                        const parsed = JSON.parse(line);
+                        alertsData.push(preloadAlertMetadata(parsed));
+                    } catch (parseError) {
+                        console.warn('Skipping malformed JSONL line', parseError);
+                    }
+
+                    if (i > 0 && i % 300 === 0) {
+                        await new Promise(resolve => setTimeout(resolve, 0));
+                    }
+                }
                 
                 populateFilters();
-                displayAlerts(alertsData);
+                filterAlerts();
             } catch (error) {
                 document.getElementById('output').innerHTML = 
                     `<div class="no-results">
@@ -262,7 +334,7 @@
             const targetLang = document.getElementById('targetFilter').value;
             const searchText = document.getElementById('textSearch').value.toLowerCase();
             
-            let filtered = alertsData.filter(alert => {
+            filteredAlerts = alertsData.filter(alert => {
                 // Filter by scenario
                 if (scenario && alert.scenario !== scenario) return false;
                 
@@ -274,30 +346,34 @@
                 
                 // Filter by search text
                 if (searchText) {
-                    const sourceText = Object.values(alert.source).join(' ').toLowerCase();
-                    const translationText = Object.values(alert.translations).join(' ').toLowerCase();
-                    if (!sourceText.includes(searchText) && !translationText.includes(searchText)) {
+                    if (!alert.__searchBlob.includes(searchText)) {
                         return false;
                     }
                 }
                 
                 return true;
             });
+
+            currentPage = 1;
             
-            displayAlerts(filtered);
-            showResultsInfo(filtered.length, alertsData.length);
+            displayAlerts(filteredAlerts);
+            showResultsInfo(filteredAlerts.length, alertsData.length);
+            renderPaginationControls();
         }
         
         // Display results info
         function showResultsInfo(filtered, total) {
             const info = document.getElementById('resultsInfo');
             info.style.display = 'block';
-            info.textContent = `Showing ${filtered} of ${total} alerts`;
+            const shown = Math.min(currentPage * PAGE_SIZE, filtered);
+            info.textContent = `Showing ${shown} of ${filtered} matching alerts (total dataset: ${total})`;
         }
         
         // Display alerts
         function displayAlerts(alerts) {
             const output = document.getElementById('output');
+            const targetLang = document.getElementById('targetFilter').value;
+            const visibleAlerts = alerts.slice(0, currentPage * PAGE_SIZE);
             
             if (alerts.length === 0) {
                 output.innerHTML = `
@@ -309,9 +385,17 @@
             }
             
             let html = '';
-            alerts.forEach(alert => {
-                const sourceLang = Object.keys(alert.source)[0];
+            visibleAlerts.forEach(alert => {
+                const sourceLang = alert.__sourceLang;
                 const sourceText = alert.source[sourceLang];
+                const translationEntries = Object.entries(alert.translations || {});
+                let renderedTranslations = translationEntries;
+
+                if (targetLang) {
+                    renderedTranslations = translationEntries.filter(([lang]) => lang === targetLang);
+                } else if (translationEntries.length > 6) {
+                    renderedTranslations = translationEntries.slice(0, 6);
+                }
                 
                 html += `
                     <div class="alert-card">
@@ -329,11 +413,20 @@
                 `;
                 
                 // Display translations
-                for (const [lang, text] of Object.entries(alert.translations)) {
+                for (const [lang, text] of renderedTranslations) {
                     html += `
                         <div class="translation-item">
                             <div class="lang-code">${lang}</div>
                             <div class="translation-text">${text}</div>
+                        </div>
+                    `;
+                }
+
+                if (!targetLang && translationEntries.length > 6) {
+                    html += `
+                        <div class="translation-item">
+                            <div class="lang-code">...</div>
+                            <div class="translation-text">${translationEntries.length - 6} more translations. Select a target language to view one language across all alerts.</div>
                         </div>
                     `;
                 }
@@ -353,16 +446,16 @@
             document.getElementById('sourceFilter').value = '';
             document.getElementById('targetFilter').value = '';
             document.getElementById('textSearch').value = '';
-            document.getElementById('resultsInfo').style.display = 'none';
-            displayAlerts(alertsData);
+            filterAlerts();
         }
         
-        // Add enter key support for text search
+        // Add enter key and debounce support for text search
         document.getElementById('textSearch').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 filterAlerts();
             }
         });
+        document.getElementById('textSearch').addEventListener('input', debounceFilter);
         
         // Load data on page load
         window.addEventListener('DOMContentLoaded', loadData);
