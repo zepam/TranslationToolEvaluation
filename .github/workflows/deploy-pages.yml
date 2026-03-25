@@ -1,4 +1,4 @@
-name: Deploy demo to GitHub Pages for Translation Dataset
+name: Deploy demo to GitHub Pages
 
 on:
   push:
