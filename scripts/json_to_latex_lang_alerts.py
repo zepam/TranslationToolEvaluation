@@ -1,9 +1,10 @@
 """
-Script to convert portland_data_profile.json to a LaTeX formatted table.
+Script to convert XXX_data_profile.json to a LaTeX formatted table.
 Creates a table with alert types as rows and languages as columns.
 """
 
 import json
+import sys
 from pathlib import Path
 
 
@@ -92,9 +93,15 @@ def json_to_latex_table(json_input, output_dir=None):
 
 
 def main():
-    input_folder = "data/processed/portland"
-    output_dir = "data/processed/portland/tables"
-    json_to_latex_table(input_folder, output_dir)
+    data_source = (
+        sys.argv[1]
+        if len(sys.argv) > 1
+        else "data/processed/combined_data_profile.json"
+    )
+
+    input_path = Path(data_source)
+    output_dir = input_path.parent / "tables"
+    json_to_latex_table(str(input_path), str(output_dir))
 
 
 if __name__ == "__main__":

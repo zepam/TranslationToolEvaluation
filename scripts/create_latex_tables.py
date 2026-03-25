@@ -27,7 +27,11 @@ def main():
     
     # data_source = sys.argv[1]
 
-    data_source = "/home/jen/TranslationsDataset/data/processed/portland/portland_data_profile.json"
+    data_source: str = (
+        sys.argv[1]
+        if len(sys.argv) > 1
+        else "/home/jen/TranslationsDataset/data/processed/combined_data_profile.json"
+    )
     script_dir = Path(__file__).parent
     
     scripts = [
@@ -35,6 +39,9 @@ def main():
         "json_to_latex_lang_alerts_SUMMARY.py",
         "domain_counts_csv_to_latex.py"
     ]
+
+    # set source_name to be the first part of the filename before the _
+    source_name_prefix = Path(data_source).stem.split("_")[0]
     
     for script in scripts:
         try:

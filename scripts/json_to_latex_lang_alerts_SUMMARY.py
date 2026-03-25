@@ -13,16 +13,13 @@ Output files:
 """
 import json
 import statistics
+import sys
 from pathlib import Path
 
 #TODO: Replace "And" with "&", "In" with "in" in formatted text
 
 # Paths
-INPUT_PATH = Path("/home/jen/TranslationsDataset/data/processed/portland/portland_data_profile.json")
-OUTPUT_DIR = INPUT_PATH.parent / "tables"
-
-FULL_TABLE_PATH = OUTPUT_DIR / "translations_per_alert_language_full.tex"
-SUMMARY_TABLE_PATH = OUTPUT_DIR / "translations_per_alert_language_summary.tex"
+DEFAULT_INPUT_PATH = Path("/home/jen/TranslationsDataset/data/processed/combined_data_profile.json")
 
 
 def latex_escape(text: str) -> str:
@@ -87,7 +84,7 @@ def generate_full_longtable(data: dict) -> str:
     return "\n".join(lines)
 
 
-def generate_summary_table(data: dict) -> str:
+def generate_summary_table(data: dict, source_prefix: str) -> str:
     """Generate a LaTeX summary statistics table by alert type.
     
     Creates a compact summary table with one row per alert type, showing:
@@ -137,7 +134,7 @@ def generate_summary_table(data: dict) -> str:
     lines.append("\\bottomrule")
     lines.append("\\end{tabular}")
     lines.append("\\caption{Summary of translation document language coverage by alert type.}")
-    lines.append("\\label{tab:portland_translations_per_alert_lang_summary}")
+    lines.append(f"\\label{{tab:{source_prefix}_translations_per_alert_lang_summary}}")
     lines.append("\\end{table}")
     return "\n".join(lines)
 
@@ -166,23 +163,31 @@ def main():
     Returns:
         None. Produces two .tex files in the output directory.
     """
-    with open(INPUT_PATH, "r", encoding="utf-8") as f:
+    input_path = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_INPUT_PATH
+    source_prefix = input_path.stem.replace("_data_profile", "")
+    output_dir = input_path.parent / "tables"
+    full_table_path = output_dir / f"{source_prefix}_translations_per_alert_language_full.tex"
+    summary_table_path = output_dir / f"{source_prefix}_translations_per_alert_language_summary.tex"
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    with open(input_path, "r", encoding="utf-8") as f:
         profile = json.load(f)
 
     data = profile["translations_per_alert_type_per_language"]
 
     full_table = generate_full_longtable(data)
-    summary_table = generate_summary_table(data)
+    summary_table = generate_summary_table(data, source_prefix)
 
-    with open(FULL_TABLE_PATH, "w", encoding="utf-8") as f:
+    with open(full_table_path, "w", encoding="utf-8") as f:
         f.write(full_table)
 
-    with open(SUMMARY_TABLE_PATH, "w", encoding="utf-8") as f:
+    with open(summary_table_path, "w", encoding="utf-8") as f:
         f.write(summary_table)
 
     print("LaTeX tables written:")
-    print(f" - Full table:    {FULL_TABLE_PATH}")
-    print(f" - Summary table: {SUMMARY_TABLE_PATH}")
+    print(f" - Full table:    {full_table_path}")
+    print(f" - Summary table: {summary_table_path}")
 
 
 if __name__ == "__main__":
