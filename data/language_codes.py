@@ -54,6 +54,7 @@ language_codes = {
     "Nepali": {"iso639-2": "nep", "iso639-1": "ne"},
     "Oromo": {"iso639-2": "orm", "iso639-1": "om"},
     "Pashto": {"iso639-2": "pus", "iso639-1": "ps"},
+    "Punjabi": {"iso639-2": "pan", "iso639-1": "pa"},
     "Romanian": {"iso639-2": "ron", "iso639-1": "ro"},
     "Rohingya": {"iso639-2": "rhg", "iso639-1": None},
     "Russian": {"iso639-2": "rus", "iso639-1": "ru"},
