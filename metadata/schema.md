@@ -9,7 +9,7 @@ Each line in the JSONL files contains:
 | target_lang      | string | Target language code                               |
 | source_string    | string | Source sentence in English                         |
 | target_string    | string | Target translation                                 |
-| situation        | string | Situation category (flood, fire, 911 outage, etc.) |
+| event_type       | enum   | Situation category (flood, fire, 911 outage, etc.) |
 | original_source  | string | Original source of the translation strings         |
 | license          | string | license information                                |
 

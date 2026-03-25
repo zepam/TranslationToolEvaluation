@@ -1,3 +1,5 @@
+# DRAFT
+
 # Dataset Codebook — Minimal Taxonomy for Emergency Alerts
 
 This codebook defines the minimal fields used to index, summarize, and validate records in the anonymized emergency-alert dataset. All definitions, allowed values, validation rules, and examples are provided so processing and reporting are reproducible.
@@ -10,7 +12,7 @@ This codebook defines the minimal fields used to index, summarize, and validate 
   - Example: `portland-911_outage-000`
 
 - scenario
-  - Type: controlled string  
+  - Type: enum 
   - Description: Primary event/hazard label for the alert. Use a controlled vocabulary.  
   - Recommended vocabulary (examples): `911_outage`, `evacuation_order`, `shelter_in_place`, `wildfire`, `flood`, `hurricane`, `tornado`, `power_outage`, `chemical_spill`, `advisory`, `test`  
   - Validation: value must be in the documented vocabulary or `unknown`.  
@@ -39,33 +41,34 @@ This codebook defines the minimal fields used to index, summarize, and validate 
     - Example: `El 911 no está funcionando en {county}.`
 
   - translation_source  
-    - Type: controlled string  
+    - Type: string  
     - Description: Provenance of the translation.  
     - Allowed values: `human`, `machine`, `human_post_edited_machine`, `unknown`  
     - Validation: must be one of the allowed values.  
     - Example: `human`
 
-  - length_chars  
-    - Type: integer  
-    - Description: Number of Unicode characters in the translated text (call with Unicode NFC). Use for reporting and length-based grouping.  
-    - Example: `27`
 
-  - length_tokens  
-    - Type: integer  
-    - Description: Token count using the documented tokenizer for the language (int). Note: Tokenization is language‑dependent; record tokenizer name/version.  
-    - Example: `5`
+  - <span style="color:red">**MAYBE THESE TOO? TBD**</span>
+    - length_chars  
+      - Type: integer  
+      - Description: Number of Unicode characters in the translated text (call with Unicode NFC). Use for reporting and length-based grouping.  
+      - Example: `27`
 
-- contains_placeholders  
-  - Type: boolean  
-  - Description: True if the text contains variable placeholders (e.g., `{county}`, `{number}`).  
-  - Detection: use regex `\{[^}]+\}` to detect placeholders.  
-  - Example: `true`
+    - length_tokens  
+      - Type: integer  
+      - Description: Token count using the documented tokenizer for the language (int). Note: Tokenization is language‑dependent; record tokenizer name/version.  
+      - Example: `5`
 
-- placeholders  
-  - Type: list of strings (optional)  
-  - Description: Exact placeholder tokens found in the text, preserved verbatim.  
-  - Example: `["{county}"]`
+    - contains_placeholders  
+      - Type: boolean  
+      - Description: True if the text contains variable placeholders (e.g., `{county}`, `{number}`).  
+      - Detection: use regex `\{[^}]+\}` to detect placeholders.  
+      - Example: `true`
 
+    - placeholders  
+      - Type: list of strings (optional)  
+      - Description: Exact placeholder tokens found in the text, preserved verbatim.  
+      - Example: `["{county}"]`
 
 
 ## Validation rules and checks
