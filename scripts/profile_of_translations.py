@@ -13,6 +13,8 @@ def profile_translations(jsonl_folder):
     jsonl_folder = Path(jsonl_folder)
     if not jsonl_folder.is_dir():
         raise ValueError(f"{jsonl_folder} is not a valid directory.")
+    
+    origin = jsonl_folder.name
 
     profile = {
         "total_alerts": 0,
@@ -53,7 +55,7 @@ def profile_translations(jsonl_folder):
     # convert_language_codes(profile)
 
     # Save the profile to a JSON file
-    output_path = jsonl_folder / "portland_data_profile.json"
+    output_path = jsonl_folder / "stats" / f"{origin}_data_profile.json"
     with open(output_path, "w", encoding="utf-8") as out:
         json.dump(profile, out, indent=4)
 
@@ -74,8 +76,9 @@ def convert_language_codes(profile):
             new_translations_per_alert[alert_type][lang_name] = count
     profile["translations_per_alert_type_per_language"] = new_translations_per_alert
 
-def main():
-    jsonl_folder = "data/processed/portland"
+def main(jsonl_folder=None):
+    if jsonl_folder is None:
+        print("No jsonl_folder provided. Please provide the path to the folder containing the JSONL files.")
     profile_translations(jsonl_folder)
 
 if __name__ == "__main__":

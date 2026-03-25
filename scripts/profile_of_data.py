@@ -343,6 +343,11 @@ def save_outputs(results, out_dir):
         json.dump(results['global_summary'], fh, ensure_ascii=False, indent=2)
     print("Wrote outputs to", out_dir)
 
+def generate_data_profile(jsonl_folder):
+    results = process_folder(jsonl_folder)
+    save_outputs(results, os.path.join(jsonl_folder, 'stats'))
+
+
 def main(processed_filepath=None):
     # ap = argparse.ArgumentParser()
     # ap.add_argument('--input-folder', required=True, help='Folder containing JSON/JSONL files')
@@ -354,8 +359,11 @@ def main(processed_filepath=None):
     # output_dir = '/home/jen/TranslationsDataset/data/processed/portland/stats'
     # results = process_folder(input_folder)
     # save_outputs(results, output_dir)
-    results = process_folder(processed_filepath)
-    save_outputs(results, os.path.join(processed_filepath, 'stats'))
+
+    if processed_filepath is None:
+        print("No jsonl_folder provided. Please provide the path to the folder containing the JSONL files.")
+    generate_data_profile(processed_filepath)
+    
 
 if __name__ == '__main__':
     main()
