@@ -228,6 +228,11 @@
             searchDebounceTimer = setTimeout(filterAlerts, 250);
         }
 
+        function isEnglishLanguage(langCode) {
+            const code = (langCode || '').toLowerCase();
+            return code === 'en' || code === 'eng' || code === 'english';
+        }
+
         function preloadAlertMetadata(alert) {
             const sourceText = Object.values(alert.source || {}).join(' ').toLowerCase();
             const translationsText = Object.values(alert.translations || {}).join(' ').toLowerCase();
@@ -375,7 +380,9 @@
             });
             
             // Get unique target languages
-            const targetLanguages = [...(manifest?.target_languages || [])].sort();
+            const targetLanguages = [...(manifest?.target_languages || [])]
+                .filter(lang => !isEnglishLanguage(lang))
+                .sort();
             const targetSelect = document.getElementById('targetFilter');
             targetLanguages.forEach(lang => {
                 const option = document.createElement('option');
@@ -445,7 +452,8 @@
             visibleAlerts.forEach(alert => {
                 const sourceLang = alert.__sourceLang;
                 const sourceText = alert.source[sourceLang];
-                const translationEntries = Object.entries(alert.translations || {});
+                const translationEntries = Object.entries(alert.translations || {})
+                    .filter(([lang]) => !isEnglishLanguage(lang));
                 let renderedTranslations = translationEntries;
 
                 if (targetLang) {
