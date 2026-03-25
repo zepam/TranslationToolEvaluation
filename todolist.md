@@ -22,4 +22,8 @@ Other ideas to explore:
 - Angela wants to be very careful about what alerts are being used to train the models. There are some old translations that haven’t been well vetted even though they’re being used. 
 - Frequently look at PBS warn site. Not the best examples, but at least it is something.
 
+Change Portland Power Lines to just Power
+
+Re-run conversion to include: number of characters, number of tokens, source, placeholder?, placeholder example for this one
+
 
