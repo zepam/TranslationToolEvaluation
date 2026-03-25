@@ -25,7 +25,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-        - name: Build scenario data and manifest for demo
+      - name: Build scenario data and manifest for demo
         shell: bash
         run: |
           set -euo pipefail
