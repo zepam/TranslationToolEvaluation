@@ -466,8 +466,6 @@
 
                 if (targetLang) {
                     renderedTranslations = translationEntries.filter(([lang]) => lang === targetLang);
-                } else if (translationEntries.length > 6) {
-                    renderedTranslations = translationEntries.slice(0, 6);
                 }
                 
                 html += `
@@ -491,15 +489,6 @@
                         <div class="translation-item">
                             <div class="lang-code">${lang}</div>
                             <div class="translation-text">${text}</div>
-                        </div>
-                    `;
-                }
-
-                if (!targetLang && translationEntries.length > 6) {
-                    html += `
-                        <div class="translation-item">
-                            <div class="lang-code">...</div>
-                            <div class="translation-text">${translationEntries.length - 6} more translations. Select a target language to view one language across all alerts.</div>
                         </div>
                     `;
                 }
