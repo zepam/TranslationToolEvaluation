@@ -233,6 +233,14 @@
             return code === 'en' || code === 'eng' || code === 'english';
         }
 
+        function formatAlertId(alertId) {
+            const id = String(alertId || '');
+            if (id.startsWith('name-')) {
+                return id.slice(5);
+            }
+            return id;
+        }
+
         function preloadAlertMetadata(alert) {
             const sourceText = Object.values(alert.source || {}).join(' ').toLowerCase();
             const translationsText = Object.values(alert.translations || {}).join(' ').toLowerCase();
@@ -465,7 +473,7 @@
                 html += `
                     <div class="alert-card">
                         <div class="alert-header">
-                            <span class="alert-id">${alert.id}</span>
+                            <span class="alert-id">${formatAlertId(alert.id)}</span>
                             <span class="alert-scenario">${alert.scenario.replace(/_/g, ' ')}</span>
                         </div>
                         
