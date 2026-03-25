@@ -235,8 +235,9 @@
 
         function formatAlertId(alertId) {
             const id = String(alertId || '');
-            if (id.startsWith('name-')) {
-                return id.slice(5);
+            const firstDash = id.indexOf('-');
+            if (firstDash !== -1 && firstDash < id.length - 1) {
+                return id.slice(firstDash + 1);
             }
             return id;
         }
