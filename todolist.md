@@ -26,4 +26,6 @@ Change Portland Power Lines to just Power
 
 Re-run conversion to include: number of characters, number of tokens, source, placeholder?, placeholder example for this one
 
+update demo to include new events and languages
+
 
