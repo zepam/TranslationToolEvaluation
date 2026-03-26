@@ -1,0 +1,21 @@
+{
+    "low_resource": [
+        "Amharic",
+        "Khmer",
+        "Lao",
+        "Nepali",
+        "Oromo",
+        "Pashto",
+        "Serbian",
+        "Somali",
+        "Telugu"
+    ],
+    "not_in_nllb": [
+        "Chuukese",
+        "Hmong",
+        "Marshallese",
+        "Mien",
+        "Rohingya",
+        "Karen"
+    ]
+}

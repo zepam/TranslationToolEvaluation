@@ -1,0 +1,11 @@
+{
+    "flood": "flood",
+    "flooding": "flood",
+    "heat": "heat",
+    "extreme_heat": "heat",
+    "winter_storm": "winter_weather",
+    "winter_weather": "winter_weather",
+    "power_lines": "power",
+    "power_outage": "power",
+    "landslides_and_mudflows": "earth_movement"
+}
