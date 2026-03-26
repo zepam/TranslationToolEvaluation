@@ -20,6 +20,27 @@ from pathlib import Path
 
 # Paths
 DEFAULT_INPUT_PATH = Path("/home/jen/TranslationsDataset/data/processed/combined_data_profile.json")
+EVENT_COMBINATIONS_PATH = Path(__file__).resolve().parent.parent / "metadata" / "event_combinations.json"
+
+
+def load_event_combinations(path=EVENT_COMBINATIONS_PATH):
+    """Load alias -> canonical event mapping from JSON file."""
+    if not path.exists():
+        return {}
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def combine_event_counts(translations, event_map):
+    """Merge translation counts by canonical event type."""
+    combined = {}
+    for alert_type, lang_counts in translations.items():
+        canonical = event_map.get(alert_type, alert_type)
+        if canonical not in combined:
+            combined[canonical] = {}
+        for lang, count in lang_counts.items():
+            combined[canonical][lang] = int(combined[canonical].get(lang, 0)) + int(count)
+    return combined
 
 
 def latex_escape(text: str) -> str:
@@ -174,7 +195,8 @@ def main():
     with open(input_path, "r", encoding="utf-8") as f:
         profile = json.load(f)
 
-    data = profile["translations_per_alert_type_per_language"]
+    data_raw = profile["translations_per_alert_type_per_language"]
+    data = combine_event_counts(data_raw, load_event_combinations())
 
     full_table = generate_full_longtable(data)
     summary_table = generate_summary_table(data, source_prefix)

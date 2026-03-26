@@ -7,6 +7,28 @@ import json
 import sys
 from pathlib import Path
 
+EVENT_COMBINATIONS_PATH = Path(__file__).resolve().parent.parent / "metadata" / "event_combinations.json"
+
+
+def load_event_combinations(path=EVENT_COMBINATIONS_PATH):
+    """Load alias -> canonical event mapping from JSON file."""
+    if not path.exists():
+        return {}
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def combine_event_counts(translations, event_map):
+    """Merge translation counts by canonical event type."""
+    combined = {}
+    for alert_type, lang_counts in translations.items():
+        canonical = event_map.get(alert_type, alert_type)
+        if canonical not in combined:
+            combined[canonical] = {}
+        for lang, count in lang_counts.items():
+            combined[canonical][lang] = int(combined[canonical].get(lang, 0)) + int(count)
+    return combined
+
 
 def json_to_latex_table(json_input, output_dir=None):
     """
@@ -29,17 +51,19 @@ def json_to_latex_table(json_input, output_dir=None):
     
     if not json_files_list:
         raise ValueError("No JSON files found")
+
+    event_map = load_event_combinations()
     
     # Process each JSON file
     for json_file in json_files_list:
         with open(json_file, 'r', encoding='utf-8') as f:
             data = json.load(f)
         
-        alert_types = sorted(data['alert_types'])
-        languages = sorted(data['languages'])
-        # replace all _ with a space and capitalize each word
-        languages = [lang.replace('_', ' ').title() for lang in languages]
-        translations = data['translations_per_alert_type_per_language']
+        translations_raw = data['translations_per_alert_type_per_language']
+        translations = combine_event_counts(translations_raw, event_map)
+        alert_types = sorted(translations.keys())
+        language_keys = sorted({lang for counts in translations.values() for lang in counts.keys()})
+        language_display = [lang.replace('_', ' ').title() for lang in language_keys]
         
         # Start LaTeX table
         latex_lines = []
@@ -48,13 +72,13 @@ def json_to_latex_table(json_input, output_dir=None):
         latex_lines.append('\\small')
         
         # Column specification
-        num_cols = len(languages) + 1  # +1 for alert type column
-        col_spec = '|l|' + 'c|' * len(languages)
+        num_cols = len(language_display) + 1  # +1 for alert type column
+        col_spec = '|l|' + 'c|' * len(language_display)
         latex_lines.append(f'\\begin{{tabular}}{{{col_spec}}}')
         latex_lines.append('\\hline')
         
         # Header row
-        header = ['Alert Type'] + languages
+        header = ['Alert Type'] + language_display
         header_row = ' & '.join(header) + ' \\\\'
         latex_lines.append(header_row)
         latex_lines.append('\\hline')
@@ -63,7 +87,7 @@ def json_to_latex_table(json_input, output_dir=None):
         for alert_type in alert_types:
             row_data = [alert_type.replace('_', ' ')]  # replace underscores
             row_data = [cell.title() for cell in row_data]  # capitalize each word
-            for language in languages:
+            for language in language_keys:
                 count = translations.get(alert_type, {}).get(language, '')
                 row_data.append(str(count) if count else '-')
             row = ' & '.join(row_data) + ' \\\\'

@@ -18,18 +18,38 @@ Notes:
     - Column headers are bolded in the output
     - Table is wrapped with LaTeX table environment and centered
     - Includes caption: "Count of translation per each event type"
-    - Includes label: "tab:domain_counts_portland"
+    - Includes label: "tab:combined_domain_counts"
 """
 
 
 # convert the data profile domain counts CSV to a LaTeX table
+import json
 import pandas as pd
 import re
 import sys
 from pathlib import Path
 
+EVENT_COMBINATIONS_PATH = Path(__file__).resolve().parent.parent / "metadata" / "event_combinations.json"
+
+
+def load_event_combinations(path=EVENT_COMBINATIONS_PATH):
+    """Load alias -> canonical event mapping from JSON file."""
+    if not path.exists():
+        return {}
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
 def domain_counts(csv_file, output_file=None, table_label="tab:domain_counts"):
     df = pd.read_csv(csv_file)
+
+    event_map = load_event_combinations()
+    if event_map and "scenario" in df.columns and "count" in df.columns:
+        df["scenario"] = df["scenario"].map(lambda x: event_map.get(x, x))
+        df = df.groupby("scenario", as_index=False)["count"].sum()
+
+    if "scenario" in df.columns:
+        df = df.sort_values("scenario", ascending=True)
+
     # Replace underscores with spaces and capitalize every word
     df = df.apply(lambda col: col.str.replace('_', ' ').str.title().str.replace('And', 'and').str.replace('In', 'in') if col.dtype == 'object' else col)
     
@@ -44,10 +64,10 @@ def domain_counts(csv_file, output_file=None, table_label="tab:domain_counts"):
             headers = [h.strip() for h in line.split('&')]
             bold_headers = []
             for j, h in enumerate(headers):
-                # h = h.rstrip().rstrip('\\').strip()
                 h = h.strip()
-                # Remove \\ from last header if present
-                if j == len(headers) - 1 and h.endswith('\\'):
+                # Remove row terminator from the last header before wrapping in \textbf{}
+                if j == len(headers) - 1:
+                    h = h.rstrip('\\').strip()
                     bold_headers.append(f'\\textbf{{{h}}} \\\\')
                 else:
                     bold_headers.append(f'\\textbf{{{h}}}')
@@ -67,7 +87,7 @@ def domain_counts(csv_file, output_file=None, table_label="tab:domain_counts"):
     latex_table = latex_table.replace('\\caption{Domain Counts}', '')
     latex_table = latex_table.replace(
         '\\end{tabular}',
-        f'\\\\end{{tabular}}\\n\\\\caption{{Count of translation per each event type}}\\n\\\\label{{{table_label}}}'
+        f'\\end{{tabular}}\n\\caption{{Count of translation per each event type}}\n\\label{{{table_label}}}'
     )
     
    
