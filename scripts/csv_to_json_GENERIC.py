@@ -158,11 +158,8 @@ def main():
 
     from scripts.profile_of_data import generate_data_profile
     generate_data_profile(processed_filepath)
-    #scripts.profile_of_data.main(processed_filepath=processed_filepath)
     from scripts.profile_of_translations import profile_translations
     profile_translations(processed_filepath)
-    # import scripts.domain_counts_csv_to_latex
-    # scripts.domain_counts_csv_to_latex.make_beautiful_files()
 
 if __name__ == "__main__":
     main()
