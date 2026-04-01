@@ -7,5 +7,7 @@
     "winter_weather": "winter_weather",
     "power_lines": "power",
     "power_outage": "power",
-    "landslides_and_mudflows": "earth_movement"
+    "landslides_and_mudflows": "earth_movement",
+    "shelter": "shelter",
+    "shelter_in_place": "shelter"
 }
