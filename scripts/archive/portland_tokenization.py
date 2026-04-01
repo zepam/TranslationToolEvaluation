@@ -198,13 +198,13 @@ def iter_jsonl_records(folder: Path):
 def process_folder(in_dir: str, out_dir: str) -> None:
     """Process JSONL folder and generate tokenization statistics.
     
-    Reads all JSONL files from input directory, tokenizes text by language,
-    and generates both per-document and aggregated statistics. Output includes
-    detailed JSONL records with per-document token counts and CSV summary with
-    per-scenario/language aggregates.
+    Reads JSONL files from the input directory and generates tokenization
+    statistics. If `in_dir` points to a `processed` root, this function will
+    process all immediate subfolders except `stats` and `tables`.
     
     Args:
-        in_dir (str): Directory containing .jsonl alert files to process.
+        in_dir (str): Directory containing .jsonl alert files to process, or a
+            processed root directory containing source subfolders.
         out_dir (str): Output directory for results. Created if missing.
     
     Returns:
@@ -215,6 +215,16 @@ def process_folder(in_dir: str, out_dir: str) -> None:
     in_dir_p = Path(in_dir)
     out_dir_p = Path(out_dir)
     out_dir_p.mkdir(parents=True, exist_ok=True)
+
+    # If pointed at processed/, process each source subfolder except stats/tables.
+    excluded = {"stats", "tables"}
+    if in_dir_p.name == "processed":
+        folders_to_process = [
+            p for p in sorted(in_dir_p.iterdir())
+            if p.is_dir() and p.name not in excluded
+        ]
+    else:
+        folders_to_process = [in_dir_p]
 
     jsonl_out = out_dir_p / "token_counts.records.jsonl"
     csv_out = out_dir_p / "token_counts.summary.csv"
@@ -229,48 +239,49 @@ def process_folder(in_dir: str, out_dir: str) -> None:
     num_records = 0
 
     with jsonl_out.open("w", encoding="utf-8") as fout:
-        for fp, line_num, obj in iter_jsonl_records(in_dir_p):
-            # print (f"Processing {fp} (line {line_num})...")
-            num_records += 1
-            rec_id = obj.get("id")
-            scenario = obj.get("scenario") or obj.get("domain") or "UNKNOWN"
-        
-            texts = build_doc_texts(obj)  # <-- uses translations + source without double counting
-            token_counts: Dict[str, int] = {}
+        for folder in folders_to_process:
+            for fp, line_num, obj in iter_jsonl_records(folder):
+                # print (f"Processing {fp} (line {line_num})...")
+                num_records += 1
+                rec_id = obj.get("id")
+                scenario = obj.get("scenario") or obj.get("domain") or "UNKNOWN"
 
-            # doc counters
-            docs_by_scenario[scenario] = docs_by_scenario.get(scenario, 0) + 1
+                texts = build_doc_texts(obj)  # <-- uses translations + source without double counting
+                token_counts: Dict[str, int] = {}
 
-            for lang_code, txt in texts.items():
+                # doc counters
+                docs_by_scenario[scenario] = docs_by_scenario.get(scenario, 0) + 1
 
-            # translations = obj.get("translations", {}) or {}
-            # token_counts: Dict[str, int] = {}
+                for lang_code, txt in texts.items():
 
-            # # doc counters
-            # docs_by_scenario[scenario] = docs_by_scenario.get(scenario, 0) + 1
+                # translations = obj.get("translations", {}) or {}
+                # token_counts: Dict[str, int] = {}
 
-            # for lang_code, txt in translations.items():
-                # print (f"  Tokenizing {lang_code}: {txt[:100]}...")
-                toks = tokenize_translation(txt, lang_code=lang_code)
-                n = len(toks)
-                token_counts[lang_code] = n
+                # # doc counters
+                # docs_by_scenario[scenario] = docs_by_scenario.get(scenario, 0) + 1
 
-                # totals
-                total_by_lang[lang_code] = total_by_lang.get(lang_code, 0) + n
-                key = (scenario, lang_code)
-                total_by_scenario_lang[key] = total_by_scenario_lang.get(key, 0) + n
+                # for lang_code, txt in translations.items():
+                    # print (f"  Tokenizing {lang_code}: {txt[:100]}...")
+                    toks = tokenize_translation(txt, lang_code=lang_code)
+                    n = len(toks)
+                    token_counts[lang_code] = n
 
-                # doc presence counts
-                docs_by_lang[lang_code] = docs_by_lang.get(lang_code, 0) + 1
-                docs_by_scenario_lang[key] = docs_by_scenario_lang.get(key, 0) + 1
+                    # totals
+                    total_by_lang[lang_code] = total_by_lang.get(lang_code, 0) + n
+                    key = (scenario, lang_code)
+                    total_by_scenario_lang[key] = total_by_scenario_lang.get(key, 0) + n
 
-            out_rec: Dict[str, Any] = {
-                "id": rec_id,
-                "scenario": scenario,
-                "source_file": str(fp),
-                "token_counts": token_counts
-            }
-            fout.write(json.dumps(out_rec, ensure_ascii=False) + "\n")
+                    # doc presence counts
+                    docs_by_lang[lang_code] = docs_by_lang.get(lang_code, 0) + 1
+                    docs_by_scenario_lang[key] = docs_by_scenario_lang.get(key, 0) + 1
+
+                out_rec: Dict[str, Any] = {
+                    "id": rec_id,
+                    "scenario": scenario,
+                    "source_file": str(fp),
+                    "token_counts": token_counts
+                }
+                fout.write(json.dumps(out_rec, ensure_ascii=False) + "\n")
 
     # Build summary CSV
     print("Building summary CSV...")
@@ -295,8 +306,6 @@ def process_folder(in_dir: str, out_dir: str) -> None:
     print(f"Wrote JSONL: {jsonl_out}")
     print(f"Wrote CSV:   {csv_out}")
 
-
-
 def main():
     """Command-line interface for tokenization pipeline.
     
@@ -304,8 +313,10 @@ def main():
     generation pipeline on the specified input directory.
     
     Command-line arguments:
-        --in-dir: Directory containing .jsonl files (default: processed/portland).
-        --out-dir: Output directory for results (default: processed/portland/token_stats).
+        --in-dir: Directory containing .jsonl files, or `processed/` root
+            containing source subfolders (default: processed).
+        --out-dir: Output directory for results
+            (default: processed/token_stats).
     """
     import argparse
     from pathlib import Path
@@ -313,12 +324,12 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument(
         "--in-dir",
-        default="/home/jen/TranslationsDataset/data/processed/portland",
+        default="/home/jen/TranslationsDataset/data/processed",
         help="Folder containing.jsonl files"
     )
     ap.add_argument(
         "--out-dir",
-        default=str(Path("/home/jen/TranslationsDataset/data/processed/portland") / "token_stats"),
+        default=str(Path("/home/jen/TranslationsDataset/data/processed") / "token_stats"),
         help="Output folder (will be created if missing)"
     )
     args = ap.parse_args()
