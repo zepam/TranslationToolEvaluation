@@ -344,6 +344,7 @@ def profile_languages(in_dir: str, out_csv: str, lang_code_to_name: Dict[str, st
 
     rows = []
     for lang_code in sorted(docs.keys()):
+        #TODO using two character lang codes, merges Chinese and skips Marshallese and Karen. Consider using the original lang codes from the data instead of mapping to ISO 639-1, or at least preserve the original code in the output.
         lang_name = lang_code_to_name.get(lang_code, lang_code)
 
         d = docs[lang_code]
