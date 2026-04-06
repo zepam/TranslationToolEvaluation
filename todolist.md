@@ -22,6 +22,8 @@ Other ideas to explore:
 - Angela wants to be very careful about what alerts are being used to train the models. There are some old translations that haven’t been well vetted even though they’re being used. 
 - Frequently look at PBS warn site. Not the best examples, but at least it is something.
 
+
+## Other things to do
 Re-run conversion to include: number of characters, number of tokens, source, placeholder?, placeholder example for this one
 
 update demo to include new events and languages
@@ -30,4 +32,15 @@ full table is missing some languages
 
 DONE
  Change Portland Power Lines to just Power
+
+ ## citation options
+ this data is free to use, but please cite the following organizations: XX, XX.
+
+ ideally this is free use, but respect the wishes of the organiztions.
+
+Can we use them as translation memories?
+
+Repurposing for machine learning? Training data? Dev data? 
+
+If it is large enough, i can create test/dev/train sets.
 

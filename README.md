@@ -18,9 +18,9 @@ It is designed to support low-resource MT research, evaluation, benchmarking, li
 
 ### Raw Files
 
-`source_scenario.filetype`
+`SOURCE_scenario.filetype`
 
-ex: `portland_911_outage.csv` is a csv file containing translations about 911 outages from Portland RDPO.
+ex: `CITY_911_outage.csv` is a csv file containing translations about 911 outages from CITY (or county, etc.).
 
 
 ### Processed Data Files
@@ -40,13 +40,13 @@ All of the code and data is in the translationsdataset package. To install the p
 ## Project Operation
 
 ### Scripts
-python -m translationsdataset.scripts.convert_csv_to_json_portland
+python -m translationsdataset.scripts.convert_csv_to_json_GENERIC
 
 ## GitHub Pages Demo
 
 This repository includes a static demo at [demo/index.html](demo/index.html) that can be published with GitHub Pages.
 
-1. Push to the `main` branch.
+<!-- 1. Push to the `main` branch.
 2. In repository settings, open `Pages`.
 3. Set `Build and deployment` source to `GitHub Actions`.
 4. The workflow at [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml) will:
@@ -55,4 +55,4 @@ This repository includes a static demo at [demo/index.html](demo/index.html) tha
 	- deploy the `demo` folder to GitHub Pages
 
 Your page URL will be:
-https://zepam.github.io/TranslationToolEvaluation/
+https://zepam.github.io/TranslationToolEvaluation/ -->
