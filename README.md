@@ -1,6 +1,6 @@
 # Multilingual Translation Dataset (English ↔ XX Languages)
 
-[![Live Demo](https://img.shields.io/badge/GitHub%20Pages-Live-2ea44f?logo=github)](https://zepam.github.io/TranslationToolEvaluation/)
+<!-- [![Live Demo](https://img.shields.io/badge/GitHub%20Pages-Live-2ea44f?logo=github)](https://zepam.github.io/TranslationToolEvaluation/) -->
 
 This dataset contains **parallel translations between English and XX world languages**, with approximately **XX sentence pairs per language**.  
 It is designed to support low-resource MT research, evaluation, benchmarking, linguistics, and multilingual NLP education.
