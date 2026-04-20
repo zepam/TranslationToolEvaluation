@@ -53,43 +53,6 @@
         select:focus, input:focus {
             outline: none;
             border-color: #4CAF50;
-        }.mode-help {
-            margin: 8px 0 15px;
-            padding: 10px 12px;
-            border-radius: 6px;
-            background: #f4f8ff;
-            border: 1px solid #d6e4ff;
-            color: #2a3a4a;
-            line-height: 1.45;
-        }.mode-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 15px;
-            margin-bottom: 15px;
-            align-items: end;
-        }.upload-panel {
-            background: #f7fbff;
-            border: 1px solid #d8e9ff;
-            border-radius: 6px;
-            padding: 12px;
-            margin-bottom: 15px;
-        }.upload-row {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }.upload-btn {
-            background: #1976d2;
-            color: white;
-        }.upload-btn:hover {
-            background: #125ca1;
-        }.loaded-files-info {
-            background: #e8f5e9;
-            color: #2e7d32;
-            padding: 10px 12px;
-            border-radius: 4px;
-            margin-top: 10px;
-            font-weight: 600;
         }.button-group {
             display: flex;
             gap: 10px;
@@ -206,33 +169,9 @@
     </style>
 </head>
 <body>
-    <!--
-        Single-page demo with two data sources:
-        1) Manifest mode: lazy loads scenario files listed in demo/data/manifest.json.
-        2) Upload mode: reads local JSONL/JSON files selected by the user.
-    -->
     <h1>🚨 Emergency Alert Translation Search</h1>
     
     <div class="search-container">
-        <div class="mode-row">
-            <div class="search-group">
-                <label for="dataMode">Data Mode:</label>
-                <select id="dataMode">
-                    <option value="manifest">Bundled demo data (manifest)</option>
-                    <option value="upload">Upload local folder (JSONL)</option>
-                </select>
-            </div>
-        </div>
-        <div id="modeHelp" class="mode-help" aria-live="polite"></div>
-
-        <div id="uploadPanel" class="upload-panel" style="display: none;">
-            <div class="upload-row">
-                <input id="directoryInput" type="file" webkitdirectory directory multiple>
-                <button class="upload-btn" onclick="loadSelectedFiles()">Load Folder</button>
-            </div>
-            <div id="loadedFilesInfo" class="loaded-files-info" style="display: none;"></div>
-        </div>
-
         <div class="search-row">
             <div class="search-group">
                 <label for="scenarioFilter">Alert Type (Scenario):</label>
@@ -272,31 +211,21 @@
     <div id="paginationControls" class="pagination-controls"></div>
 
     <script>
-        // Application state
         let alertsData = [];
-        let uploadedAlertsData = [];
         let filteredAlerts = [];
         let manifest = null;
         const scenarioCache = {};
         const scenarioCacheOrder = [];
-
-        // UI modes
-        const MODE_MANIFEST = 'manifest';
-        const MODE_UPLOAD = 'upload';
-        let activeMode = MODE_MANIFEST;
-
-        // Rendering and loading limits
         let currentPage = 1;
         const PAGE_SIZE = 25;
         const MANIFEST_PATH = 'data/manifest.json';
         const SCENARIO_CACHE_LIMIT = 4;
         const MAX_FILTERED_ALERTS_BUFFER = 1500;
-
         let searchDebounceTimer = null;
         let totalMatchingAlerts = 0;
         let totalAlertsScanned = 0;
         let matchesWereTruncated = false;
-
+        
         function debounceFilter() {
             if (searchDebounceTimer) {
                 clearTimeout(searchDebounceTimer);
@@ -319,49 +248,11 @@
         }
 
         function preloadAlertMetadata(alert) {
-            // Cache source language for cheaper render path.
             alert.__sourceLang = Object.keys(alert.source || {})[0] || 'eng';
             return alert;
         }
 
-        function clearFilterOptions() {
-            document.getElementById('scenarioFilter').innerHTML = '<option value="">All Scenarios</option>';
-            document.getElementById('sourceFilter').innerHTML = '<option value="">All Source Languages</option>';
-            document.getElementById('targetFilter').innerHTML = '<option value="">All Target Languages</option>';
-        }
-
-        function showLoadedFilesInfo(fileCount, alertCount) {
-            const info = document.getElementById('loadedFilesInfo');
-            info.style.display = 'block';
-            info.textContent = `Loaded ${fileCount} file(s) with ${alertCount} alert(s)`;
-        }
-
-        function showNoUploadDataMessage() {
-            document.getElementById('resultsInfo').style.display = 'none';
-            document.getElementById('output').innerHTML = `
-                <div class="no-results">
-                    <h2>Upload Mode</h2>
-                    <p>Select a folder and click Load Folder to begin.</p>
-                </div>`;
-            document.getElementById('paginationControls').innerHTML = '';
-        }
-
-        function updateModeHelp(mode) {
-            const help = document.getElementById('modeHelp');
-            if (!help) {
-                return;
-            }
-
-            if (mode === MODE_UPLOAD) {
-                help.innerHTML = '<strong>Upload local folder (JSONL):</strong> choose this if you want to explore your own files from your computer. Load Folder is required before search results appear.';
-                return;
-            }
-
-            help.innerHTML = '<strong>Bundled demo data (manifest):</strong> choose this for the quickest start with the dataset already included in this project. No local files are needed.';
-        }
-
         function touchScenarioInCache(scenario) {
-            // Keep a small LRU-like cache to avoid unbounded memory growth.
             const existingIndex = scenarioCacheOrder.indexOf(scenario);
             if (existingIndex !== -1) {
                 scenarioCacheOrder.splice(existingIndex, 1);
@@ -408,7 +299,10 @@
                 return;
             }
 
-            controls.innerHTML = '';
+            if (shown >= filteredAlerts.length) {
+                controls.innerHTML = '';
+                return;
+            }
         }
 
         function loadMoreAlerts() {
@@ -422,32 +316,7 @@
             document.getElementById('output').innerHTML = `<div class="loading">${message}</div>`;
         }
 
-        async function parseJsonlTextFallback(text) {
-            // Fallback parser when stream APIs are unavailable.
-            const lines = text.trim().split('\n');
-            const parsedAlerts = [];
-
-            for (let i = 0; i < lines.length; i++) {
-                const line = lines[i].trim();
-                if (!line) {
-                    continue;
-                }
-                try {
-                    parsedAlerts.push(preloadAlertMetadata(JSON.parse(line)));
-                } catch (parseError) {
-                    console.warn('Skipping malformed JSONL line', parseError);
-                }
-
-                if (i > 0 && i % 250 === 0) {
-                    await new Promise(resolve => setTimeout(resolve, 0));
-                }
-            }
-
-            return parsedAlerts;
-        }
-
         async function parseJsonlResponse(response) {
-            // Stream parser for fetch responses to avoid loading entire files into memory.
             if (!response.body) {
                 const text = await response.text();
                 return parseJsonlTextFallback(text);
@@ -497,93 +366,27 @@
             return parsedAlerts;
         }
 
-        async function parseJsonlFile(file) {
-            // Stream parser for local uploaded files.
-            if (!file.stream) {
-                const text = await file.text();
-                return parseJsonlTextFallback(text);
-            }
-
-            const reader = file.stream().getReader();
-            const decoder = new TextDecoder();
-            let buffered = '';
+        async function parseJsonlTextFallback(text) {
+            const lines = text.trim().split('\n');
             const parsedAlerts = [];
 
-            while (true) {
-                const { value, done } = await reader.read();
-                buffered += decoder.decode(value || new Uint8Array(), { stream: !done });
-
-                const lines = buffered.split('\n');
-                buffered = lines.pop() || '';
-
-                for (let i = 0; i < lines.length; i++) {
-                    const line = lines[i].trim();
-                    if (!line) {
-                        continue;
-                    }
-                    try {
-                        parsedAlerts.push(preloadAlertMetadata(JSON.parse(line)));
-                    } catch (parseError) {
-                        console.warn(`Skipping malformed JSONL line in ${file.name}`, parseError);
-                    }
-
-                    if (parsedAlerts.length > 0 && parsedAlerts.length % 500 === 0) {
-                        await new Promise(resolve => setTimeout(resolve, 0));
-                    }
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line) {
+                    continue;
                 }
-
-                if (done) {
-                    break;
-                }
-            }
-
-            if (buffered.trim()) {
                 try {
-                    parsedAlerts.push(preloadAlertMetadata(JSON.parse(buffered.trim())));
+                    parsedAlerts.push(preloadAlertMetadata(JSON.parse(line)));
                 } catch (parseError) {
-                    console.warn(`Skipping malformed JSONL trailing line in ${file.name}`, parseError);
+                    console.warn('Skipping malformed JSONL line', parseError);
+                }
+
+                if (i > 0 && i % 250 === 0) {
+                    await new Promise(resolve => setTimeout(resolve, 0));
                 }
             }
 
             return parsedAlerts;
-        }
-
-        async function loadSelectedFiles() {
-            // Upload mode entrypoint: read root-level JSONL/JSON files from selected folder.
-            const fileInput = document.getElementById('directoryInput');
-            const files = fileInput.files;
-
-            if (!files || files.length === 0) {
-                document.getElementById('output').innerHTML = '<div class="no-results"><h2>No Folder Selected</h2><p>Please choose a folder containing JSONL files.</p></div>';
-                return;
-            }
-
-            const jsonlFiles = Array.from(files).filter(file => {
-                const isJsonFile = file.name.endsWith('.jsonl') || file.name.endsWith('.json');
-                const pathParts = (file.webkitRelativePath || '').split('/');
-                return isJsonFile && pathParts.length === 2;
-            });
-
-            if (jsonlFiles.length === 0) {
-                document.getElementById('output').innerHTML = '<div class="no-results"><h2>No JSONL Files Found</h2><p>No JSONL/JSON files found at the root of selected folder.</p></div>';
-                return;
-            }
-
-            uploadedAlertsData = [];
-            let loadedCount = 0;
-
-            for (let i = 0; i < jsonlFiles.length; i++) {
-                const file = jsonlFiles[i];
-                setOutputLoading(`Loading file ${i + 1} of ${jsonlFiles.length}: ${file.name}`);
-                const parsed = await parseJsonlFile(file);
-                uploadedAlertsData.push(...parsed);
-                loadedCount += 1;
-                await new Promise(resolve => setTimeout(resolve, 0));
-            }
-
-            showLoadedFilesInfo(loadedCount, uploadedAlertsData.length);
-            populateFilters();
-            await filterAlerts();
         }
 
         async function loadScenarioData(scenario) {
@@ -604,7 +407,6 @@
         }
 
         async function gatherMatchesAcrossScenarios(sourceLang, targetLang, searchText) {
-            // When no scenario is selected in manifest mode, scan scenarios incrementally.
             const matched = [];
             let matchCount = 0;
             let scannedCount = 0;
@@ -636,25 +438,25 @@
             return { matched, matchCount, scannedCount, truncated };
         }
 
-        async function loadManifestData() {
-            // Load manifest once, then reuse it for subsequent mode switches/searches.
+        // Load JSON data
+        async function loadData() {
             try {
-                if (!manifest) {
-                    setOutputLoading('Loading metadata...');
-                    const response = await fetch(MANIFEST_PATH);
-                    if (!response.ok) {
-                        throw new Error('Could not load data manifest.');
-                    }
-                    manifest = await response.json();
+                setOutputLoading('Loading metadata...');
+                const response = await fetch(MANIFEST_PATH);
+                if (!response.ok) {
+                    throw new Error('Could not load data manifest.');
                 }
 
+                manifest = await response.json();
                 populateFilters();
+
                 if (manifest.scenarios.length > 0) {
                     document.getElementById('scenarioFilter').value = manifest.scenarios[0];
                 }
+
                 await filterAlerts();
             } catch (error) {
-                document.getElementById('output').innerHTML =
+                document.getElementById('output').innerHTML = 
                     `<div class="no-results">
                         <h2>Error Loading Data</h2>
                         <p>${error.message}</p>
@@ -662,10 +464,10 @@
                     </div>`;
             }
         }
-
-        function populateFiltersFromManifest() {
-            clearFilterOptions();
-
+        
+        // Populate filter dropdowns
+        function populateFilters() {
+            // Get unique scenarios
             const scenarios = [...(manifest?.scenarios || [])].sort();
             const scenarioSelect = document.getElementById('scenarioFilter');
             scenarios.forEach(scenario => {
@@ -674,7 +476,8 @@
                 option.textContent = scenario.replace(/_/g, ' ').toUpperCase();
                 scenarioSelect.appendChild(option);
             });
-
+            
+            // Get unique source languages
             const sourceLanguages = [...(manifest?.source_languages || [])].sort();
             const sourceSelect = document.getElementById('sourceFilter');
             sourceLanguages.forEach(lang => {
@@ -683,7 +486,8 @@
                 option.textContent = lang.toUpperCase();
                 sourceSelect.appendChild(option);
             });
-
+            
+            // Get unique target languages
             const targetLanguages = [...(manifest?.target_languages || [])]
                 .filter(lang => !isEnglishLanguage(lang))
                 .sort();
@@ -695,81 +499,15 @@
                 targetSelect.appendChild(option);
             });
         }
-
-        function populateFiltersFromAlerts(alerts) {
-            clearFilterOptions();
-
-            const scenarios = [...new Set(alerts.map(alert => alert.scenario).filter(Boolean))].sort();
-            const scenarioSelect = document.getElementById('scenarioFilter');
-            scenarios.forEach(scenario => {
-                const option = document.createElement('option');
-                option.value = scenario;
-                option.textContent = scenario.replace(/_/g, ' ').toUpperCase();
-                scenarioSelect.appendChild(option);
-            });
-
-            const sourceLanguages = [...new Set(alerts
-                .map(alert => Object.keys(alert.source || {})[0])
-                .filter(Boolean))].sort();
-            const sourceSelect = document.getElementById('sourceFilter');
-            sourceLanguages.forEach(lang => {
-                const option = document.createElement('option');
-                option.value = lang;
-                option.textContent = lang.toUpperCase();
-                sourceSelect.appendChild(option);
-            });
-
-            const targetLanguages = [...new Set(alerts.flatMap(alert => Object.keys(alert.translations || {})))]
-                .filter(lang => !isEnglishLanguage(lang))
-                .sort();
-            const targetSelect = document.getElementById('targetFilter');
-            targetLanguages.forEach(lang => {
-                const option = document.createElement('option');
-                option.value = lang;
-                option.textContent = lang.toUpperCase();
-                targetSelect.appendChild(option);
-            });
-        }
-
-        function populateFilters() {
-            if (activeMode === MODE_UPLOAD) {
-                populateFiltersFromAlerts(uploadedAlertsData);
-                return;
-            }
-            populateFiltersFromManifest();
-        }
-
+        
+        // Filter alerts based on search criteria
         async function filterAlerts() {
-            // Central filtering path for both modes.
             const scenario = document.getElementById('scenarioFilter').value;
             const sourceLang = document.getElementById('sourceFilter').value;
             const targetLang = document.getElementById('targetFilter').value;
             const searchText = document.getElementById('textSearch').value.toLowerCase();
 
             setOutputLoading('Loading alerts...');
-
-            if (activeMode === MODE_UPLOAD) {
-                alertsData = uploadedAlertsData;
-                filteredAlerts = alertsData.filter(alert => {
-                    if (scenario && alert.scenario !== scenario) return false;
-                    return alertMatchesFilters(alert, sourceLang, targetLang, searchText);
-                });
-
-                totalMatchingAlerts = filteredAlerts.length;
-                totalAlertsScanned = alertsData.length;
-                matchesWereTruncated = false;
-                currentPage = 1;
-
-                displayAlerts(filteredAlerts);
-                showResultsInfo(totalMatchingAlerts, totalAlertsScanned);
-                renderPaginationControls();
-                return;
-            }
-
-            if (!manifest) {
-                await loadManifestData();
-                return;
-            }
 
             if (scenario) {
                 alertsData = await loadScenarioData(scenario);
@@ -786,24 +524,26 @@
             }
 
             currentPage = 1;
+            
             displayAlerts(filteredAlerts);
             showResultsInfo(totalMatchingAlerts, totalAlertsScanned);
             renderPaginationControls();
         }
-
+        
+        // Display results info
         function showResultsInfo(filtered, total) {
             const info = document.getElementById('resultsInfo');
             info.style.display = 'block';
             const shown = Math.min(currentPage * PAGE_SIZE, filteredAlerts.length);
             info.textContent = `Showing ${shown} of ${filtered} matching alerts (scanned: ${total})`;
         }
-
+        
+        // Display alerts
         function displayAlerts(alerts) {
-            // Render only one page at a time to keep DOM size bounded.
             const output = document.getElementById('output');
             const targetLang = document.getElementById('targetFilter').value;
             const visibleAlerts = alerts.slice(0, currentPage * PAGE_SIZE);
-
+            
             if (alerts.length === 0) {
                 output.innerHTML = `
                     <div class="no-results">
@@ -812,7 +552,7 @@
                     </div>`;
                 return;
             }
-
+            
             let html = '';
             visibleAlerts.forEach(alert => {
                 const sourceLang = alert.__sourceLang;
@@ -824,22 +564,23 @@
                 if (targetLang) {
                     renderedTranslations = translationEntries.filter(([lang]) => lang === targetLang);
                 }
-
+                
                 html += `
                     <div class="alert-card">
                         <div class="alert-header">
                             <span class="alert-id">${formatAlertId(alert.id)}</span>
                             <span class="alert-scenario">${alert.scenario.replace(/_/g, ' ')}</span>
                         </div>
-
+                        
                         <div class="source-text">
                             <div class="source-label">Source (${sourceLang.toUpperCase()})</div>
                             <div>${sourceText}</div>
                         </div>
-
+                        
                         <div class="translations-grid">
                 `;
-
+                
+                // Display translations
                 for (const [lang, text] of renderedTranslations) {
                     html += `
                         <div class="translation-item">
@@ -848,60 +589,26 @@
                         </div>
                     `;
                 }
-
+                
                 html += `
                         </div>
                     </div>
                 `;
             });
-
+            
             output.innerHTML = html;
         }
-
+        
+        // Reset filters
         async function resetFilters() {
             document.getElementById('scenarioFilter').value = '';
             document.getElementById('sourceFilter').value = '';
             document.getElementById('targetFilter').value = '';
             document.getElementById('textSearch').value = '';
-
-            if (activeMode === MODE_UPLOAD && uploadedAlertsData.length === 0) {
-                showNoUploadDataMessage();
-                return;
-            }
-
             await filterAlerts();
         }
-
-        async function setMode(mode) {
-            // Toggle between manifest-backed browsing and local-upload browsing.
-            activeMode = mode;
-            updateModeHelp(activeMode);
-            const uploadPanel = document.getElementById('uploadPanel');
-            const loadedInfo = document.getElementById('loadedFilesInfo');
-
-            clearFilterOptions();
-            document.getElementById('textSearch').value = '';
-            document.getElementById('resultsInfo').style.display = 'none';
-            document.getElementById('paginationControls').innerHTML = '';
-
-            if (activeMode === MODE_UPLOAD) {
-                uploadPanel.style.display = 'block';
-                if (uploadedAlertsData.length > 0) {
-                    alertsData = uploadedAlertsData;
-                    populateFilters();
-                    await filterAlerts();
-                } else {
-                    loadedInfo.style.display = 'none';
-                    showNoUploadDataMessage();
-                }
-                return;
-            }
-
-            uploadPanel.style.display = 'none';
-            loadedInfo.style.display = 'none';
-            await loadManifestData();
-        }
-
+        
+        // Add enter key and debounce support for text search
         document.getElementById('textSearch').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 filterAlerts();
@@ -909,15 +616,9 @@
         });
         document.getElementById('textSearch').addEventListener('input', debounceFilter);
         document.getElementById('scenarioFilter').addEventListener('change', filterAlerts);
-        document.getElementById('sourceFilter').addEventListener('change', filterAlerts);
-        document.getElementById('targetFilter').addEventListener('change', filterAlerts);
-        document.getElementById('dataMode').addEventListener('change', async function(e) {
-            await setMode(e.target.value);
-        });
-
-        window.addEventListener('DOMContentLoaded', async function() {
-            await setMode(MODE_MANIFEST);
-        });
+        
+        // Load data on page load
+        window.addEventListener('DOMContentLoaded', loadData);
     </script>
 </body>
 </html>
