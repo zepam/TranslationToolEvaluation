@@ -225,6 +225,8 @@
         let totalMatchingAlerts = 0;
         let totalAlertsScanned = 0;
         let matchesWereTruncated = false;
+        let activeFilterRequestId = 0;
+        const FILTER_CANCELLED_ERROR = 'FILTER_CANCELLED';
         
         function debounceFilter() {
             if (searchDebounceTimer) {
@@ -283,6 +285,33 @@
             }
 
             return true;
+        }
+
+        function collectMatchesFromAlerts(alerts, sourceLang, targetLang, searchText) {
+            const matched = [];
+            let matchCount = 0;
+            let truncated = false;
+
+            for (let i = 0; i < alerts.length; i++) {
+                const alert = alerts[i];
+                if (!alertMatchesFilters(alert, sourceLang, targetLang, searchText)) {
+                    continue;
+                }
+
+                matchCount += 1;
+                if (matched.length < MAX_FILTERED_ALERTS_BUFFER) {
+                    matched.push(alert);
+                } else {
+                    truncated = true;
+                }
+            }
+
+            return {
+                matched,
+                matchCount,
+                scannedCount: alerts.length,
+                truncated
+            };
         }
 
         function renderPaginationControls() {
@@ -406,19 +435,27 @@
             return parsed;
         }
 
-        async function gatherMatchesAcrossScenarios(sourceLang, targetLang, searchText) {
+        async function gatherMatchesAcrossScenarios(sourceLang, targetLang, searchText, requestId) {
             const matched = [];
             let matchCount = 0;
             let scannedCount = 0;
             let truncated = false;
 
             for (let i = 0; i < manifest.scenarios.length; i++) {
+                if (requestId !== activeFilterRequestId) {
+                    throw new Error(FILTER_CANCELLED_ERROR);
+                }
+
                 const scenario = manifest.scenarios[i];
                 setOutputLoading(`Filtering scenario ${i + 1} of ${manifest.scenarios.length}...`);
                 const scenarioAlerts = await loadScenarioData(scenario);
                 scannedCount += scenarioAlerts.length;
 
                 for (let j = 0; j < scenarioAlerts.length; j++) {
+                    if (requestId !== activeFilterRequestId) {
+                        throw new Error(FILTER_CANCELLED_ERROR);
+                    }
+
                     const alert = scenarioAlerts[j];
                     if (alertMatchesFilters(alert, sourceLang, targetLang, searchText)) {
                         matchCount += 1;
@@ -502,6 +539,7 @@
         
         // Filter alerts based on search criteria
         async function filterAlerts() {
+            const requestId = ++activeFilterRequestId;
             const scenario = document.getElementById('scenarioFilter').value;
             const sourceLang = document.getElementById('sourceFilter').value;
             const targetLang = document.getElementById('targetFilter').value;
@@ -509,25 +547,36 @@
 
             setOutputLoading('Loading alerts...');
 
-            if (scenario) {
-                alertsData = await loadScenarioData(scenario);
-                filteredAlerts = alertsData.filter(alert => alertMatchesFilters(alert, sourceLang, targetLang, searchText));
-                totalMatchingAlerts = filteredAlerts.length;
-                totalAlertsScanned = alertsData.length;
-                matchesWereTruncated = false;
-            } else {
-                const allScenarioMatches = await gatherMatchesAcrossScenarios(sourceLang, targetLang, searchText);
-                filteredAlerts = allScenarioMatches.matched;
-                totalMatchingAlerts = allScenarioMatches.matchCount;
-                totalAlertsScanned = allScenarioMatches.scannedCount;
-                matchesWereTruncated = allScenarioMatches.truncated;
-            }
+            try {
+                if (scenario) {
+                    alertsData = await loadScenarioData(scenario);
+                    const scenarioMatches = collectMatchesFromAlerts(alertsData, sourceLang, targetLang, searchText);
+                    filteredAlerts = scenarioMatches.matched;
+                    totalMatchingAlerts = scenarioMatches.matchCount;
+                    totalAlertsScanned = scenarioMatches.scannedCount;
+                    matchesWereTruncated = scenarioMatches.truncated;
+                } else {
+                    const allScenarioMatches = await gatherMatchesAcrossScenarios(sourceLang, targetLang, searchText, requestId);
+                    filteredAlerts = allScenarioMatches.matched;
+                    totalMatchingAlerts = allScenarioMatches.matchCount;
+                    totalAlertsScanned = allScenarioMatches.scannedCount;
+                    matchesWereTruncated = allScenarioMatches.truncated;
+                }
 
-            currentPage = 1;
-            
-            displayAlerts(filteredAlerts);
-            showResultsInfo(totalMatchingAlerts, totalAlertsScanned);
-            renderPaginationControls();
+                if (requestId !== activeFilterRequestId) {
+                    return;
+                }
+
+                currentPage = 1;
+                displayAlerts(filteredAlerts);
+                showResultsInfo(totalMatchingAlerts, totalAlertsScanned);
+                renderPaginationControls();
+            } catch (error) {
+                if (error && error.message === FILTER_CANCELLED_ERROR) {
+                    return;
+                }
+                throw error;
+            }
         }
         
         // Display results info
