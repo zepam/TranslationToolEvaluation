@@ -1,4 +1,107 @@
 let alertsData = [];
+let filteredAlerts = [];
+let currentPage = 1;
+const PAGE_SIZE = 25;
+
+function setLoadingMessage(message) {
+    const output = document.getElementById('output');
+    if (output) {
+        output.innerHTML = `<div class="loading">${message}</div>`;
+    }
+}
+
+function renderPaginationControls() {
+    const controls = document.getElementById('paginationControls');
+    if (!controls) {
+        return;
+    }
+
+    const shown = Math.min(currentPage * PAGE_SIZE, filteredAlerts.length);
+    if (shown >= filteredAlerts.length) {
+        controls.innerHTML = '';
+        return;
+    }
+
+    controls.innerHTML = `<button class="load-more-btn" onclick="loadMoreAlerts()">Load more (${shown}/${filteredAlerts.length})</button>`;
+}
+
+function loadMoreAlerts() {
+    currentPage += 1;
+    displayAlerts(filteredAlerts);
+    showResultsInfo(filteredAlerts.length, alertsData.length);
+    renderPaginationControls();
+}
+
+async function parseJsonlFromFile(file) {
+    if (!file.stream) {
+        return parseJsonlFallback(await file.text(), file.name);
+    }
+
+    const reader = file.stream().getReader();
+    const decoder = new TextDecoder();
+    let buffered = '';
+    const parsedAlerts = [];
+    let lineCount = 0;
+
+    while (true) {
+        const { value, done } = await reader.read();
+        buffered += decoder.decode(value || new Uint8Array(), { stream: !done });
+
+        const lines = buffered.split('\n');
+        buffered = lines.pop() || '';
+
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (!line) {
+                continue;
+            }
+
+            lineCount += 1;
+            try {
+                parsedAlerts.push(JSON.parse(line));
+            } catch (e) {
+                console.warn(`Error parsing line in ${file.name}:`, e);
+            }
+
+            if (lineCount % 500 === 0) {
+                await new Promise(resolve => setTimeout(resolve, 0));
+            }
+        }
+
+        if (done) {
+            break;
+        }
+    }
+
+    if (buffered.trim()) {
+        try {
+            parsedAlerts.push(JSON.parse(buffered.trim()));
+        } catch (e) {
+            console.warn(`Error parsing trailing line in ${file.name}:`, e);
+        }
+    }
+
+    return parsedAlerts;
+}
+
+function parseJsonlFallback(text, fileName) {
+    const parsedAlerts = [];
+    const lines = text.split('\n');
+
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (!line) {
+            continue;
+        }
+        try {
+            parsedAlerts.push(JSON.parse(line));
+        } catch (e) {
+            console.warn(`Error parsing line in ${fileName}:`, e);
+        }
+    }
+
+    return parsedAlerts;
+}
 
 // Load files from directory selection
 async function loadSelectedFiles() {
@@ -24,30 +127,27 @@ async function loadSelectedFiles() {
         return;
     }
     
-    document.getElementById('output').innerHTML = '<div class="loading">Loading files...</div>';
+    setLoadingMessage('Loading files...');
     
     alertsData = [];
     let loadedCount = 0;
     
     try {
         for (const file of jsonlFiles) {
-            const text = await file.text();
-            const lines = text.trim().split('\n').filter(line => line.trim());
-            
-            for (const line of lines) {
-                try {
-                    const alert = JSON.parse(line);
-                    alertsData.push(alert);
-                } catch (e) {
-                    console.warn(`Error parsing line in ${file.name}:`, e);
-                }
-            }
+            setLoadingMessage(`Loading ${loadedCount + 1} of ${jsonlFiles.length}: ${file.name}`);
+            const fileAlerts = await parseJsonlFromFile(file);
+            alertsData.push(...fileAlerts);
             loadedCount++;
+            await new Promise(resolve => setTimeout(resolve, 0));
         }
         
         if (alertsData.length > 0) {
             populateFilters();
-            displayAlerts(alertsData);
+            filteredAlerts = alertsData;
+            currentPage = 1;
+            displayAlerts(filteredAlerts);
+            showResultsInfo(filteredAlerts.length, alertsData.length);
+            renderPaginationControls();
             showLoadedFilesInfo(loadedCount, alertsData.length);
         } else {
             showError('No valid alert data found in the files.');
@@ -121,7 +221,7 @@ function filterAlerts() {
     const targetLang = document.getElementById('targetFilter').value;
     const searchText = document.getElementById('textSearch').value.toLowerCase();
     
-    let filtered = alertsData.filter(alert => {
+    filteredAlerts = alertsData.filter(alert => {
         // Filter by scenario
         if (scenario && alert.scenario !== scenario) return false;
         
@@ -142,21 +242,28 @@ function filterAlerts() {
         
         return true;
     });
-    
-    displayAlerts(filtered);
-    showResultsInfo(filtered.length, alertsData.length);
+
+    currentPage = 1;
+    displayAlerts(filteredAlerts);
+    showResultsInfo(filteredAlerts.length, alertsData.length);
+    renderPaginationControls();
 }
 
 // Display results info
 function showResultsInfo(filtered, total) {
     const info = document.getElementById('resultsInfo');
+    if (!info) {
+        return;
+    }
     info.style.display = 'block';
-    info.textContent = `Showing ${filtered} of ${total} alerts`;
+    const shown = Math.min(currentPage * PAGE_SIZE, filtered);
+    info.textContent = `Showing ${shown} of ${filtered} alerts (loaded: ${total})`;
 }
 
 // Display alerts
 function displayAlerts(alerts) {
     const output = document.getElementById('output');
+    const visibleAlerts = alerts.slice(0, currentPage * PAGE_SIZE);
     
     if (alerts.length === 0) {
         output.innerHTML = `
@@ -168,7 +275,7 @@ function displayAlerts(alerts) {
     }
     
     let html = '';
-    alerts.forEach(alert => {
+    visibleAlerts.forEach(alert => {
         const sourceLang = Object.keys(alert.source)[0];
         const sourceText = alert.source[sourceLang];
         
@@ -212,8 +319,15 @@ function resetFilters() {
     document.getElementById('sourceFilter').value = '';
     document.getElementById('targetFilter').value = '';
     document.getElementById('textSearch').value = '';
-    document.getElementById('resultsInfo').style.display = 'none';
-    displayAlerts(alertsData);
+    const info = document.getElementById('resultsInfo');
+    if (info) {
+        info.style.display = 'none';
+    }
+    filteredAlerts = alertsData;
+    currentPage = 1;
+    displayAlerts(filteredAlerts);
+    showResultsInfo(filteredAlerts.length, alertsData.length);
+    renderPaginationControls();
 }
 
 // Add enter key support for text search

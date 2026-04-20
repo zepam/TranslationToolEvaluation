@@ -45,6 +45,7 @@ python -m translationsdataset.scripts.convert_csv_to_json_GENERIC
 ## GitHub Pages Demo
 
 This repository includes a static demo at [demo/index.html](demo/index.html) that can be published with GitHub Pages.
+For a full walkthrough of demo files and run modes, see [demo/README.md](demo/README.md).
 
 <!-- 1. Push to the `main` branch.
 2. In repository settings, open `Pages`.
