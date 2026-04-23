@@ -23,7 +23,7 @@ It is designed to support low-resource MT research, evaluation, benchmarking, li
 ex: `CITY_911_outage.csv` is a csv file containing translations about 911 outages from CITY (or county, etc.).
 
 
-### Processed Data Files
+<!-- ### Processed Data Files -->
 
 <!-- ## 🏗️ Directory Structure
 
@@ -31,16 +31,10 @@ See the full directory tree in the repository root. -->
 
 <!-- ## 🔥 How to Use -->
 
+<!-- ## Project Operation -->
 
-## Project Setup
-
-All of the code and data is in the translationsdataset package. To install the package:
-`pip install -e .`
-
-## Project Operation
-
-### Scripts
-python -m translationsdataset.scripts.convert_csv_to_json_GENERIC
+<!-- ### Scripts
+python -m translationsdataset.scripts.convert_csv_to_json_GENERIC -->
 
 ## GitHub Pages Demo
 

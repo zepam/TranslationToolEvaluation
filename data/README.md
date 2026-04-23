@@ -13,4 +13,4 @@ Visually, it would look like this:
 | source text | L1 text | L2 text |
 
 ## Placeholders
-Placeholders are surrounded by { }. They can be empty or have suggested text.
+Placeholders are (or should be) surrounded by { }. They can be empty or have suggested text.
