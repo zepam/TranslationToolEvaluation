@@ -4,40 +4,43 @@
 
 # Benchmark with Existing Human Translations
 
-### 1) Prepare Splits and Gold References
+## 1) Prepare Splits and Gold References
 
-- Create a held-out **test set** (e.g., hash-based split by `doc_id`) as the canonical benchmark.
-- Ensure each test record includes:
+- If using data for training or fine-tuning:
+  - Create a held-out test set and held-out evaluation set
+  - (hash-based split by `doc_id`) as the canonical benchmark
+- If not, entire set can be used as test
+  
+- Ensure each record includes:
     - `source_text`
     - `source_language`
     - `reference_translation` (human)
     - `translation_source` metadata
 
-### 2) Baseline systems
-    - Commercial APIs: Google Translate, DeepL, Azure Translator
-    - Open-source models: NLLB, M2M-100, or mBART
+## 2) Baseline systems
+  - Commercial APIs: Google Translate, DeepL, Azure Translator
+  - Open-source models: NLLB, M2M-100, or mBART
 
-    Note the version, parameters, preprocessing steps
+  Note the version, parameters, preprocessing steps
 
-### 3) Run Reference-Based Automatic MT Metrics
+## 3) Run Automatic MT Metrics
 
-- **Options**:
+- Possible metrics:
     - sacreBLEU
     - chrF / chrF++
     - METEOR
     - COMET
     - BLEURT
     - BERTScore
-  
 - Report results per language and aggregated.
 - Document exact preprocessing/tokenizer name and version.
 
-- **Also?**
-  - Readability?
-  - evaluate small sample. track errors by type and severity?
+## 3b) Optional:
+  - Readability
+  - evaluate small sample. track errors by type and severity
   - Translation error rate
 
-### 4) Run Domain-Aware Automatic Checks
+## 3c) Optional: Run Domain-Aware Automatic Checks
 
 - **Placeholder fidelity:** percent preserving placeholders exactly (regex: `r'{[^}]+}'`); treat as must-pass for operations.
 - **Critical-term preservation:** verify key terms (e.g., “evacuate”, “shelter”, locations, times, phone numbers) appear in outputs.
@@ -45,15 +48,14 @@
 - **Slot Error Rate (SER):**  
     `SER = (#missing + #incorrect slots) / total_slots`
 
-### 5) Produce Summary Tables and Error Examples
+## 5) Produce Summary Tables and Error Examples
 
 - Probable table columns:
     - `#docs`, `#sentences`, `BLEU`, `chrF`, `COMET`, `Other Metrics`
     - `placeholder_fidelity(%)`, `critical_term_preserve(%)`,
     - `avg_tokens`, `vocab_size`
 - Include representative failure examples per language and event type.
-
-If done in Step 3, provide error category breakdowns (e.g., omitted action, mistranslated location, placeholder corruption) with examples.
+- If optional analysis is done in Step 3, provide error category breakdowns (e.g., omitted action, mistranslated location, placeholder corruption) with examples.
 
 ---
 ---
@@ -61,9 +63,8 @@ If done in Step 3, provide error category breakdowns (e.g., omitted action, mist
 # Evaluate Translations from LLM Using Examples in Prompts   ![Status](https://img.shields.io/badge/status-pilot-yellow) 
 
 
-
 ## Overview
-Use a shared prompting protocol with k‑shot examples drawn from Event A (translated into the target language) to produce Event B alerts in that language. Primary evaluation: automatic (chrF, sentence-embedding similarity) + safety checks. Missing examples handled by English fallback, oversampling, and treating missing pairs as zero‑shot.
+Use a shared prompting protocol with k‑shot examples drawn from Event A (translated into the target language) to produce Event B alerts in that language. Primary evaluation: automatic (chrF, sentence-embedding similarity) + safety checks.
 
 ## Model choices & inference settings
 
