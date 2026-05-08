@@ -11,10 +11,10 @@ shelter_in_place,78
 flood,60
 boil_water,47
 shelters,34
-winter_storm,31
 dam_failure,31
-volcano,29
+winter_storm,31
 reunification,29
+volcano,29
 alert_and_warning,26
 heat,23
 terrorism,21
@@ -22,6 +22,6 @@ power_lines,19
 earthquake,18
 pandemic_flu,13
 911_outage,10
+flooding,2
 driving,2
 fire,2
-flooding,2

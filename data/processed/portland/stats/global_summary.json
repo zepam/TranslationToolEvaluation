@@ -1,5 +1,5 @@
 {
-  "total_docs": 1218,
+  "total_docs": 1216,
   "languages": [
     "am",
     "ar",
@@ -17,7 +17,7 @@
     "km",
     "ko",
     "lo",
-    "mah",
+    "mh",
     "my",
     "ne",
     "om",
@@ -37,6 +37,6 @@
   ],
   "num_languages": 33,
   "total_sentences_approx": 40434,
-  "total_tokens_approx": 543068,
+  "total_tokens_approx": 543047,
   "total_pairs": 32
 }
