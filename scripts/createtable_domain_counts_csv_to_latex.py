@@ -94,7 +94,7 @@ def domain_counts(csv_file, output_file=None, table_label="tab:domain_counts"):
     if output_file:
         with open(output_file, 'w') as f:
             f.write(latex_table)
-        print(f"Wrote LaTeX table to {output_file}")
+        # print(f"Wrote LaTeX table to {output_file}")
     else:
         print(latex_table)
 
@@ -140,6 +140,10 @@ def make_beautiful_files():
     output_dir.mkdir(parents=True, exist_ok=True)
     output_tex = output_dir / f"{source_prefix}_domain_counts_table.tex"
     domain_counts(input_csv, output_tex, table_label=f"tab:domain_counts_{source_prefix}")
+
+    print("LaTeX tables written:")
+    print(f" - Domain counts:    {output_tex}")
+
 
 def main():
     make_beautiful_files()

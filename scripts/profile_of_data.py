@@ -25,6 +25,8 @@ import hashlib
 from tqdm import tqdm
 import pandas as pd
 
+EXCLUDED_DIR_NAMES = {"stats", "tables"}
+
 # Basic Unicode CJK detection (approx)
 CJK_RE = re.compile(r'[\u4E00-\u9FFF\u3040-\u30FF\uAC00-\uD7AF]')
 
@@ -141,7 +143,8 @@ def process_folder(input_folder):
 
     # iterate files
     filepaths = []
-    for root, _, files in os.walk(input_folder):
+    for root, dirs, files in os.walk(input_folder):
+        dirs[:] = [d for d in dirs if d.lower() not in EXCLUDED_DIR_NAMES]
         for fn in files:
             if fn.lower().endswith('.json') or fn.lower().endswith('.jsonl'):
                 filepaths.append(os.path.join(root, fn))

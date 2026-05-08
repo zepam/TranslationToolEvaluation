@@ -110,10 +110,13 @@ def json_to_latex_table(json_input, output_dir=None):
             output_path.parent.mkdir(parents=True, exist_ok=True)
             with open(output_path, 'w', encoding='utf-8') as f:
                 f.write(latex_table)
-            print(f"LaTeX table saved to {output_path}")
+            # print(f"LaTeX table saved to {output_path}")
         else:
             print(f"\n--- {json_file.name} ---")
             print(latex_table)
+
+        print("LaTeX tables written:")
+        print(f" - Domain counts:    {output_path}")
 
 
 def main():

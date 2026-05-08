@@ -81,7 +81,10 @@ def convert_csv_to_jsonl(csv_path, lang_map=language_codes):
     for i, row in df.iterrows():
 
         source_text = row["English"]
-        nothing, source_text_value = custom_kc_cleanup("English", source_text)  # apply custom cleanup to source text as well
+        if basename.lower().startswith("kc"):
+            _, source_text_value = custom_kc_cleanup("English", source_text)  # apply custom cleanup to source text as well
+        else:
+            source_text_value = source_text
 
         translations = {}
         for col, val in row.items():
@@ -123,7 +126,8 @@ def convert_csv_to_jsonl(csv_path, lang_map=language_codes):
 def custom_kc_cleanup(col, val):
     if isinstance(val, str):
         val = val.replace("•\xa0\xa0\xa0\xa0\xa0", "").strip()
-        val = val.replace("•  ", "").strip()
+        val = re.sub(r"•\s+", "", val).strip()
+        val = re.sub(r"·\s+", "", val).strip()
         if isinstance(val, str) and re.match(r"^\s*\d{1,2}\.", val):
             val = re.sub(r"^\s*\d{1,2}\.\s*", "", val).strip()
                 # if val changed, print a warning
