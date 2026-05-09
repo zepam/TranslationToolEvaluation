@@ -8,10 +8,11 @@ It is designed to support low-resource MT research, evaluation, benchmarking, li
 ## 📦 Contents
 
 - XX languages × XX English-source sentences each
+- 26 different alert types (extreme heat, wind, etc.)
 - Cleaned and normalized text
 - JSONL format and line-aligned format
 - Metadata including language codes, domains, and sources
-- Train/dev/test splits
+~~- Train/dev/test splits~~
 - Scripts for preprocessing, combining, and generating statistics
 
 ## File Name Format
