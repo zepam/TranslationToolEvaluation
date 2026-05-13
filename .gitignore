@@ -1,1 +1,4 @@
-analysis.ipynb
+analysis_out/groups/
+*.png
+analysis_out/sim_matrix.npy
+.git-rewrite/

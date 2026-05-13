@@ -1,0 +1,238 @@
+cluster_id,medoid_id,medoid_text,member_id,member_text,flag
+0,portland-911_outage-007,911 መስመሮች ተመልሰው መስራት ጀምረዋል።,portland-911_outage-007,911 lines are back up and working.,
+1,portland-911_outage-006,{Company/location} 911 መስመሮች ተመልሰው መስራት ጀምረዋል።,portland-911_outage-006,{Company/location} 911 lines are back up and working.,
+2,portland-911_outage-002,{Company name(s)} የስልክ ደንበኞች ወደ 911 መገናኘት ችግር እያጋጠማቸው ነው።,portland-911_outage-002,{Company name(s)} phone customers are experiencing a 911 outage.,
+3,portland-911_outage-004,911 መደወል ከፈለጉ ሞባይል ይጠቀሙ።,portland-911_outage-004,"If you need to call 911, use a cell phone.",
+4,portland-911_outage-005,እርዳታ ከፈለጉ እና ከ 911 መገናኘት ካልቻሉ፡ ስልኩን ይዝጉ እና እንደገና ይደውሉ።,portland-911_outage-005,"If you need help and are unable to reach a 911, hang up and call again.",
+5,portland-911_outage-001,በአደጋ ጊዜ {number} ይደውሉ።,portland-911_outage-001,Dial {number} for emergencies.,
+6,kc-911_outage-000,የ911 የድንገተኛ ጥሪ መቀበያ መስመር ከተበላሸ,kc-911_outage-000,911 Outage Messaging,
+7,portland-911_outage-003,አሁንም ወደ 911 የጽሑፍ መልእክት መላክ ይቻላሉ።,portland-911_outage-003,You can still send text messages to 911.,
+8,kc-911_outage-001,ከሲያትል ፖሊስና ሲያትል የእሳት አደጋ መከላከያ ክፍል ጠቃሚ መልዕክት; ሲያትል 911 ችግር አለበት. ከ 911 ጋር መገናኘት ካልቻሉ ለድንገተኛ ጊዜ ጥሪ (206) 583-2111 ወይም (206) 625-5011 ወይም የጽሑፍ መልዕክት 911 ብቻ ይደውሉ.,kc-911_outage-001,"Safety Message from Seattle Police and Seattle Fire - there is a significant disruption to calling 911 in Seattle. If you cannot connect to Seattle 911, please call 206-583-2111, 206-625-5011 or text 911 ONLY for emergencies.",
+9,portland-911_outage-000,በ{county} ውስጥ 911 አይሰራም ያለው።,portland-911_outage-000,911 is not working in {county}.,sem_high_lex_low
+10,portland-air_quality-130,በቤትዎ ውስጥ ያለውን አየር ያለ ሙቀት ለማዟዟር እና ለማጣራት በምድጃዎ ላይ ያለውን ማቀዝቀዣ ያስኪዱት።,portland-air_quality-060,"You may be more at risk if you have a heart or lung disease, are a child or older adult, or work outside for long periods of time",sem_high_lex_low
+10,portland-air_quality-130,በቤትዎ ውስጥ ያለውን አየር ያለ ሙቀት ለማዟዟር እና ለማጣራት በምድጃዎ ላይ ያለውን ማቀዝቀዣ ያስኪዱት።,portland-air_quality-084,Choose a mask size and brand that fits your face and has no gaps.,sem_high_lex_low
+10,portland-air_quality-130,በቤትዎ ውስጥ ያለውን አየር ያለ ሙቀት ለማዟዟር እና ለማጣራት በምድጃዎ ላይ ያለውን ማቀዝቀዣ ያስኪዱት።,portland-air_quality-088,"Wearing a mask can make it harder to breathe for people with some health conditions, like asthma. Ask your doctor if you are concerned.",sem_high_lex_low
+10,portland-air_quality-130,በቤትዎ ውስጥ ያለውን አየር ያለ ሙቀት ለማዟዟር እና ለማጣራት በምድጃዎ ላይ ያለውን ማቀዝቀዣ ያስኪዱት።,portland-air_quality-100,Consider canceling outdoor activities when the air quality is unhealthy.,sem_high_lex_low
+10,portland-air_quality-130,በቤትዎ ውስጥ ያለውን አየር ያለ ሙቀት ለማዟዟር እና ለማጣራት በምድጃዎ ላይ ያለውን ማቀዝቀዣ ያስኪዱት።,portland-air_quality-119,The state of California provides a list of certified air purifiers that clean smoke from the air:,sem_high_lex_low
+10,portland-air_quality-130,በቤትዎ ውስጥ ያለውን አየር ያለ ሙቀት ለማዟዟር እና ለማጣራት በምድጃዎ ላይ ያለውን ማቀዝቀዣ ያስኪዱት።,portland-air_quality-126,"If you are able to, please buy a few air filters and masks now while stores have them in stock.",sem_high_lex_low
+10,portland-air_quality-130,በቤትዎ ውስጥ ያለውን አየር ያለ ሙቀት ለማዟዟር እና ለማጣራት በምድጃዎ ላይ ያለውን ማቀዝቀዣ ያስኪዱት።,portland-air_quality-130,Run the fan on your furnace without heat to circulate and filter the air in your house.,sem_high_lex_low
+10,portland-air_quality-130,በቤትዎ ውስጥ ያለውን አየር ያለ ሙቀት ለማዟዟር እና ለማጣራት በምድጃዎ ላይ ያለውን ማቀዝቀዣ ያስኪዱት።,portland-air_quality-140,Avoid frying or broiling when cooking.,sem_high_lex_low
+10,portland-air_quality-130,በቤትዎ ውስጥ ያለውን አየር ያለ ሙቀት ለማዟዟር እና ለማጣራት በምድጃዎ ላይ ያለውን ማቀዝቀዣ ያስኪዱት።,portland-air_quality-145,"If you find ash from wildfire smoke inside your home, wipe it up with a damp cloth or wet mop.",sem_high_lex_low
+10,portland-air_quality-130,በቤትዎ ውስጥ ያለውን አየር ያለ ሙቀት ለማዟዟር እና ለማጣራት በምድጃዎ ላይ ያለውን ማቀዝቀዣ ያስኪዱት።,portland-air_quality-152,Use a rolled up towel to stop smoke coming in through the window or under the door.,sem_high_lex_low
+10,portland-air_quality-130,በቤትዎ ውስጥ ያለውን አየር ያለ ሙቀት ለማዟዟር እና ለማጣራት በምድጃዎ ላይ ያለውን ማቀዝቀዣ ያስኪዱት።,portland-air_quality-158,You can tape a furnace filter to a box fan to clean the air inside your home.,
+10,portland-air_quality-130,በቤትዎ ውስጥ ያለውን አየር ያለ ሙቀት ለማዟዟር እና ለማጣራት በምድጃዎ ላይ ያለውን ማቀዝቀዣ ያስኪዱት።,portland-air_quality-173,Seek shelter somewhere else if your home is too warm to stay inside with the windows closed.,sem_high_lex_low
+11,portland-air_quality-114,ቤትዎ በጣም ጭሳማ ከሆነ አየር ማቀዝቀዣ ወዳለበት ቦታ ይሂዱ።,portland-air_quality-114,"If your home is too smoky, go to a place with air conditioning.",sem_high_lex_low
+11,portland-air_quality-114,ቤትዎ በጣም ጭሳማ ከሆነ አየር ማቀዝቀዣ ወዳለበት ቦታ ይሂዱ።,portland-air_quality-132,Set your home’s thermostat fan to ON and close the fresh air intake.,sem_high_lex_low
+11,portland-air_quality-114,ቤትዎ በጣም ጭሳማ ከሆነ አየር ማቀዝቀዣ ወዳለበት ቦታ ይሂዱ።,portland-air_quality-169,Never leave a box fan filter on when you are away or asleep.,sem_high_lex_low
+11,portland-air_quality-114,ቤትዎ በጣም ጭሳማ ከሆነ አየር ማቀዝቀዣ ወዳለበት ቦታ ይሂዱ።,portland-air_quality-178,"If your home is too smoky, go to a place with air conditioning.",
+12,portland-air_quality-025,ሰኞ፡ የአየር ጥራት ምናልባት ለጤና ጎጂ ሊሆን ይችላል።,portland-air_quality-025,Air quality will probably become unhealthy on Monday.,
+12,portland-air_quality-025,ሰኞ፡ የአየር ጥራት ምናልባት ለጤና ጎጂ ሊሆን ይችላል።,portland-air_quality-026,Air quality will probably become unhealthy on Tuesday.,
+12,portland-air_quality-025,ሰኞ፡ የአየር ጥራት ምናልባት ለጤና ጎጂ ሊሆን ይችላል።,portland-air_quality-029,Air quality will probably become unhealthy on Friday.,
+12,portland-air_quality-025,ሰኞ፡ የአየር ጥራት ምናልባት ለጤና ጎጂ ሊሆን ይችላል።,portland-air_quality-030,Air quality will probably become unhealthy on Saturday.,
+13,portland-air_quality-046,የአየር ጥራት መረጃ ጠቋሚ (AQI) እንዴት ይሰራል?,portland-air_quality-015,Air Quality Index (AQI),
+13,portland-air_quality-046,የአየር ጥራት መረጃ ጠቋሚ (AQI) እንዴት ይሰራል?,portland-air_quality-016,What is the Air Quality Index (AQI)?,
+13,portland-air_quality-046,የአየር ጥራት መረጃ ጠቋሚ (AQI) እንዴት ይሰራል?,portland-air_quality-046,How does the Air Quality Index (AQI) work?,
+14,portland-air_quality-007,ጤናማ ያልሆነ አየር እና ጤናዎ,portland-air_quality-005,Smoky Air and Your Health,
+14,portland-air_quality-007,ጤናማ ያልሆነ አየር እና ጤናዎ,portland-air_quality-007,Unhealthy Air and Your Health,
+15,portland-air_quality-116,መስኮቶችን እና በሮችን ይዝጉ።,portland-air_quality-116,Close doors and windows.,
+15,portland-air_quality-116,መስኮቶችን እና በሮችን ይዝጉ።,portland-air_quality-151,Keep windows and doors closed.,
+16,portland-air_quality-003,የሰደድ እሳት ጭስ እና የቤተሰብዎ ጤና,portland-air_quality-002,Wildfire Smoke and Your Health,
+16,portland-air_quality-003,የሰደድ እሳት ጭስ እና የቤተሰብዎ ጤና,portland-air_quality-003,Wildfire Smoke and Your Family’s Health,
+17,portland-air_quality-012,ለሰደድ እሳት ጭስ ዝግጁ ይሁኑ,portland-air_quality-012,Be Ready for Wildfire Smoke,
+17,portland-air_quality-012,ለሰደድ እሳት ጭስ ዝግጁ ይሁኑ,portland-air_quality-072,Prepare for Wildfire Smoke / Get Ready,
+18,portland-air_quality-077,በአከባቢያችን ያለው የሰደድ እሳት ወቅት ከግንቦት አጋማሽ እስከ ጥቅምት ወር ድረስ ነው።,portland-air_quality-076,Wildfire season in our area is generally from mid-May to late September.,
+18,portland-air_quality-077,በአከባቢያችን ያለው የሰደድ እሳት ወቅት ከግንቦት አጋማሽ እስከ ጥቅምት ወር ድረስ ነው።,portland-air_quality-077,Wildfire season in our area is usually from mid-May through October.,
+19,portland-air_quality-033,የሰደድ እሳት ጭስ በአካባቢያችን ላይ ተጽዕኖ እያሳደረ ነው።,portland-air_quality-032,Wildfire smoke from {area} is impacting our area.,
+19,portland-air_quality-033,የሰደድ እሳት ጭስ በአካባቢያችን ላይ ተጽዕኖ እያሳደረ ነው።,portland-air_quality-033,Wildfire smoke is impacting our area.,
+20,portland-air_quality-054,የሰደድ እሳት ጭስ የአየር ብክለት ነው።,portland-air_quality-053,Wildfire smoke is a type of air pollution.,
+20,portland-air_quality-054,የሰደድ እሳት ጭስ የአየር ብክለት ነው።,portland-air_quality-054,Wildfire smoke is air pollution.,
+21,portland-air_quality-122,የምድጃዎን ማጣርያ ይለውጡ።,portland-air_quality-122,Change your furnace filter.,
+21,portland-air_quality-122,የምድጃዎን ማጣርያ ይለውጡ።,portland-air_quality-124,Change your furnace filter.,
+22,portland-air_quality-028,ሐሙስ፡ የአየር ጥራት ምናልባት ለጤና ጎጂ ሊሆን ይችላል።,portland-air_quality-024,Air quality will probably become unhealthy on Sunday.,
+22,portland-air_quality-028,ሐሙስ፡ የአየር ጥራት ምናልባት ለጤና ጎጂ ሊሆን ይችላል።,portland-air_quality-028,Air quality will probably become unhealthy on Thursday.,
+23,portland-air_quality-113,ቤትዎ በጣም ጭሳማ ከሆነ የት መሄድ ይችላሉ?,portland-air_quality-113,"If your home gets too smoky, where could you go?",
+23,portland-air_quality-113,ቤትዎ በጣም ጭሳማ ከሆነ የት መሄድ ይችላሉ?,portland-air_quality-177,"If your home gets too smoky, where could you go?",
+24,portland-air_quality-184,ንፁህ የአይር ማዕከል በአቅራብያዎት መኖሩን ለማረጋገጥ 2-1-1 ይደውሉ ወይም info.orgንይጎብኙ ።,portland-air_quality-184,Call 2-1-1 or visit 211info.org to find out if there is a clean air center open near you.,
+25,portland-air_quality-182,ንፁህ የአየር ማዕከል ጥሩ አየር ማናፈሻ እና ንፁህ የቤት ውስጥ አየር ያለው ለህዝብ ቦታ ነው።,portland-air_quality-182,A clean air center is a public place with good ventilation and clean indoor air.,
+26,portland-air_quality-185,211 ይደውሉ ወይም 211info.org ይጎብኙ,portland-air_quality-185,Call 2-1-1 or visit 211info.org,
+27,portland-air_quality-172,ስለ የሰደድ እሳት ጭስ የበለጠ ለመማር public alerts.orgን ይጎብኙ።,portland-air_quality-172,Visit the Publicalerts.org website to learn more about wildfire smoke.,
+28,portland-air_quality-171,እርዳታ ያግኙ / ሌሎችን ይርዱ,portland-air_quality-171,GET HELP / HELP OTHERS (see General tab for more),
+29,portland-air_quality-179,ቤተ መፃሕፍት፣ የገበያ አዳራሽ፣የገበያ ማዕከል ወይም ሌላ ለህዝብ ቦታ ይጎብኙ።,portland-air_quality-179,"Visit a library, mall, shopping center, or other public space.",sem_high_lex_low
+30,portland-air_quality-170,ማጣርያው የቆሸሸ ሲመስሎት ይቀይሩት።,portland-air_quality-170,Change the filter when it looks dirty.,
+31,portland-air_quality-176,ንፁህ አየር ማዕከሎች,portland-air_quality-176,CLEAN AIR CENTERS (see Shelters tab for more),
+32,portland-air_quality-174,ወደ ጎረቤቶችዎ ይሂዱ፡፡,portland-air_quality-174,Check on your neighbors.,
+33,portland-air_quality-137,አየሩ ጪሳማ ሲሆን፣ ወደ ውስጠኛው አየር ብክለት አይጨምሩ።,portland-air_quality-137,"When the air is smoky, don’t add to indoor air pollution.",
+34,portland-air_quality-165,አየር ወደ ውስጥ የሚያስገባውን የሳጥን ማቀዝቀዣውን ጎን ያግኙ። ማጣርያውን በዚህ የማቀዝቀዣ ጎን ያስቀምጡ። በማጣርያው ላይ የታተመው ቀስት አየሩ በሚንቀሳቀስበት አቅጣጫ ወደ ማቀዝቀዣው መጠቆም አለበት።,portland-air_quality-165,Find the side of the box fan that is pulling air in. Put the filter on this side of the fan. The arrow printed on the filter should point toward the fan in the same direction as the air is moving.,
+35,portland-air_quality-163,በ 2012 ወይም ከዚያ በኋላ የተሰራ የሳጥን ማቀዝቀዣ ብቻ ይጠቀሙ። እሳትን የሚከላከል የደህንነት መሳርያ አላቸው።,portland-air_quality-163,Only use a box fan made in 2012 or later. They have a safety device to prevent fires.,
+36,portland-air_quality-144,ቤት አመዳማ ሲሆን እንዴት እንደሚፀዳ,portland-air_quality-144,How to clean up ash indoors:,
+37,portland-air_quality-167,በማጣርያው እና በማቀዝቀዣው መካከል ያሉትን ክፍተቶች ይዝጉ።,portland-air_quality-167,Seal any gaps between the filter and the fan.,sem_high_lex_low
+38,portland-air_quality-141,ቫክዩም አያድርጉ።,portland-air_quality-141,Don’t vacuum.,
+39,portland-air_quality-161,"ባለ 20"" × 20"" ምድጃ ማጣርያ (MERV 13)",portland-air_quality-161,A 20” x 20” furnace filter (MERV 13),
+40,portland-air_quality-168,ከክፍሉ ሲወጡ የሳጥኑን ማቀዝቀዣ ያጥፉ,portland-air_quality-168,Turn the box fan off when you leave the room,sem_high_lex_low
+41,portland-air_quality-175,የሳምባ እና የልብ ህመም ያለባቸው ሰዎች በዝቅተኛ የአየር ጥራት ሊቸግሩ ይችላሉ። በተለይ ብቻቸውን የሚኖሩ ከሆነ ይህ አደገኛ ሊሆን ይችላል። ጎረቤቶችዎ ደህና ናቸው ብለው አያስቡ - ይጎብኙ ወይም ይደውሉላቸው እና ይጠይቁ!,portland-air_quality-175,People with lung and heart conditions may struggle with poor air quality. This can be especially dangerous if they live alone. Don’t assume your neighbors are okay - visit or call them and ask!,
+42,portland-air_quality-128,ከቻሉ የአየር ማፅጃን ያስኪዱ።,portland-air_quality-128,"If you can, run an air purifier.",
+43,portland-air_quality-157,አየሩን ለማፅዳት የሳጥን ማቀዝቀዣ አየር ማጣርያ መስራት ይችላሉ።,portland-air_quality-157,You can make box fan filter to clean the air,
+44,portland-air_quality-180,በጭስ አየር ቀናት መካከል ንፁህ አየር ማዕከሎች ሊከፈቱ ይችላሉ።,portland-air_quality-180,Clean air centers may open during smoky air days.,
+45,portland-air_quality-156,የሳጥን ማቀዝቀዣ አየር ማጣርያዎችን ይስሩ።,portland-air_quality-156,Make a box fan air filter.,
+46,portland-air_quality-143,የረጅም ጊዜ የጭስ ኩነቶች አብዛኛውን ጊዜ አየሩ የተሻለ በሚሆንበት ጊዜ፣ የራሳቸው ጊዜ ይኖራቸዋል። የአየር ጥራት ጥሩ በሚሆንበት ጊዜ ንፁህ አየር ለማምጣት መስኮቶችን ይክፈቱ።,portland-air_quality-143,"Long-term smoke events usually have periods when the air is better. When air quality is good, open windows to bring in fresh air.",sem_high_lex_low
+47,portland-air_quality-147,ንፁህ የአየር ክፍል ይፍጠሩ።,portland-air_quality-147,Create a clean air room.,
+48,portland-air_quality-134,ይህ በማጣሪያዉ ውስጥ ያለማቋረጥ አየርን ያንቀሳቅሳል።,portland-air_quality-134,This will move air through the filter constantly.,sem_high_lex_low
+49,portland-air_quality-092,እውቅና ያለው N95 ጭንብል በማሸጊያው ላይ NIOSH ታትሞበታል።,portland-air_quality-092,An official N95 mask has NIOSH printed on the package.,
+50,portland-air_quality-118,የ HEPA ማጣርያ በጣም ትንሽ የሆኑ የብክለት ንጥረ ነገሮችን ማቆም ይችላል።,portland-air_quality-118,A HEPA filter can stop very small particles of pollution.,sem_high_lex_low
+51,portland-air_quality-146,የHEPA ማጣርያ ከሌለው በስተቀር የጭስ አመድን ለማፅዳት ቫክዩም አይጠቀሙ።,portland-air_quality-146,Do not use a vacuum to clean up smoke ash unless it has a HEPA filter.,
+52,portland-air_quality-105,Oregon OSHA በጭስ እና ጤናማ ያልሆነ የአየር ጥራት ቀናት ከቤት ውጭ ሰራተኞችን ለመጠበቅ ህጎች አሉት።,portland-air_quality-105,"Oregon OSHA has rules to protect outdoor workers during smoky, unhealthy air quality days.",sem_high_lex_low
+53,portland-air_quality-089,N95 ጭንብል ከውጭ ከሚጨስ አየር በጣም ጥሩ መከላከያ ነው።,portland-air_quality-089,An N95 mask is the best protection from smoky air outside.,
+54,portland-air_quality-136,ከውጭ የሚመጣው አንዳንድ ጭስ አየር ወደ ቤታችን ውስጥ ሊገባ ይችላል።,portland-air_quality-136,Some of the smoky air from outside can get inside our homes.,sem_high_lex_low
+55,portland-air_quality-149,ንፁህ የአየር ክፍል በጭስ አየር ክስተቶች ወቅት የጭስ መጠን በተቻለ መጠን ዝቅተኛ እንዲሆን የተዘጋጀ ክፍል ነው።,portland-air_quality-149,A clean air room is a room that is set up to keep smoke levels as low as possible during smoky air events.,
+56,portland-air_quality-083,N95 ጭምብሎችን ይሰብስቡ።,portland-air_quality-083,Gather N95 masks.,
+57,portland-air_quality-079,ከፀደይ 2023 ጀምሮ ጭምብል ባለው ተገኝነት ላይ በመመስረት የህዝብ ጤና ምክሮች ይለወጣሉ።,portland-air_quality-079,"Public Health advice changes based on mask availability, as of Spring 2023.",
+58,portland-air_quality-075,የሰደድ እሳት ጭስ በጣም ርቆ ቢገኝም እንኳ በአከባቢያችን ጭስ አዘል አየር እንዲፈጠር ሊያደርግ ይችላል።,portland-air_quality-075,"Smoke from wildfires, even fires very far away, can cause smoky air in our area.",
+59,portland-air_quality-070,ምልክቶቹ ከታዩብዎ ሐኪምዎን ያነጋግሩ።,portland-air_quality-070,"If you have symptoms, contact your doctor.",
+60,portland-air_quality-064,ሳል,portland-air_quality-064,Coughing,
+61,portland-air_quality-155,የሳጥን ማቀዝቀዣ አየር ማጣርያዎች,portland-air_quality-155,Box Fan Air Filters,
+62,portland-air_quality-129,አየር ማቀዝቀዣዎን እንደገና እንዲዘዋወር ያዘጋጁ።,portland-air_quality-129,Set your air conditioner to recirculate.,sem_high_lex_low
+63,portland-air_quality-102,የአየር ጥራት መጥፎ በሚሆንበት ጊዜ የቤት እንስሳትን ወደ ውጭ አይውሰዱ።,portland-air_quality-102,Don’t take pets outside when the air quality is bad.,
+64,portland-air_quality-110,ለሰደድ እሳት ጭስ ተጋላጭነትን ለመቀነስ በጣም ውጤታማው መንገድ መስኮቶች እና በሮች ተዘግተው በቤት ውስጥ መቆየት ነው።,portland-air_quality-110,The most effective way to reduce exposure to wildfire smoke is to stay indoors with windows and doors closed.,sem_high_lex_low
+65,portland-air_quality-154,መስኮቶችዎን ለመዝጋት የፕላስቲክ መሸፈኛ እና መለጠፍያ መጠቀም አያስፈልግዎትም። ከቤት ውጭ በሚጨስበት ጊዜ እንኳን ካርቦን ዳይኦክሳይድን እና የቤት ውስጥ አየር ብክለትን ለማስወገድ ህንፃዎች የተወሰነ የውጭ አየር ያስፈልጋቸዋል። በጣም ጥሩው መፍትሔ የቤት ውስጥ አየርን በአየር ማጣርያ ማጣራት ነው።,portland-air_quality-154,"You don’t need to use plastic sheeting and tape to seal your windows. Even when it’s smoky outside, buildings need some outside air to move carbon dioxide and indoor air pollutants out. The best solution is to filter indoor air with an air purifier.",
+66,portland-air_quality-109,ቤት ውስጥ መቆየት,portland-air_quality-109,staying indoors.,
+67,portland-air_quality-166,ማጣርያውን ከማቀዝቀዣው ጋር ለማያያዝ የፕላስተር ማጣበቅያን ይጠቀሙ።,portland-air_quality-166,Use tape to attach the filter to the fan.,sem_high_lex_low
+68,portland-air_quality-127,የአየር ማፅጃ ይጠቀሙ።,portland-air_quality-127,Use an air purifier.,
+69,portland-air_quality-142,ቫክዩም የHEPA ማጣርያ ከሌለው በቀር ቫክዩም አያድርጉ።,portland-air_quality-142,Don’t vacuum unless the vacuum has a HEPA filter.,
+70,portland-air_quality-162,የፕላስተር ማጣበቅያ,portland-air_quality-162,Duct tape,
+71,portland-air_quality-098,ከቤት ውጭ እራስዎን ይጠብቁ።,portland-air_quality-098,Protect Yourself Outdoors,
+72,portland-air_quality-112,የሰደድ እሳት ወቅት ነው። ጭስ አየርን ለማጣራት መንገዶች አሉዎት?,portland-air_quality-112,It’s wildfire season. Do you have ways to filter smoky air?,sem_high_lex_low
+73,portland-air_quality-183,ንፁህ የአየር ማዕከል የመዝናኛ ማዕከል፣ ቤተመፃሕፍት፣ ትምህርት ቤት፣ ጂምናዚየም ወይም ሌላ የቤት ውስጥ መገልገያ ጥሩ የአየር መናፈሻ እና አየር ማቀዝቀዣ ያለው በአየርጭስ ጊዜ ለህዝብ ክፍት ሊሆን ይችላል።,portland-air_quality-183,"A clean air center could be a recreation center, library, school gymnasium or other indoor facility with good ventilation and air conditioning that is open to the public during smoky air events.",
+74,portland-air_quality-121,በ HVAC ስርዓት ውስጥ ያለውን ማጣርያ ይለውጡ።,portland-air_quality-121,Change the filter on your HVAC system.,
+75,portland-air_quality-125,ተጨማሪ የምድጃ ማጣርያዎችን ይግዙ።,portland-air_quality-125,Buy extra furnace filters.,
+76,portland-air_quality-138,ሻማ አይለኩሱ፣ የጋዝ ምድጃዎችን አይጠቀሙ ወይም ቫክዩም አይጠቀሙ።,portland-air_quality-138,"Don’t burn candles, use gas stoves, or vacuum.",sem_high_lex_low
+77,portland-air_quality-091,N95 ጭንብል በጣም አነስተኛ የሆኑ የብክለት ንጥረ ነገሮችን የሚያጣራ ከፍተኛ ጥራት ያለው የፊት ጭንብል ነው።,portland-air_quality-091,An N95 mask is a high quality face mask that filters out very small pollution particles.,
+78,portland-air_quality-164,"MERV 13 ማጣርያ መጠን 20"" × 20"" ይጠቀሙ።",portland-air_quality-164,Use a MERV 13 filter size 20” x 20”.,
+79,portland-air_quality-150,ጥቂት መስኮቶች እና በሮች ያሉት ክፍል ይምረጡ።,portland-air_quality-150,Choose a room with few windows and doors.,
+80,portland-air_quality-107,በሰደድ እሳት ጭስ ውስጥ ጎጂ የሆኑትን ንጥረ ነገሮች መተንፈስን ለመከላከል በጣም ጥሩ የሆነው መንገድ በቤት ውስጥ መቆየት ነው።,portland-air_quality-107,The best way to prevent breathing in the harmful particles in wildfire smoke is to stay indoors.,sem_high_lex_low
+81,portland-air_quality-052,በአከባቢዎ ያለውን የአሁኑን የ አጥመጠ ያግኙ። https://www.airnow.gov/aqi/aqi-basics/: ይጎብኙ,portland-air_quality-052,Find the current AQI in your area. Visit: https://www.airnow.gov/aqi/aqi-basics/,
+82,portland-air_quality-153,ለጥቂት ጭስ አዘል አየር ቀናት ጊዝያዊ መፍትሄው ንፁህ አየር ክፍል መሆን አለበት።,portland-air_quality-153,A clean air room should be a temporary solution during a few days of smoky air.,
+83,portland-air_quality-103,በጭስ አየር ወደ ውጭ መውጣት ካለብዎት N95 ጭንብል ያድርጉ።,portland-air_quality-103,"If you have to go outside in smoky air, wear an N95 mask.",
+84,portland-air_quality-135,ፈሳሽ የሚመጡ ማቀዝቅዣዎችን ወይም ሙሉ የቤት ማቀዝቀዣዎችን አያብሩ።,portland-air_quality-135,Do not turn on swamp coolers or whole house fans.,sem_high_lex_low
+85,portland-air_quality-095,የጨርቅ ጭምብሎች ከጭስ አየር አይከላከሉም።,portland-air_quality-095,Cloth masks do not protect from smoky air.,
+86,portland-air_quality-022,ለአካባቢያችን የተራዘመ የአየር ጥራት ማስጠንቀቂያ ምክር አለ።,portland-air_quality-022,There is an extended air quality advisory for our area.,
+87,portland-air_quality-133,"ማዕከላዊ ቱቦ የአየር ማቀዝቀዣ እና የማሞቅያ ስርዓት ካልዎት ስርዓቱን ወደ ""ማብራት"" ያቀናብሩት።",portland-air_quality-133,"If you have a central ducted air conditioning and heating system, set the system to “on.”",
+88,portland-air_quality-123,MERV 13 ማጣርያ ወይም ከዛ በላይ ይጠቀሙ።,portland-air_quality-123,Use a MERV 13 filter or higher.,
+89,portland-air_quality-080,የህዝብ ጤና KN95 ጭንብልን ለጭስ አይመክርም።,portland-air_quality-080,Public Health is not recommending KN95 masks for smoke.,
+90,portland-air_quality-090,N95 ጭንብል ምንድን ነው?,portland-air_quality-090,What is an N95 mask?,
+91,portland-air_quality-066,የአፍንጫ ፈሳሽ,portland-air_quality-066,Runny nose,sem_high_lex_low
+92,portland-air_quality-043,የአየር ጥራት ጠቋሚ ሰንጠረዥ,portland-air_quality-043,Air Quality Index Table,
+93,portland-air_quality-073,ለጭስ አዘል አየር ቀናት ለመዘጋጀት የሚያግዝዎት አንዳንድ መረጃዎች እዚህ ላይ ቀርበውልዎታል።,portland-air_quality-073,Here is some information to help you get ready for smoky air days.,
+94,portland-air_quality-082,ከፍተኛ ጥራት ያላቸውን ጭምብሎች ይሰብስቡ።,portland-air_quality-082,Gather high quality masks.,sem_high_lex_low
+95,portland-air_quality-078,ማስታወሻዎች,portland-air_quality-078,NOTES:,
+96,portland-air_quality-014,የአየር ጥራት አስፈላጊ የሆነው ለምንድን ነው?,portland-air_quality-014,Why is Air Quality Important?,sem_high_lex_low
+97,portland-air_quality-038,ዛሬ፡ ቀይ አየር ጥራት ማስጠቀቂያ።,portland-air_quality-038,Red air quality alert today.,sem_high_lex_low
+98,portland-air_quality-065,በአስም መጠቃት,portland-air_quality-065,Asthma attacks,
+99,portland-air_quality-099,ከቤት ውጭ እንቅስቃሴዎችን ያስወግዱ።,portland-air_quality-099,Avoid outdoor activities.,
+100,portland-air_quality-010,የአየሩ ጥራት ጤናማ በማይሆንበት ጊዜ ደህንነትዎን ይጠብቁ,portland-air_quality-010,Stay Safe When Air Quality is Unhealthy,
+101,portland-air_quality-040,በአካባቢያችን ያለው የአየር ጥራት መጥፎ ሆኖ ቀጥሏል።,portland-air_quality-040,Air quality in our area continues to be bad.,sem_high_lex_low
+102,portland-air_quality-148,በቤትዎ ውስጥ ንፁህ የአየር ክፍል ይፍጠሩ።,portland-air_quality-148,Create a clean air room in your home.,
+103,portland-air_quality-048,50 ወይም ከዚያ በታች የሆነ የ AQI መጠን ጥሩ የአየር ጥራትን ይወክላል።,portland-air_quality-048,An AQI value of 50 or below represents good air quality.,entity_issue:numbers_changed
+104,portland-air_quality-071,የአተነፋፈስ ጤንነት ችግር ካለብዎ፣ የሓኪምዎን ምክር ይከተሉ።,portland-air_quality-071,"If you have a respiratory health condition, follow the advice of your doctor.",sem_high_lex_low
+105,portland-air_quality-067,የጉሮሮ ህመም,portland-air_quality-067,Sore throat,
+106,portland-air_quality-009,ከሰደድ እሳት ጭስ ደህንነትዎን ይጠብቁ,portland-air_quality-009,Stay Safe from Wildfire Smoke,
+107,portland-air_quality-042,የአየር ጥራት መረጃ ጠቋሚ እና ጤና,portland-air_quality-042,Air Quality Index and Health,
+108,portland-air_quality-061,ልጆች ለጭስ አደጋ የበለጠ ተጋላጭ ናቸው ምክንያቱም ሳንባዎቻቸው ገና በማደግ ላይ ስለመሆናቸው እና የአየር መተላለፍያዎቻቸው ያነሱ በመሆናቸው ነው።,portland-air_quality-061,Children are more sensitive to smoke because their lungs are still developing and their airways are smaller.,sem_high_lex_low
+109,portland-air_quality-051,AQI የውጭ አየር ምን ያህል ንፁህ ወይም የተበከለ እንደሆነ ይነግርዎታል።,portland-air_quality-051,AQI tells you how clean or polluted the air outside is.,
+110,portland-air_quality-001,የሰደድ እሳት ጭስ,portland-air_quality-001,Wildfire Smoke,
+111,portland-air_quality-019,AQI አስፈላጊ የሆነው ለምንድን ነው?,portland-air_quality-019,Why is the AQI important?,
+112,portland-air_quality-035,ዛሬ የአየር ጥራት ለጤና ጎጂ ነው።,portland-air_quality-035,The air quality today is unhealthy.,sem_high_lex_low
+113,portland-air_quality-104,ከቤት ውጭ የሚሰሩ ሰራተኞች ለጤናማ ያልሆነ እና ጭስ አየር የመጋለጥ እድላቸው ከፍተኛ ነው።,portland-air_quality-104,"Outdoor workers are at a higher risk for exposure to unhealthy, smoky air.",sem_high_lex_low
+114,portland-air_quality-096,የጨርቅ ጭምብሎች እና የጨርቅ ምርቶች ከጭስ አየር አይከላከሉም።,portland-air_quality-096,Cloth masks and bandanas do not protect from smoky air.,
+115,portland-air_quality-017,AQI ምንድን ነው?,portland-air_quality-017,What is the AQI?,
+116,portland-air_quality-069,የደረት ህመም ወይም ፈጣን የልብ ትርታ,portland-air_quality-069,Chest pain or fast heartbeat,
+117,portland-air_quality-068,ራስ ምታት,portland-air_quality-068,Headaches,sem_high_lex_low
+118,portland-air_quality-039,የአየር ጥራት ማስጠንቀቂያው ተራዝሟል።,portland-air_quality-039,The air quality alert is extended.,sem_high_lex_low
+119,portland-air_quality-097,ከጭስ አየር የሚመጣው ብክለት በጣም ትንሽ ነው እና በጨርቅ ጭምብል ውስጥ ማለፍ ይችላል።,portland-air_quality-097,Pollution from smoky air is very small and can pass through a cloth mask.,
+120,portland-air_quality-058,ጭስ አዘል አየር ማንኛውንም ሰው ሊያሳምም ይችላል።,portland-air_quality-058,Smoky air can make anyone sick.,sem_high_lex_low
+121,portland-air_quality-081,ጭንብሎች,portland-air_quality-081,Masks,sem_high_lex_low
+122,portland-air_quality-036,ዛሬ የአየር ጥራት ለጤና በጣም አደገኛ ነው።,portland-air_quality-036,The air quality today is very dangerous.,
+123,portland-air_quality-087,N95 ጭምብሎች በሃርድዌር መደብሮች እና በኦንላይን ላይ ይገኛሉ።,portland-air_quality-087,N95 masks are available at hardware stores and online.,
+124,portland-air_quality-004,ጭስ አዘል አየር,portland-air_quality-004,Smoky Air,
+125,portland-air_quality-159,የሚያስፈልጎት ነገር:,portland-air_quality-159,What you need:,
+126,portland-air_quality-160,በ 2012 ወይም ከዚያ በኋላ የተሰራ ሳጥን ዳን,portland-air_quality-160,A box fan made in 2012 or newer,
+127,portland-air_quality-115,የቤት ውስጥ አየርን ንፁህ ያድርጉ።,portland-air_quality-115,Keep indoor air clean.,
+128,portland-air_quality-074,እርስዎ እና ቤተሰብዎ ለጭስ አዘል አየር ቀናት እንድትዘጋጁ የሚያግዙዎት አንዳንድ መረጃ እዚህ ላይ ቀርበዋል።,portland-air_quality-074,Here is some information to help you and your family get ready for smoky air days.,
+129,portland-air_quality-013,የኣየር ጥራት ምንድነው?,portland-air_quality-013,What is Air Quality?,
+130,portland-air_quality-085,ምንም ክፍተት ሳይኖር ከአፍንጫዎ እና ከአፍዎ ጋር የሚስማማ ጭምብል ይምረጡ።,portland-air_quality-085,Choose a mask that fits your nose and mouth with no gaps.,
+131,portland-air_quality-117,የአየር ማጣርያን ከ HEPA ማጣርያ ጋር ይጠቀሙ።,portland-air_quality-117,Use an air purifier with a HEPA filter.,
+132,portland-air_quality-139,የሚቃጠለውን ማንኛውንም ነገር አይጠቀሙ - ሻማ፣ ዕጣን፣ የእሳት ማገዶዎች፣ ሲጋራዎች ወይም የጋዝ ምድጃዎች።,portland-air_quality-139,"Don’t use anything that burns - candles, incense, fireplaces, cigarettes, or gas stoves.",sem_high_lex_low
+133,portland-air_quality-050,የAQI ቁጥሩ ከፍ ያለ ከሆነ፣ በአየር ውስጥ ብዙ ብክለት አለ።,portland-air_quality-050,"If the AQI number is high, there is a lot of pollution in the air.",
+134,portland-air_quality-041,በአካባቢያችን አደገኛ የሆነ የአየር ጥራት ሁኔታ እያጋጠመን ነው።,portland-air_quality-041,We are experiencing dangerously poor air quality in our area.,sem_high_lex_low
+135,portland-air_quality-018,AQIን እንዴት እንደሚፈትሹ,portland-air_quality-018,How to Check the AQI,
+136,portland-air_quality-044,የአየር ጥራት መረጃ ጠቋሚ (AQI) የአየር ጥራትን ለመለካት የሚያገለግል የEPA መረጃ ጠቋሚ ነው። (የአከባቢ ጥበቃ ኤጀንሲ),portland-air_quality-044,The Air Quality Index (AQI) is the EPA’s index for measuring air quality. (Environmental Protection Agency),
+137,portland-air_quality-120,በቤት ውድ ያለው አየር በጣም ጭሳማ ከሆነ፣ እራስዎን ለመጠበቅ N95 ጭንብል ማድረግ ይችላሉ።,portland-air_quality-120,"If the air is too smoky indoors, you can wear an N95 mask inside to protect yourself.",entity_issue:numbers_changed
+138,portland-air_quality-181,በጭስ አየር ቀናት መካከል ንፁህ አየር ማዕከሎች ለህዝቡ ሊከፈቱ ይችላሉ።,portland-air_quality-181,Clean air centers may open to the public during smoky air days.,
+139,portland-air_quality-111,የአየር ጥራት ደካማ በሚሆንበት ጊዜ ልጆችን ከውስጥ ያድርጓቸው።,portland-air_quality-111,Keep kids inside when air quality is poor.,
+140,portland-air_quality-057,የሰደድ እሳት ጭስ ሳንባችንን፣ ጉሮሮአችንን እና ደረታችንን ሊረብሹ ወይም ሊጎዱ የሚችሉ ጥቃቅን ንጥረ ነገሮች አሉት። በአስም መጠቃቶችን ሊያስከትል ወይም የሳንባ ወይም የደረት ኢንፌክሽን አደጋን ሊጨምር ይችላል።,portland-air_quality-057,"Wildfire smoke has very small particles that can irritate or damage our lungs, throat, and chest. It can cause asthma attacks or increase the risk of lung or chest infection.",sem_high_lex_low
+141,portland-air_quality-023,ለ{location} የተራዘመ የአየር ጥራት ማስጠንቀቂያ አለ።,portland-air_quality-023,There is an extended air quality advisory for {location}.,
+142,portland-air_quality-021,ለአካባቢያችን ስለ አየር ጥራት ማስጠንቀቂያ አለ።,portland-air_quality-021,There is an air quality alert for our area.,
+143,portland-air_quality-101,በሚጨስ አየር ጊዜ ከቤት ውጭ የአካል ብቃት እንቅስቃሴ አያድርጉ። ብዙ ጊዜ ከቤት ውጭ ማሳለፍ እና ጠንክሮ መተንፈስ የጭስ አየር የጤና ተፅእኖዎችን ያባብሰዋል።,portland-air_quality-101,Don’t exercise outdoors during smoky air. Spending a lot of time outside and breathing hard can make the health impacts of smoky air worse.,sem_high_lex_low
+144,portland-air_quality-131,የቤትዎን ቴርሞስታት ማቀዝቀዣን ያብሩት።,portland-air_quality-131,Set your home’s thermostat fan to ON.,sem_high_lex_low
+145,portland-air_quality-006,ጤናማ ያልሆነ አየር,portland-air_quality-006,Unhealthy Air,
+146,portland-air_quality-037,ዛሬ ያለው የአየር ጥራት አደገኛ ነው።,portland-air_quality-037,The air quality today is hazardous.,
+147,portland-air_quality-108,የመተንፈሻ፣ የሳንባ ወይም የልብ ችግር ያለባቸዉ ሰዎች የትንፋሽ ተጋላጭነትን መገደብ ያለባቸው በ,portland-air_quality-108,"People with respiratory, lung, or heart conditions should limit their exposure by",
+148,portland-air_quality-063,ጭስ አዘል አየር መተንፈስ የሚከተሉትን ሊያስከትል ይችላል:,portland-air_quality-063,Breathing smoky air can cause:,
+149,portland-air_quality-062,ለዝቅተኛ የአየር ጥራት መጋለጥ የሚከተሉትን ሊያስከትል ይችላል፦ [BLANK],portland-air_quality-062,Exposure to poor air quality may cause: [BLANK],
+150,portland-air_quality-027,እሮብ፡ የአየር ጥራት ምናልባት ለጤና ጎጂ ሊሆን ይችላል።,portland-air_quality-027,Air quality will probably become unhealthy on Wednesday.,
+151,portland-air_quality-056,ጭስ አዘል አየር ሳንባን ሊረብሽ ወይም ሊጎዳ ይችላል።,portland-air_quality-056,Smoky air can irritate or damage the lungs.,
+152,portland-air_quality-094,ከሰደድ እሳት ጭስ ለመጠበቅ በጨርቅ የፊት ጭንብል ላይ አይተማመኑ።,portland-air_quality-094,Do not rely on cloth face masks for protection from wildfire smoke.,
+153,portland-air_quality-045,የአየር ጥራት መረጃ ጠቋሚ ወይም AQI በዙርያችን ያለውን የአየር ብክለት ለመለካት የሚያገለግል መመሪያ ነው።,portland-air_quality-045,The Air Quality Index or AQI is a guide for measuring pollution in the air around us.,
+154,portland-air_quality-047,የቁጥሩ ከፍ እያለ መሄድ የበለጠ የአየር ብክለት መጨመርን እና የጤና ስጋት ከፍ ማለትን ያሳያል፡፡,portland-air_quality-047,"The higher the number, the more air pollution there is and the greater the health concern.",sem_high_lex_low
+155,portland-air_quality-055,የሰደድ እሳት ጭስ ሳንባን ሊረብሽ ወይም ሊጎዳ ይችላል።,portland-air_quality-055,Wildfire smoke can irritate or damage the lungs.,
+156,portland-air_quality-106,እራስዎን በቤት ውስጥ ይጠብቁ,portland-air_quality-106,Protect Yourself Indoors,
+157,portland-air_quality-049,ከ300 በላይ የሆነ የAQI መጠን በጣም ጤናማ ያልሆነ የአየር ጥራትን ይወክላል።,portland-air_quality-049,An AQI value over 300 represents very unhealthy air quality.,sem_high_lex_low;entity_issue:numbers_changed
+158,portland-air_quality-086,ከፊትዎ ጋር የሚስማማ ጭምብል ለማግኘት የተቻለውን ሁሉ ያድርጉ።,portland-air_quality-086,Do the best you can to find a mask that fits your face.,sem_high_lex_low
+159,portland-air_quality-008,የሰደድ እሳት ጭስ በአየር ላይ በሚሆንበት ጊዜ ደህንነትዎን ይጠብቁ,portland-air_quality-008,Stay Safe When Wildfire Smoke is in the Air,
+160,portland-air_quality-034,የአየር ጥራት እየተባባሰ ነው።,portland-air_quality-034,Air quality is getting worse.,
+161,portland-air_quality-059,ለጭስ አየር ብክለት የበለጠ ተጋላጭ ይሆኑ ሰዎች አስም፣ የልብ ወይም የሳምባ ህመም ያለባቸውን፣ ሕፃናትን እና እርጉዝ ሰዎችን ያጠቃልላላል።,portland-air_quality-059,"People who are more sensitive to smoky air pollution include people with asthma, heart or lung conditions, children and pregnant people.",
+162,portland-air_quality-093,በልጆች ልኬት የተሰሩ የ N95 ጭምብሎች የሉም። አነስተኛ የአዋቂ ልኬት ጭምብሎች ለልጅ ፊት ልኬት ሊሆኑ ይችላሉ።,portland-air_quality-093,There are no N95 masks made in children’s sizes. A small adult size may fit a child’s face.,
+163,portland-air_quality-011,ዝቅተኛ ዋጋ ወይም ዋጋ የሌላቸው ከጭስ የመዳን መንገዶች,portland-air_quality-011,Low-Cost or No-Cost Ways to Stay Safe From Smoke,
+164,portland-alert_and_warning-006,በአንዳንድ ቦታዎች የፖሊስ መኮንኖች ወይም በጎ ፍቃደኞች ሰዎችን እንዲለቁ ቤት ለቤት እየሄዱ ሊጠይቁ ይችላሉ።,portland-alert_and_warning-006,"In some areas, police officers or volunteers may go door-to-door asking people to leave.",sem_high_lex_low
+164,portland-alert_and_warning-006,በአንዳንድ ቦታዎች የፖሊስ መኮንኖች ወይም በጎ ፍቃደኞች ሰዎችን እንዲለቁ ቤት ለቤት እየሄዱ ሊጠይቁ ይችላሉ።,portland-alert_and_warning-023,"If you don’t have cell service where you live, keep your radio or television on when wildfire risk is high.",sem_high_lex_low
+165,portland-alert_and_warning-027,የአደጋ ጊዜ የአየር ሁኔታ መረጃን ለመስማት ሬዲዮዎን፦ [___] FM [___] WB ላይ ያድርጉ,portland-alert_and_warning-027,Tune your radio to hear emergency weather information: [___] FM [___] WB,
+166,portland-alert_and_warning-025,የሚኖሩት የሞባይል ስልክ አገልግሎት ደካማ በሆነበት ቦታ ከሆነ የNOAA የአየር ጠባይ ራዲዮ ይኑርዎ።,portland-alert_and_warning-025,Get a NOAA weather radio if you are in an area with poor cell service.,sem_high_lex_low
+167,portland-alert_and_warning-026,የአየር ጠባይ ራዲዮ የ“WB” ቅንብር ያለው ሲሆን የአየር ጠባይ መረጃ ከNOAA ያሰራጫል።,portland-alert_and_warning-026,A weather radio has a “WB” setting and broadcasts weather information from NOAA.,
+168,portland-alert_and_warning-022,አንዳንድ የአካባቢ ሬዲዮ ጣቢያዎች በድንገተኛ አደጋ ጊዜ ማንቂያዎችን ያሰራጫሉ።,portland-alert_and_warning-022,Some local radio stations will broadcast alerts during an emergency.,sem_high_lex_low
+169,portland-alert_and_warning-024,በአካባቢዎ የሰደድ እሳት አደጋ ካለ ራዲዮዎን ክፍት ያድርጉ።,portland-alert_and_warning-024,Keep your radio on when there is wildfire danger in your area.,sem_high_lex_low
+170,portland-alert_and_warning-008,እባክዎ ይህን ለጓደኞችዎ፣ ቤተሰቦችዎና ጎረቤቶችዎ ያጋሩ!,portland-alert_and_warning-008,"Please share this with your friends, family, and neighbors!",
+171,portland-alert_and_warning-012,ማንቂያው ተሰርዟል,portland-alert_and_warning-012,Alert canceled,
+172,portland-alert_and_warning-020,የራዲዮ ማንቂያዎች,portland-alert_and_warning-020,Radio Alerts,
+173,portland-alert_and_warning-019,እባክዎ በ{time} በ{agency} የተላከውን የአደጋ ጊዜ ማስተንቀቂያ ችላ ይበሉ። ይህ በስህተት የተላከ ነው።,portland-alert_and_warning-019,Please disregard the emergency alert sent at {time} by {agency}. This was sent by mistake.,
+174,portland-alert_and_warning-011,ተሰርዟል,portland-alert_and_warning-011,Canceled,
+175,portland-alert_and_warning-021,አንዳንድ የአደጋ ጊዜ ማንቂያዎች በራዲዮ ይላካሉ።,portland-alert_and_warning-021,Some emergency alerts are sent by radio.,sem_high_lex_low
+176,portland-alert_and_warning-015,የ[LOCATION] የመልቀቂያ ማንቂያ ተነስቷል,portland-alert_and_warning-015,Evacuation alert lifted for [LOCATION],
+177,portland-alert_and_warning-001,የአደጋ ጊዜ ማንቂያና ማስጠንቀቂያ ስርዐቶች እንዴት እንደሚሰሩ በ PublicAlerts.org/About-Alerts ላይ ይወቁ።,portland-alert_and_warning-001,Learn how emergency alert and warning systems work at PublicAlerts.org/About-Alerts.,
+178,portland-alert_and_warning-003,በሰደድ እሳት ወቅት የመልቀቂያ ማስታወቂያ በስልክ፣ በጽሁፍ ወይም በኢሜል ሊደርስዎት ይችላል።,portland-alert_and_warning-003,"During a wildfire, you may get an evacuation notice by phone, text, or email.",
+179,portland-alert_and_warning-000,ማንቂያና ማስጠንቀቂያ,portland-alert_and_warning-000,Alert & Warning (see Evacuation & Wildfire tabs for more),
+180,portland-alert_and_warning-004,የመውጫ ማንቂያ በስልክ፣ ሞባይል ወይም በኢሜይል ሊሰጥዎት ይችላል።,portland-alert_and_warning-004,"You may get an evacuation alert by phone, cell, or email.",sem_high_lex_low
+181,portland-alert_and_warning-009,ይህ የ[AGENCY] የሰደድ እሳት የአደጋ ጊዜ ማስጠንቀቂያ ነው።,portland-alert_and_warning-009,This is a wildfire emergency alert from [AGENCY].,
+182,portland-alert_and_warning-017,ትክክል ያልሆነ ማንቂያ,portland-alert_and_warning-017,Incorrect Alert,
+183,portland-alert_and_warning-013,የ[LOCATION] ማንቂያው ተሰርዟል,portland-alert_and_warning-013,Alert canceled for [LOCATION],
+184,portland-alert_and_warning-018,{County/Agency} ትክክል ያልሆነ የአደጋ ጊዜ ማስጠንቀቂያ ዛሬ በ{time} ልኳል።,portland-alert_and_warning-018,{County/Agency} sent an incorrect emergency alert today at {time}.,
+185,portland-alert_and_warning-005,ሁልጊዜም የመውጫ ትእዛዞችን ይከተሉ።,portland-alert_and_warning-005,Always follow evacuation orders.,sem_high_lex_low
+186,portland-alert_and_warning-007,የሆነ ሰው ቤትዎ መጥቶ መውጣት እንዳለብዎ እስከሚነግርዎ ድረስ አይጠብቁ።,portland-alert_and_warning-007,Don’t wait for someone to come to your home to tell you to evacuate.,sem_high_lex_low
+187,portland-alert_and_warning-014,"የሕዝብ ደህንነት ሃይል መዝጋት (Public Safety Power Shutoff, PSPS) ተሰርዟል",portland-alert_and_warning-014,Public Safety Power Shutoff (PSPS) canceled,
+188,portland-alert_and_warning-002,በማንኛውም ጊዜ አድራሻዎን፣ ስልክዎን ወይም የኢሜይል አድራሻ ለውጥን ጨምሮ ወቅታዊ መረጃዎን ያሳውቁ።,portland-alert_and_warning-002,"Update your information any time your address, phone, or email changes.",sem_high_lex_low
+189,kc-boil_water-008,በመደበኛ የቧንቧ ውሃ ሻወር መውሰድ፣ ሰውነትን መታጠብና ልብስን ማጠብ ይቻላል። ይሁን እንጂ፣ ጨቅላ ሕጻናት ወይም ትናንሽ ልጆች የመታጠቢያ ውሃን እንዳይጠጡ ወይም የገላ ማጠቢያ ፎጣ በአፋቸው እንዳይመጥጡ ያድርጉ።,kc-boil_water-006,"To disinfect: boil water for one minute. When cool, refrigerate in clean, covered containers.",sem_high_lex_low
+189,kc-boil_water-008,በመደበኛ የቧንቧ ውሃ ሻወር መውሰድ፣ ሰውነትን መታጠብና ልብስን ማጠብ ይቻላል። ይሁን እንጂ፣ ጨቅላ ሕጻናት ወይም ትናንሽ ልጆች የመታጠቢያ ውሃን እንዳይጠጡ ወይም የገላ ማጠቢያ ፎጣ በአፋቸው እንዳይመጥጡ ያድርጉ።,kc-boil_water-008,"It is safe to shower, bathe and wash clothes with regular tap water. However, do not let infants or small children to drink bath water or to suck on washcloths.",
+189,kc-boil_water-008,በመደበኛ የቧንቧ ውሃ ሻወር መውሰድ፣ ሰውነትን መታጠብና ልብስን ማጠብ ይቻላል። ይሁን እንጂ፣ ጨቅላ ሕጻናት ወይም ትናንሽ ልጆች የመታጠቢያ ውሃን እንዳይጠጡ ወይም የገላ ማጠቢያ ፎጣ በአፋቸው እንዳይመጥጡ ያድርጉ።,kc-boil_water-010,"If you know of someone who is unable to understand, see or hear this message, please tell them about it.",sem_high_lex_low
+189,kc-boil_water-008,በመደበኛ የቧንቧ ውሃ ሻወር መውሰድ፣ ሰውነትን መታጠብና ልብስን ማጠብ ይቻላል። ይሁን እንጂ፣ ጨቅላ ሕጻናት ወይም ትናንሽ ልጆች የመታጠቢያ ውሃን እንዳይጠጡ ወይም የገላ ማጠቢያ ፎጣ በአፋቸው እንዳይመጥጡ ያድርጉ።,portland-boil_water-007,Do not use ice or drink beverages made with tap water unless it has been boiled for one minute and cooled first.,sem_high_lex_low
+189,kc-boil_water-008,በመደበኛ የቧንቧ ውሃ ሻወር መውሰድ፣ ሰውነትን መታጠብና ልብስን ማጠብ ይቻላል። ይሁን እንጂ፣ ጨቅላ ሕጻናት ወይም ትናንሽ ልጆች የመታጠቢያ ውሃን እንዳይጠጡ ወይም የገላ ማጠቢያ ፎጣ በአፋቸው እንዳይመጥጡ ያድርጉ።,portland-boil_water-020,"Before using your tap water again, flush all pipes and faucets.",sem_high_lex_low
+190,portland-boil_water-023,{Company} በ{area} ላሉ ሰዎች በፈቃደኝነት የሚደረግ የውሃ ቅነሳ ማስጠንቀቂያ ሰጥቷል።,portland-boil_water-023,{Company} issued a voluntary Water Reduction Advisory for people in {area}.,
+190,portland-boil_water-023,{Company} በ{area} ላሉ ሰዎች በፈቃደኝነት የሚደረግ የውሃ ቅነሳ ማስጠንቀቂያ ሰጥቷል።,portland-boil_water-024,{Company} issued a mandatory Water Reduction Advisory for people in {area}.,
+191,portland-boil_water-010,ውሃን እንዴት ማፍላት እንደሚቻል፦ ውሃው ለአንድ ደቂቃ ያህል እንዲፈላ እና በምድጃው ላይ እንዲቀዘቅዝ ያድርጉት። በሚቀዘቅዝበት ጊዜ በንጹህ እና በተሸፈኑ መያዣዎች ፍርጅ ውስጥ ያስገቡ።,kc-boil_water-016,Run water softeners through a regeneration cycle.,sem_high_lex_low
+191,portland-boil_water-010,ውሃን እንዴት ማፍላት እንደሚቻል፦ ውሃው ለአንድ ደቂቃ ያህል እንዲፈላ እና በምድጃው ላይ እንዲቀዘቅዝ ያድርጉት። በሚቀዘቅዝበት ጊዜ በንጹህ እና በተሸፈኑ መያዣዎች ፍርጅ ውስጥ ያስገቡ።,portland-boil_water-010,"How to boil water: Let water boil for one minute and then let cool on the stove. When cool, refrigerate in clean, covered containers.",
+192,portland-boil_water-030,በ{Company} የተሰጠው በፍቃደኝነት የሚደረግ የውሃ ቅነሳ ማስጠንቀቂያ ከአሁን በኋላ ተፈጻሚ አይሆንም።,portland-boil_water-030,The voluntary Water Reduction Advisory issued by {Company} is no longer in effect.,
+192,portland-boil_water-030,በ{Company} የተሰጠው በፍቃደኝነት የሚደረግ የውሃ ቅነሳ ማስጠንቀቂያ ከአሁን በኋላ ተፈጻሚ አይሆንም።,portland-boil_water-031,The mandatory Water Reduction Advisory issued by {Company} is no longer in effect.,
+193,portland-boil_water-017,ውሃው አሁን ለመጠጥ ደህና ነው።,portland-boil_water-017,The water is now safe to drink.,
+194,portland-boil_water-028,አነስተኛ የውሃ መጠን አጠቃቀም መንገዶች፡- መኪናዎን አለማተብ፣ ገላዎን የሚታጠቡበት ጊዜ ማሳጠር፣ የሳሩን አለመጠጣት።,portland-boil_water-028,"Ways to use less water: don't wash your car, take shorter showers, don't water your lawn.",sem_high_lex_low
+195,portland-boil_water-026,ውሃው አሁንም ለመጠጥ እና ለመጠቀም አስተማማኝ ነው።,portland-boil_water-026,The water is still safe to drink and use.,
+196,portland-boil_water-006,ለአንድ ደቂቃ ያህል ተፈልቶ ካልቀዘቀዘ በስተቀር የቧንቧ ውሃ አይጠጡ።,portland-boil_water-006,Do not drink tap water unless it has been boiled for one minute and cooled first.,sem_high_lex_low
+197,portland-boil_water-016,ስረዛ - ውሃን የማፍላት ማስጠንቀቂያ ተነስቷል።,portland-boil_water-016,Cancellation - Boil water advisory lifted.,sem_high_lex_low
+198,portland-boil_water-021,ውሃው በቧንቧዎችን እንዲወርድ ስለማድረግ ለበለጠ መረጃ፡-,portland-boil_water-021,For more information about flushing pipes:,
+199,portland-boil_water-009,ውሃው ለአንድ ደቂቃ ተፈልቶ የቀዘቀዘ ካልሆነ በስተቀር በቧንቧ ውሃ የታጠቡ ጥሬ ምግቦችን አትብሉ። ያልተፈላ የቧንቧ ውሃ ሊያሳምምዎት ይችላል።,portland-boil_water-009,Do not eat raw foods rinsed with tap water unless it has been boiled for one minute and cooled first. Tap water that has not been boiled can make you sick.,
