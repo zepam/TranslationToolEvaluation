@@ -5,8 +5,9 @@
 - [ ] Fix language code table and verify missing languages are included
   - [ ] Chinese Traditional AND Chinese Simplified
   - [ ] Marshallese isn't mapping correctly
-- [ ] Clarify which sentences are similiar and which are essentially templates. `Flood watch` is similar to `flood warning`, but `the temp will be XX today` is a template.
 - [ ] Develop licensing agreement to share with agencies
+- [ ] FCC - fix the sentence parsing as detailed in `analysis_out/missing_extra_report.csv`
+- [/] Clarify which sentences are similiar and which are essentially templates. `Flood watch` is similar to `flood warning`, but `the temp will be XX today` is a template. Many sentences are similiar, but carry an important distinction. 
 
 ### 🟠 Medium Priority
 
