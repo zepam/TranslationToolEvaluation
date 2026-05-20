@@ -150,6 +150,10 @@ def main():
     )
     lines.append(footer)
 
+    # create output directory if it doesn't exist
+    out_dir = Path(args.out_tex).parent
+    out_dir.mkdir(parents=True, exist_ok=True)
+
     Path(args.out_tex).write_text("".join(lines), encoding="utf-8")
     print(f"Wrote LaTeX table to {args.out_tex}")
 
