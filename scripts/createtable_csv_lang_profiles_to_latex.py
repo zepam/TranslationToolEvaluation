@@ -76,7 +76,7 @@ def main():
     lang_codes = load_language_codes_py(args.lang_codes_py, var_name="language_codes")
 
     # Build a name -> displayed code mapping for the LaTeX table:
-    # prefer iso639-2 if present, else iso639-1, else keep the existing code.
+    # prefer BCP-47, then iso639-2 if present, then iso639-1, else keep the existing code.
     def display_code(row):
         name = str(row["Language Name"])
         info = lang_codes.get(name)
