@@ -34,9 +34,14 @@ def find_profile_files(processed_root: Path) -> list[Path]:
     Args:
         processed_root: Directory to recursively search.
     Returns:
-        Sorted list of paths that match ``*_data_profile.json``.
+        Sorted list of paths that match ``*_data_profile.json`` and do not
+        begin with ``combined``.
     """
-    return sorted(processed_root.rglob("*_data_profile.json"))
+    return sorted(
+        path
+        for path in processed_root.rglob("*_data_profile.json")
+        if not path.name.startswith("combined")
+    )
 
 
 def merge_profile_into_combined(combined: dict, profile: dict) -> None:
