@@ -1,0 +1,26 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build LaTeX",
+            "type": "shell",
+            "command": "/home/jen/texlive/2026/bin/x86_64-linux/latexmk",
+            "args": [
+                "-pdf",
+                "-interaction=nonstopmode",
+                "${file}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$latex",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        }
+    ]
+}

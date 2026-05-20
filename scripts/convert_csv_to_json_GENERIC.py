@@ -33,23 +33,26 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from data.language_codes import language_codes
 
+def _preferred_language_code(codes):
+    return codes.get("BCP-47") or codes.get("iso639-1") or codes.get("iso639-2")
+
 def find_language_code(column_name, lang_map):
     # Check for exact match first
     if column_name in lang_map:
-        return lang_map[column_name]["iso639-1"] or lang_map[column_name]["iso639-2"]
+        return _preferred_language_code(lang_map[column_name])
     
     # Check for case-insensitive match
     for lang, codes in lang_map.items():
         if lang.lower() == column_name.lower():
-            return codes["iso639-1"] or codes["iso639-2"]
+            return _preferred_language_code(codes)
     
     # Handle specific quirks in the data
     if column_name.lower().startswith("farsi") or column_name.lower().startswith("persian"):
-        return lang_map["Persian"]["iso639-1"] or lang_map["Persian"]["iso639-2"]
+        return _preferred_language_code(lang_map["Persian"])
     elif column_name.lower().startswith("karen"):
-        return lang_map["Karen"]["iso639-1"] or lang_map["Karen"]["iso639-2"]
+        return _preferred_language_code(lang_map["Karen"])
     elif column_name.lower().startswith("trasitional chinese") or column_name.lower().startswith("traditional chinese"):
-        return lang_map["Traditional Chinese"]["iso639-1"] or lang_map["Traditional Chinese"]["iso639-2"]
+        return _preferred_language_code(lang_map["Traditional Chinese"])
     
     print(f"Warning: Unrecognized language column '{column_name}' in CSV. Skipping this column.")
     return None

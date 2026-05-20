@@ -33,10 +33,11 @@
     "tl",
     "uk",
     "vi",
-    "zh"
+    "zh-Hans",
+    "zh-Hant"
   ],
-  "num_languages": 33,
-  "total_sentences_approx": 40434,
-  "total_tokens_approx": 543047,
-  "total_pairs": 32
+  "num_languages": 34,
+  "total_sentences_approx": 41700,
+  "total_tokens_approx": 564702,
+  "total_pairs": 33
 }

@@ -5,5 +5,27 @@
         "*.copilotmd": "vscode.markdown.preview.editor",
         "*.npy": "pydata.preview",
         "file:/**/*.csv": "jupyter-data-wrangler"
-    }
+    },
+    "latex-workshop.latex.rootFile": "${workspaceFolder}/data/processed/tables/wrap.tex",
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk",
+            "tools": ["latexmk"]
+        }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "/home/jen/texlive/2026/bin/x86_64-linux/latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "-auxdir=%OUTDIR%",
+                "%DOC%"
+            ]
+        }
+    ]
 }
