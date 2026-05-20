@@ -3,3 +3,5 @@ analysis_out/groups/
 analysis_out/sim_matrix.npy
 .git-rewrite/
 data/raw/fcc_sentencedelimited
+wrap.*
+
