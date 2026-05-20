@@ -34,23 +34,32 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from data.language_codes import language_codes
 
 def find_language_code(column_name, lang_map):
+
     # Check for exact match first
     if column_name in lang_map:
-        return lang_map[column_name]["iso639-1"] or lang_map[column_name]["iso639-2"]
+        # print(f"Exact match found: Column name '{column_name}' matches language '{column_name}'.")
+        return  lang_map[column_name].get("BCP-47") or lang_map[column_name]["iso639-1"] or lang_map[column_name]["iso639-2"]
     
     # Check for case-insensitive match
     for lang, codes in lang_map.items():
         if lang.lower() == column_name.lower():
-            return codes["iso639-1"] or codes["iso639-2"]
+            return codes["BCP-47"] or codes["iso639-1"] or codes["iso639-2"]
     
     # Handle specific quirks in the data
     if column_name.lower().startswith("farsi") or column_name.lower().startswith("persian"):
+        # print(f"Warning: Column name '{column_name}' is recognized as Persian/Farsi. Using ISO 639-1 code if available.")
         return lang_map["Persian"]["iso639-1"] or lang_map["Persian"]["iso639-2"]
     elif column_name.lower().startswith("karen"):
+        # print(f"Warning: Column name '{column_name}' is recognized as Karen. Using ISO 639-1 code if available.")
         return lang_map["Karen"]["iso639-1"] or lang_map["Karen"]["iso639-2"]
-    elif column_name.lower().startswith("trasitional chinese") or column_name.lower().startswith("traditional chinese"):
-        return lang_map["Traditional Chinese"]["iso639-1"] or lang_map["Traditional Chinese"]["iso639-2"]
-    
+    elif column_name.lower().startswith("trasitional chinese") or "traditional chinese" in column_name.lower():
+        # print (f"Warning: Column name '{column_name}' is recognized as Traditional Chinese. Using BCP-47 code if available.")
+        return lang_map["Traditional Chinese"]["BCP-47"] or lang_map["Traditional Chinese"]["iso639-1"] or lang_map["Traditional Chinese"]["iso639-2"]
+    elif "simplified chinese" in column_name.lower():
+        print (f"Warning: Column name '{column_name}' is recognized as Simplified Chinese. Using BCP-47 code if available.")
+        return lang_map["Simplified Chinese"]["BCP-47"] or lang_map["Simplified Chinese"]["iso639-1"] or lang_map["Simplified Chinese"]["iso639-2"]
+
+
     print(f"Warning: Unrecognized language column '{column_name}' in CSV. Skipping this column.")
     return None
 

@@ -43,8 +43,8 @@ def load_language_flags(path: str) -> tuple[set[str], set[str]]:
 def main():
     import argparse
     ap = argparse.ArgumentParser()
-    # ap.add_argument("--csv", required=True, help="Input per-language CSV (from your profiler)")
-    ap.add_argument("--csv", default="data/processed/stats/combined_per_language_profile.csv", help="Input per-language CSV (from your profiler)")
+    # ap.add_argument("--csv", required=True, help="Input per-language CSV (from profiler)")
+    ap.add_argument("--csv", default="data/processed/stats/combined_per_language_profile.csv", help="Input per-language CSV (from profiler)")
     ap.add_argument("--lang-codes-py", default="/home/jen/TranslationsDataset/data/language_codes.py",
                     help="Path to language_codes.py")
     # ap.add_argument("--out-tex", required=True, help="Output.tex file")
@@ -58,7 +58,7 @@ def main():
     # Load CSV
     df = pd.read_csv(args.csv)
 
-    # Expect these columns from your profiler:
+    # Expect these columns from profiler:
     # Language Name, Lang Code, Num of Docs, Num of Sentences, Num of Tokens, Num of Characters,
     # Avg Tokens per Sentence, Avg Characters per Sentence, Vocabulary Size
     # Normalize column names to match the figure
@@ -72,7 +72,7 @@ def main():
     }
     df = df.rename(columns=rename)
 
-    # Load your mapping (LanguageName -> iso codes)
+    # Load mapping (LanguageName -> iso codes)
     lang_codes = load_language_codes_py(args.lang_codes_py, var_name="language_codes")
 
     # Build a name -> displayed code mapping for the LaTeX table:
@@ -80,8 +80,9 @@ def main():
     def display_code(row):
         name = str(row["Language Name"])
         info = lang_codes.get(name)
+        print(f"Processing language '{name}' with info: {info}")
         if isinstance(info, dict):
-            return info.get("iso639-2") or info.get("iso639-1") or row["Lang Code"]
+            return info.get("BCP-47") or info.get("iso639-2") or info.get("iso639-1") or row["Lang Code"]
         return row["Lang Code"]
 
     df["Lang Code"] = df.apply(display_code, axis=1)
@@ -102,7 +103,7 @@ def main():
     if args.sort_by in df.columns:
         df = df.sort_values(args.sort_by, ascending=True)
 
-    # Column order like your figure
+    # Column order like figure
     cols = [
         "Language Name", "Lang Code", "Num of Docs", "Sents", "Tokens", "Chars",
         "Avg Tokens per Sent", "Avg Chars per Sent", "Vocab Size"

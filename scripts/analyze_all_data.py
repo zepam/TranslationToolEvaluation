@@ -36,7 +36,6 @@ def collect_scripts(pattern: str, exclude: set[str]) -> list[Path]:
         if script_path.name not in exclude
     )
 
-
 def parse_args() -> argparse.Namespace:
     """Parse command-line arguments for the pipeline runner."""
     parser = argparse.ArgumentParser(
