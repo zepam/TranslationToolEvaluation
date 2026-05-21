@@ -12,6 +12,7 @@ Output files:
     - translations_per_alert_language_summary.tex: Summary statistics
 """
 import json
+import os
 import statistics
 import sys
 from pathlib import Path
@@ -186,7 +187,7 @@ def main():
     """
     input_path = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_INPUT_PATH
     source_prefix = input_path.stem.replace("_data_profile", "")
-    output_dir = input_path.parent / "tables"
+    output_dir = input_path.parent.parent / "tables"
     full_table_path = output_dir / f"{source_prefix}_translations_per_alert_language_full.tex"
     summary_table_path = output_dir / f"{source_prefix}_translations_per_alert_language_summary.tex"
 
@@ -208,8 +209,8 @@ def main():
         f.write(summary_table)
 
     print("LaTeX tables written:")
-    print(f" - Full table:    {full_table_path}")
-    print(f" - Summary table: {summary_table_path}")
+    print(f" - Full table:    {os.path.relpath(full_table_path)}")
+    print(f" - Summary table: {os.path.relpath(summary_table_path)}")
 
 
 if __name__ == "__main__":

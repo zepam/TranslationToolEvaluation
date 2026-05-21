@@ -48,7 +48,7 @@ def main():
     ap.add_argument("--lang-codes-py", default="/home/jen/TranslationsDataset/data/language_codes.py",
                     help="Path to language_codes.py")
     # ap.add_argument("--out-tex", required=True, help="Output.tex file")
-    ap.add_argument("--out-tex", default="data/processed/tables/combined_lang_profiles_table.tex", help="Output.tex file")
+    ap.add_argument("--out_tex", default="data/tables/combined_lang_profiles_table.tex", help="Output.tex file")
     ap.add_argument("--table-label", default="tab:combined_per_language_stats", help="LaTeX label")
     ap.add_argument("--table-caption", default="Statistics per language: Number of documents, Number of Sentences, Tokens, Characters, Average Tokens per Sentence, Average Characters per Sentence, Vocabulary Size.", help="Caption")
     ap.add_argument("--language-flags", default="metadata/language_flags.json", help="Path to JSON with low_resource and not_in_nllb lists")
@@ -156,7 +156,9 @@ def main():
     out_dir.mkdir(parents=True, exist_ok=True)
 
     Path(args.out_tex).write_text("".join(lines), encoding="utf-8")
-    print(f"Wrote LaTeX table to {args.out_tex}")
+    # print(f"Wrote LaTeX table to {args.out_tex}")
+    print("LaTeX tables written:")
+    print(f" - Languages profile:    {args.out_tex}")
 
 if __name__ == "__main__":
     main()
