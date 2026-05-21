@@ -136,7 +136,7 @@ def make_beautiful_files():
     if not input_csv.exists():
         input_csv = Path("data/processed/portland/stats/domain_counts.csv")
 
-    output_dir = base_dir / "tables"
+    output_dir = base_dir.parent / "tables"
     output_dir.mkdir(parents=True, exist_ok=True)
     output_tex = output_dir / f"{source_prefix}_domain_counts_table.tex"
     domain_counts(input_csv, output_tex, table_label=f"tab:domain_counts_{source_prefix}")
