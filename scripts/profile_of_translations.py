@@ -55,7 +55,7 @@ def profile_translations(jsonl_folder):
     # convert_language_codes(profile)
 
     # Save the profile to a JSON file
-    output_path = jsonl_folder / "stats" / f"{origin}_data_profile.json"
+    output_path = jsonl_folder.parent.parent / "stats" / f"{origin}_data_profile.json"
     with open(output_path, "w", encoding="utf-8") as out:
         json.dump(profile, out, indent=4)
 

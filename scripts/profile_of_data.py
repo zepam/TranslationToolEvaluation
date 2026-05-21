@@ -24,6 +24,7 @@ from collections import defaultdict, Counter
 import hashlib
 from tqdm import tqdm
 import pandas as pd
+from pathlib import Path
 
 EXCLUDED_DIR_NAMES = {"stats", "tables"}
 
@@ -336,13 +337,17 @@ def process_folder(input_folder):
     }
 
 def save_outputs(results, out_dir):
+    out_dir = Path(out_dir).resolve() 
+    source = out_dir.parts[-2] if len(out_dir.parts) >= 3 else 'unknown'
+    out_dir = out_dir.parent.parent.parent / 'stats'
+
     os.makedirs(out_dir, exist_ok=True)
-    results['per_lang_df'].to_csv(os.path.join(out_dir, 'per_language_stats.csv'), index=False)
-    results['pair_df'].to_csv(os.path.join(out_dir, 'language_pair_stats.csv'), index=False)
-    results['align_df'].to_csv(os.path.join(out_dir, 'alignment_breakdown.csv'), index=False)
-    results['domain_df'].to_csv(os.path.join(out_dir, 'domain_counts.csv'), index=False)
-    results['coverage_df'].to_csv(os.path.join(out_dir, 'translation_coverage.csv'), index=False)
-    with open(os.path.join(out_dir, 'global_summary.json'), 'w', encoding='utf-8') as fh:
+    results['per_lang_df'].to_csv(os.path.join(out_dir, f'{source}_per_language_stats.csv'), index=False)
+    results['pair_df'].to_csv(os.path.join(out_dir, f'{source}_language_pair_stats.csv'), index=False)
+    results['align_df'].to_csv(os.path.join(out_dir, f'{source}_alignment_breakdown.csv'), index=False)
+    results['domain_df'].to_csv(os.path.join(out_dir, f'{source}_domain_counts.csv'), index=False)
+    results['coverage_df'].to_csv(os.path.join(out_dir, f'{source}_translation_coverage.csv'), index=False)
+    with open(os.path.join(out_dir, f'{source}_global_summary.json'), 'w', encoding='utf-8') as fh:
         json.dump(results['global_summary'], fh, ensure_ascii=False, indent=2)
     print("Wrote outputs to", out_dir)
 
