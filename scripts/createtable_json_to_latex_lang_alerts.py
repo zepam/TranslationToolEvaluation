@@ -106,7 +106,8 @@ def json_to_latex_table(json_input, output_dir=None):
         
         # Output
         if output_dir:
-            output_path = Path(output_dir) / f"{json_file.stem}_table.tex"
+            output_path = Path(output_dir).parent.parent
+            output_path = output_path / "tables" / f"{json_file.stem}_table.tex"
             output_path.parent.mkdir(parents=True, exist_ok=True)
             with open(output_path, 'w', encoding='utf-8') as f:
                 f.write(latex_table)
@@ -116,7 +117,7 @@ def json_to_latex_table(json_input, output_dir=None):
             print(latex_table)
 
         print("LaTeX tables written:")
-        print(f" - Domain counts:    {output_path}")
+        print(f" - Combined data profile:    {output_path}")
 
 
 def main():
