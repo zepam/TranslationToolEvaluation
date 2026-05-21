@@ -3,3 +3,6 @@ analysis_out/groups/
 analysis_out/sim_matrix.npy
 .git-rewrite/
 data/raw/fcc_sentencedelimited
+**/__pycache__/**
+data/__pycache__/language_codes.cpython-311.pyc
+scripts/__pycache__/profile_of_data.cpython-311.pyc
