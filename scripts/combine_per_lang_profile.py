@@ -19,6 +19,7 @@ from typing import Dict, Any, List, Optional, Iterable
 import pandas as pd
 import regex as re
 import importlib.util
+import os
 
 # -----------------------
 # Import language codes
@@ -365,9 +366,9 @@ def profile_languages(in_dir: str, out_csv: str, lang_code_to_name: Dict[str, st
         })
 
     df = pd.DataFrame(rows).sort_values(["Num of Tokens"], ascending=False)
-    Path(out_csv).parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(out_csv, index=False)
-    print(f"Wrote: {out_csv}")
+    rel_out = os.path.relpath(out_csv)
+    print(f"Output written to (combine_per_lang_profile): {rel_out}")
 
 def main():
     """Command-line interface for language profiling.
@@ -386,7 +387,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument(
         "--in-dir",
-        default="/home/jen/TranslationsDataset/data/processed",
+        default="/data/processed",
         help=(
             "Either data/processed root (uses source folders only, excluding stats/tables) "
             "or a specific source folder under data/processed"
@@ -394,18 +395,18 @@ def main():
     )
     ap.add_argument(
         "--out-csv",
-        default="/home/jen/TranslationsDataset/data/processed/stats/combined_per_language_profile.csv",
+        default="/data/stats/combined_per_language_profile.csv",
         help="Output CSV",
     )
     ap.add_argument("--no-dedupe", action="store_true", help="Do not dedupe by id")
-    ap.add_argument("--lang-map", default="/home/jen/TranslationsDataset/data/language_codes.py",
-                    help="Path to your language mapping JSON (from your lang_code file)")
+    ap.add_argument(
+        "--lang-map",
+        default="language_codes.py",
+        help="Path to language mapping JSON (from lang_code file)",
+    )
     args = ap.parse_args()
 
-    code_to_name = load_code_to_name_from_py(
-        "/home/jen/TranslationsDataset/data/language_codes.py",
-        var_name="language_codes"
-    )
+    code_to_name = load_code_to_name_from_py(args.lang_map, var_name="language_codes")
 
     profile_languages(
         args.in_dir, 

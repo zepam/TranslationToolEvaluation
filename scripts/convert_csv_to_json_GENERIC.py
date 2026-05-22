@@ -164,7 +164,7 @@ def main():
 
     processed_filepath = None
     for csv_path in csv_files:
-        print(f"Processing {csv_path}...")
+        # print(f"Processing {csv_path}...")
         processed_filepath = convert_csv_to_jsonl(csv_path, lang_map=language_codes)
 
     # then run the scripts/profile_of_data.py script to get the data profile for the Portland data

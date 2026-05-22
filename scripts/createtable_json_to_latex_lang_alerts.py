@@ -106,8 +106,8 @@ def json_to_latex_table(json_input, output_dir=None):
         
         # Output
         if output_dir:
-            output_path = Path(output_dir).parent.parent
-            output_path = output_path / "tables" / f"{json_file.stem}_table.tex"
+            # output_path = Path(output_dir).parent.parent
+            output_path = Path(output_dir) / "tables" / f"{json_file.stem}_table.tex"
             output_path.parent.mkdir(parents=True, exist_ok=True)
             with open(output_path, 'w', encoding='utf-8') as f:
                 f.write(latex_table)
@@ -124,11 +124,11 @@ def main():
     data_source = (
         sys.argv[1]
         if len(sys.argv) > 1
-        else "data/processed/combined_data_profile.json"
+        else "data/stats/combined_data_profile.json"
     )
 
     input_path = Path(data_source)
-    output_dir = input_path.parent / "tables"
+    output_dir = input_path.parent.parent / "tables"
     json_to_latex_table(str(input_path), str(output_dir))
 
 

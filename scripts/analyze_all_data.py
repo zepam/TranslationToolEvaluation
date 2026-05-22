@@ -12,6 +12,7 @@ import argparse
 import subprocess
 import sys
 from pathlib import Path
+import os
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS_DIR = Path(__file__).resolve().parent
@@ -42,9 +43,9 @@ def parse_args() -> argparse.Namespace:
         description="Run the TranslationToolEvaluation analysis pipeline in a fixed order."
     )
     parser.add_argument(
-        "--processed-root",
+        "--stats-root",
         type=Path,
-        default=REPO_ROOT / "data" / "processed",
+        default=REPO_ROOT / "data" / "stats",
         help="Root processed-data directory to profile.",
     )
     return parser.parse_args()
@@ -54,12 +55,13 @@ def main() -> None:
     """Run the requested scripts in the requested order."""
     args = parse_args()
 
-    if not args.processed_root.exists():
-        raise FileNotFoundError(f"Processed root does not exist: {args.processed_root}")
+    os.makedirs(args.stats_root, exist_ok=True)
+    # if not args.stats_root.exists():
+    #     raise FileNotFoundError(f"Stats root does not exist: {args.stats_root}")
 
     # Run the requested core scripts first.
     print("Data profiling...")
-    generate_data_profile(str(args.processed_root))
+    generate_data_profile(str(args.stats_root))
 
     run_python_script(SCRIPTS_DIR / "combine_data_profiles.py")
     run_python_script(SCRIPTS_DIR / "combine_per_lang_profile.py")

@@ -44,7 +44,7 @@ def main():
     import argparse
     ap = argparse.ArgumentParser()
     # ap.add_argument("--csv", required=True, help="Input per-language CSV (from profiler)")
-    ap.add_argument("--csv", default="data/processed/stats/combined_per_language_profile.csv", help="Input per-language CSV (from profiler)")
+    ap.add_argument("--csv", default="data/stats/combined_per_language_profile.csv", help="Input per-language CSV (from profiler)")
     ap.add_argument("--lang-codes-py", default="/home/jen/TranslationsDataset/data/language_codes.py",
                     help="Path to language_codes.py")
     # ap.add_argument("--out-tex", required=True, help="Output.tex file")
@@ -80,7 +80,7 @@ def main():
     def display_code(row):
         name = str(row["Language Name"])
         info = lang_codes.get(name)
-        print(f"Processing language '{name}' with info: {info}")
+        # print(f"Processing language '{name}' with info: {info}")
         if isinstance(info, dict):
             return info.get("BCP-47") or info.get("iso639-2") or info.get("iso639-1") or row["Lang Code"]
         return row["Lang Code"]

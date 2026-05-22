@@ -123,13 +123,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--processed-root",
         type=Path,
-        default=Path("data/processed"),
+        default=Path("data/stats"),
         help="Root directory to search for *_data_profile.json files.",
     )
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("data/processed/combined_data_profile.json"),
+        default=Path("data/stats/combined_data_profile.json"),
         help="Output path for combined profile JSON.",
     )
     return parser.parse_args()
@@ -144,7 +144,7 @@ def main() -> None:
     print(f"Total alerts: {combined['total_alerts']}")
     print(f"Alert types: {len(combined['alert_types'])}")
     print(f"Languages: {len(combined['languages'])}")
-    print(f"Output written to: {args.output}")
+    print(f"Output written to (combine_data_files): {args.output}")
 
 
 if __name__ == "__main__":

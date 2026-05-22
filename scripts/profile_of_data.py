@@ -26,7 +26,8 @@ from tqdm import tqdm
 import pandas as pd
 from pathlib import Path
 
-EXCLUDED_DIR_NAMES = {"stats", "tables"}
+EXCLUDED_DIR_NAMES = {}
+# EXCLUDED_DIR_NAMES = {"stats", "tables"}
 
 # Basic Unicode CJK detection (approx)
 CJK_RE = re.compile(r'[\u4E00-\u9FFF\u3040-\u30FF\uAC00-\uD7AF]')

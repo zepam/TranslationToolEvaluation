@@ -20,7 +20,7 @@ from pathlib import Path
 #TODO: Replace "And" with "&", "In" with "in" in formatted text
 
 # Paths
-DEFAULT_INPUT_PATH = Path("/home/jen/TranslationsDataset/data/processed/combined_data_profile.json")
+DEFAULT_INPUT_PATH = Path("/home/jen/TranslationsDataset/data/stats/combined_data_profile.json")
 EVENT_COMBINATIONS_PATH = Path(__file__).resolve().parent.parent / "metadata" / "event_combinations.json"
 
 
