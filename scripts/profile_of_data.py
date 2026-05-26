@@ -1,20 +1,23 @@
 #!/usr/bin/env python3
-"""
-compute_alert_stats.py
+"""profile_of_data.py
 
-Usage:
-    python compute_alert_stats.py --input-folder /path/to/jsons --output-dir./stats_out
+Utilities to profile a folder of translated documents stored as JSON/JSONL.
 
-Produces CSV/JSON outputs:
-- per_language_stats.csv
-- language_pair_stats.csv
-- alignment_breakdown.csv
-- domain_counts.csv
-- global_summary.json
+This module scans an input folder for JSON/JSONL files containing documents
+with source text and translations, computes per-language and pairwise
+statistics (counts of documents, sentences, tokens, vocabulary sizes,
+alignment categories such as 1:1, 1:n), and writes summary CSV/JSON files.
 
-Notes:
-- The script handles JSONL (one JSON object per line) and JSON files containing a list or single object.
-- Adjust sentence/tokenization rules for better linguistic accuracy.
+High-level functions
+- `process_folder(input_folder)` — parse files and compute DataFrames + summary
+- `save_outputs(results, out_dir)` — persist CSV/JSON outputs
+- `generate_data_profile(jsonl_folder)` — convenience wrapper: process + save
+
+Notes
+- Handles JSONL (one JSON object per line) and JSON files containing a list
+    or a single object.
+- Sentence splitting and tokenization are intentionally lightweight and
+    heuristic; adjust `split_sentences` and `tokenize` for linguistic accuracy.
 """
 import os
 import json
@@ -39,6 +42,16 @@ SENT_END_RE = re.compile(r'(?<=[\.\!\?\u0964\u061F])\s+|\n+')
 WORD_RE = re.compile(r'\w+', flags=re.UNICODE)
 
 def read_json_objects_from_file(path):
+    """Read JSON objects from a file.
+
+    The function supports three common layouts:
+    - JSONL: one JSON object per line (JSON Lines)
+    - A JSON array containing objects
+    - A single JSON object
+
+    Returns a list of parsed Python objects (dictionaries).
+    Malformed lines are skipped rather than raising.
+    """
     objs = []
     with open(path, 'r', encoding='utf-8') as fh:
         text = fh.read().strip()
@@ -54,16 +67,15 @@ def read_json_objects_from_file(path):
                 try:
                     objs.append(json.loads(line))
                 except json.JSONDecodeError:
-                    # fallback: skip broken lines
+                    # skip broken lines
                     continue
             return objs
-        # Heuristic: single JSON array
+        # Heuristic: single JSON array or single object
         try:
             data = json.loads(text)
             if isinstance(data, list):
                 return data
             elif isinstance(data, dict):
-                # single object
                 return [data]
         except json.JSONDecodeError:
             # fallback: try line-by-line parse
@@ -78,39 +90,53 @@ def read_json_objects_from_file(path):
     return objs
 
 def split_sentences(text):
+    """Split text into sentences using lightweight heuristics.
+
+    - For CJK scripts, avoid naive whitespace-based splitting; if there is
+      sentence-ending punctuation use it, otherwise keep the whole text as
+      a single segment.
+    - For other scripts we split on punctuation and newlines using `SENT_END_RE`.
+    Returns a list of non-empty sentence strings.
+    """
     if text is None:
         return []
     text = text.strip()
     if not text:
         return []
-    # If CJK characters present, fallback to treating whole text as single "sentence" if no punctuation
+    # If CJK characters present, treat more carefully
     if CJK_RE.search(text):
-        # If punctuation present, use the same splitter; else return the whole text
+        # If punctuation is present, split; else keep as single sentence
         if re.search(r'[。！？\.!?]', text):
             parts = [p.strip() for p in SENT_END_RE.split(text) if p.strip()]
             return parts
         else:
             return [text]
-    # Normal case: split by punctuation and newlines
+    # Default: split by punctuation and newlines
     parts = [p.strip() for p in SENT_END_RE.split(text) if p.strip()]
     return parts if parts else [text]
 
 def tokenize(text, lang_hint=None):
+    """Tokenize text into tokens.
+
+    This is intentionally simple:
+    - For CJK scripts we return individual characters (approximation).
+    - Otherwise we use a Unicode-aware word regex (`WORD_RE`).
+    The optional `lang_hint` is kept for future language-specific logic.
+    """
     if text is None:
         return []
     text = text.strip()
     if not text:
         return []
-    # If CJK, fallback to character tokens (approx)
+    # CJK: approximate by characters (removing spaces)
     if CJK_RE.search(text):
-        # remove spaces, return list of characters excluding whitespace
         chars = [c for c in text.replace(' ', '') if not c.isspace()]
         return chars
-    # Default: word regex (captures across many scripts) else whitespace split
+    # Use Unicode word regex as the default tokenizer
     tokens = WORD_RE.findall(text)
     if tokens:
         return tokens
-    # fallback
+    # Fallback: simple whitespace split
     return [t for t in text.split() if t]
 
 def stable_hash_split(key, ratios=(0.8,0.1,0.1)):
@@ -125,6 +151,12 @@ def stable_hash_split(key, ratios=(0.8,0.1,0.1)):
         return 'test'
 
 def process_folder(input_folder):
+    """Process a folder of JSON/JSONL files and compute profiling statistics.
+
+    Returns a dictionary containing pandas DataFrames for per-language stats,
+    pairwise stats, alignment breakdown, domain counts, coverage, and a
+    small `global_summary` dict.
+    """
     # accumulators
     docs_count = 0
     languages = set()
@@ -143,7 +175,7 @@ def process_folder(input_folder):
     per_id_lang_sent_counts = {}  # id -> {lang: num_sentences}
     ids_seen = set()
 
-    # iterate files
+    # iterate files and collect JSON/JSONL paths
     filepaths = []
     for root, dirs, files in os.walk(input_folder):
         dirs[:] = [d for d in dirs if d.lower() not in EXCLUDED_DIR_NAMES]
@@ -152,7 +184,7 @@ def process_folder(input_folder):
                 filepaths.append(os.path.join(root, fn))
     filepaths.sort()
 
-    # load objects
+    # load objects from each file into a single list for processing
     all_objs = []
     for fp in tqdm(filepaths, desc="Reading JSON files"):
         objs = read_json_objects_from_file(fp)
@@ -168,11 +200,14 @@ def process_folder(input_folder):
             pass
         ids_seen.add(doc_id)
 
+        # Domain/scenario metadata (if present)
         scenario = obj.get('scenario') or obj.get('domain') or None
         if scenario:
             scenario_counts[scenario] += 1
 
-        # build map of language -> text for this doc
+        # Build a map of language -> text for this document. The repo's
+        # JSON schema varies; we accept a `source` block and a `translations`
+        # block. `source` may be a dict (lang->text) or a single string.
         lang_texts = {}
         # source block may be a dict of languages
         src_block = obj.get('source') or {}
@@ -190,7 +225,7 @@ def process_folder(input_folder):
                 if txt is not None:
                     lang_texts[lang] = txt
         # now we have combined set of language texts for this doc
-        # update per-lang doc counts (count doc if language appears here)
+        # update per-language doc counts (count doc if language appears here)
         for lang in lang_texts.keys():
             languages.add(lang)
             per_lang_doc_counts[lang] += 1
@@ -206,8 +241,7 @@ def process_folder(input_folder):
             for lang in trans_block.keys():
                 per_lang_tgt_counts[lang] += 1
 
-        # For alignment and sentence metrics: iterate each src lang and each target lang
-        # Compute sentence/token/char counts per language
+        # For alignment and sentence metrics: compute sentence/token/char counts per language
         this_doc_lang_sent_counts = {}
         for lang, txt in lang_texts.items():
             sents = split_sentences(txt)
@@ -221,16 +255,15 @@ def process_folder(input_folder):
                 toks = tokenize(s, lang_hint=lang)
                 tok_count += len(toks)
                 char_count += len(s)
-                # accumulate vocab counts
+                # accumulate token frequencies (lowercased for latin/roman scripts)
                 for t in toks:
-                    # normalize tokens for Latin scripts heuristically
                     per_lang_token_vocab[lang][t.lower()] += 1
             per_lang_token_counts[lang] += tok_count
             per_lang_char_counts[lang] += char_count
 
         per_id_lang_sent_counts[doc_id] = this_doc_lang_sent_counts
 
-        # pairwise stats: for each source lang (in source block) and each target lang (in translations)
+        # Pairwise stats: for each source language and each target (translation) language
         src_langs = list(src_block.keys()) if isinstance(src_block, dict) else (['source'] if isinstance(src_block, str) else [])
         tgt_langs = list(trans_block.keys()) if isinstance(trans_block, dict) else []
         for s in src_langs:
@@ -239,7 +272,7 @@ def process_folder(input_folder):
                 # alignment category by sentences
                 s_sents = this_doc_lang_sent_counts.get(s, 0)
                 t_sents = this_doc_lang_sent_counts.get(t, 0)
-                # classify
+                # classify alignment by sentence counts (simple heuristic)
                 if s_sents == 1 and t_sents == 1:
                     cat = '1:1'
                 elif s_sents == 1 and t_sents > 1:
