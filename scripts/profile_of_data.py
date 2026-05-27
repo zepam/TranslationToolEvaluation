@@ -29,8 +29,12 @@ from tqdm import tqdm
 import pandas as pd
 from pathlib import Path
 
-EXCLUDED_DIR_NAMES = {}
-# EXCLUDED_DIR_NAMES = {"stats", "tables"}
+# EXCLUDED_DIR_NAMES = {}
+EXCLUDED_DIR_NAMES = {"stats", "tables"}
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+OUTPUT_STATS_DIRNAME = Path("data") / "stats"
+
 
 # Basic Unicode CJK detection (approx)
 CJK_RE = re.compile(r'[\u4E00-\u9FFF\u3040-\u30FF\uAC00-\uD7AF]')
@@ -370,24 +374,64 @@ def process_folder(input_folder):
         'global_summary': global_summary
     }
 
-def save_outputs(results, out_dir):
-    out_dir = Path(out_dir).resolve() 
-    source = out_dir.parts[-2] if len(out_dir.parts) >= 3 else 'unknown'
-    out_dir = out_dir.parent.parent.parent / 'stats'
-
-    os.makedirs(out_dir, exist_ok=True)
-    results['per_lang_df'].to_csv(os.path.join(out_dir, f'{source}_per_language_stats.csv'), index=False)
-    results['pair_df'].to_csv(os.path.join(out_dir, f'{source}_language_pair_stats.csv'), index=False)
-    results['align_df'].to_csv(os.path.join(out_dir, f'{source}_alignment_breakdown.csv'), index=False)
-    results['domain_df'].to_csv(os.path.join(out_dir, f'{source}_domain_counts.csv'), index=False)
-    results['coverage_df'].to_csv(os.path.join(out_dir, f'{source}_translation_coverage.csv'), index=False)
-    with open(os.path.join(out_dir, f'{source}_global_summary.json'), 'w', encoding='utf-8') as fh:
+def save_outputs(results, input_folder, output_dir=None):
+    """Save profiling results to CSV/JSON files with source-prefixed names.
+    
+    Args:
+        results: dict from process_folder() containing DataFrames and summary.
+        input_folder: the source folder being profiled (e.g., data/processed/portland).
+                      Used to extract the source name for file prefixes.
+        output_dir: optional override for output directory. If None, saves to
+                    input_folder/stats. Useful for saving all sources to a
+                    single central stats directory.
+    """
+    input_path = Path(input_folder).resolve()
+    source = input_path.name  # Extract folder name (e.g., 'portland' from .../portland)
+    
+    if output_dir is None:
+        output_dir = OUTPUT_STATS_DIRNAME
+    else:
+        output_dir = Path(output_dir).resolve()
+    
+    os.makedirs(output_dir, exist_ok=True)
+    
+    results['per_lang_df'].to_csv(output_dir / f'{source}_per_language_stats.csv', index=False)
+    results['pair_df'].to_csv(output_dir / f'{source}_language_pair_stats.csv', index=False)
+    results['align_df'].to_csv(output_dir / f'{source}_alignment_breakdown.csv', index=False)
+    results['domain_df'].to_csv(output_dir / f'{source}_domain_counts.csv', index=False)
+    results['coverage_df'].to_csv(output_dir / f'{source}_translation_coverage.csv', index=False)
+    with open(output_dir / f'{source}_global_summary.json', 'w', encoding='utf-8') as fh:
         json.dump(results['global_summary'], fh, ensure_ascii=False, indent=2)
-    print("Wrote outputs to", out_dir)
+    print(f"Wrote {source} outputs to {output_dir}")
 
-def generate_data_profile(jsonl_folder):
-    results = process_folder(jsonl_folder)
-    save_outputs(results, os.path.join(jsonl_folder, 'stats'))
+def generate_data_profile(input_path):
+    """Process and profile data folders, generating statistics with source-prefixed names.
+    
+    Args:
+        input_path: either a source folder (e.g., data/processed/portland) or a
+                    parent folder containing source subfolders (e.g., data/processed).
+                    If parent folder, profiles each subfolder separately.
+    """
+    input_path = Path(input_path).resolve()
+    
+    # Check if input_path contains subfolders with JSON/JSONL files
+    subfolders = [d for d in input_path.iterdir() if d.is_dir() and 
+                  (list(d.rglob('*.json')) or list(d.rglob('*.jsonl')))]
+    # exclude any subfolders that are in EXCLUDED_DIR_NAMES
+    subfolders = [d for d in subfolders if d.name.lower() not in EXCLUDED_DIR_NAMES]
+    
+    if subfolders:
+        # Parent folder case: profile each subfolder
+        print(f"Found {len(subfolders)} source folders. Profiling each...")
+        for source_folder in sorted(subfolders):
+            print(f"\nProcessing {source_folder.name}...")
+            results = process_folder(str(source_folder))
+            save_outputs(results, str(source_folder))
+    else:
+        # Single folder case: profile directly
+        print(f"Profiling {input_path.name}...")
+        results = process_folder(str(input_path))
+        save_outputs(results, str(input_path))
 
 
 def main(processed_filepath=None):

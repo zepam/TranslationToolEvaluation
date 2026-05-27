@@ -30,7 +30,7 @@ import sys
 from pathlib import Path
 
 EVENT_COMBINATIONS_PATH = Path(__file__).resolve().parent.parent / "metadata" / "event_combinations.json"
-DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent.parent / "tables"
+DEFAULT_OUTPUT_DIR = Path("data") / "tables"
 
 
 def load_event_combinations(path=EVENT_COMBINATIONS_PATH):
@@ -118,7 +118,7 @@ def build_combined_domain_counts(processed_root, output_csv):
 
     output_csv.parent.mkdir(parents=True, exist_ok=True)
     combined.to_csv(output_csv, index=False)
-    print(f"Built combined domain counts from {len(domain_files)} files: {output_csv}")
+    # print(f"Built combined domain counts from {len(domain_files)} files: {output_csv}")
     return output_csv
 
 def make_beautiful_files():
@@ -141,7 +141,7 @@ def make_beautiful_files():
     # if not input_csv.exists():
     #     input_csv = Path("data/processed/portland/stats/domain_counts.csv")
 
-    output_dir = base_dir.parent / "tables"
+    output_dir = DEFAULT_OUTPUT_DIR
     output_dir.mkdir(parents=True, exist_ok=True)
     output_tex = output_dir / f"{source_prefix}_domain_counts_table.tex"
     domain_counts(combined_csv, output_tex, table_label=f"tab:domain_counts_{source_prefix}")

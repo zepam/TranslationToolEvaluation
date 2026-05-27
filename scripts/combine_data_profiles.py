@@ -28,7 +28,7 @@ import argparse
 import json
 from pathlib import Path
 
-JSON_DATA_PROFILE_FOLDER = Path(__file__).resolve().parent.parent / "data" / "stats"
+JSON_DATA_PROFILE_FOLDER = Path("data") / "stats"
 COMBINED_PROFILE_OUTPUT = JSON_DATA_PROFILE_FOLDER / "combined_data_profile.json"
 
 
@@ -149,7 +149,7 @@ def main() -> None:
     print(f"Total alerts: {combined['total_alerts']}")
     print(f"Alert types: {len(combined['alert_types'])}")
     print(f"Languages: {len(combined['languages'])}")
-    print(f"Output written to (combine_data_files): {args.output}")
+    print(f"Output written to (combine_data_files): {JSON_DATA_PROFILE_FOLDER}/combined_data_profile.json")
 
 
 if __name__ == "__main__":

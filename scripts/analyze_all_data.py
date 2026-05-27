@@ -22,7 +22,6 @@ if str(REPO_ROOT) not in sys.path:
 
 from scripts.profile_of_data import generate_data_profile
 
-
 def run_python_script(script_path: Path, *args: str) -> None:
     """Run a Python script with the current interpreter and fail fast on error."""
     # print(f"Running {script_path.name}...")
@@ -48,6 +47,14 @@ def parse_args() -> argparse.Namespace:
         default=REPO_ROOT / "data" / "stats",
         help="Root processed-data directory to profile.",
     )
+
+    parser.add_argument(
+        "--jsonl-root",
+        type=Path,
+        default=REPO_ROOT / "data" / "processed",
+        help="Root directory for JSONL files."
+    )
+
     return parser.parse_args()
 
 
@@ -61,7 +68,7 @@ def main() -> None:
 
     # Run the requested core scripts first.
     print("Data profiling...")
-    generate_data_profile(str(args.stats_root))
+    generate_data_profile(str(args.jsonl_root))
 
     run_python_script(SCRIPTS_DIR / "combine_data_profiles.py")
     run_python_script(SCRIPTS_DIR / "combine_per_lang_profile.py")
