@@ -3,7 +3,7 @@
 ### 🔴 High Priority
 
 - [ ] Fix language code table and verify missing languages are included
-  - [ ] Chinese Traditional AND Chinese Simplified
+  - [x] Chinese Traditional AND Chinese Simplified
   - [ ] Marshallese isn't mapping correctly
 - [ ] Develop licensing agreement to share with agencies
 - [ ] FCC - fix the sentence parsing as detailed in `analysis_out/missing_extra_report.csv`
@@ -11,7 +11,7 @@
 
 ### 🟠 Medium Priority
 
-- [ ] evaluate similarities betwen translations that are in the same language/event pair
+- [/] evaluate similarities betwen translations that are in the same language/event pair
 
 ### 🟢 Low Priority
 
