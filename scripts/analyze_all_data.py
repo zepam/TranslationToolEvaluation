@@ -12,6 +12,7 @@ import argparse
 import subprocess
 import sys
 from pathlib import Path
+import os
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS_DIR = Path(__file__).resolve().parent
@@ -20,7 +21,6 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from scripts.profile_of_data import generate_data_profile
-
 
 def run_python_script(script_path: Path, *args: str) -> None:
     """Run a Python script with the current interpreter and fail fast on error."""
@@ -42,11 +42,19 @@ def parse_args() -> argparse.Namespace:
         description="Run the TranslationToolEvaluation analysis pipeline in a fixed order."
     )
     parser.add_argument(
-        "--processed-root",
+        "--stats-root",
         type=Path,
-        default=REPO_ROOT / "data" / "processed",
+        default=REPO_ROOT / "data" / "stats",
         help="Root processed-data directory to profile.",
     )
+
+    parser.add_argument(
+        "--jsonl-root",
+        type=Path,
+        default=REPO_ROOT / "data" / "processed",
+        help="Root directory for JSONL files."
+    )
+
     return parser.parse_args()
 
 
@@ -54,12 +62,13 @@ def main() -> None:
     """Run the requested scripts in the requested order."""
     args = parse_args()
 
-    if not args.processed_root.exists():
-        raise FileNotFoundError(f"Processed root does not exist: {args.processed_root}")
+    os.makedirs(args.stats_root, exist_ok=True)
+    # if not args.stats_root.exists():
+    #     raise FileNotFoundError(f"Stats root does not exist: {args.stats_root}")
 
     # Run the requested core scripts first.
     print("Data profiling...")
-    generate_data_profile(str(args.processed_root))
+    generate_data_profile(str(args.jsonl_root))
 
     run_python_script(SCRIPTS_DIR / "combine_data_profiles.py")
     run_python_script(SCRIPTS_DIR / "combine_per_lang_profile.py")

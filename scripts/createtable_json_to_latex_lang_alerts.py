@@ -7,7 +7,9 @@ import json
 import sys
 from pathlib import Path
 
+REPO_ROOT = Path(__file__).resolve().parent.parent
 EVENT_COMBINATIONS_PATH = Path(__file__).resolve().parent.parent / "metadata" / "event_combinations.json"
+DEFAULT_OUTPUT_DIR = Path("data") / "tables"
 
 
 def load_event_combinations(path=EVENT_COMBINATIONS_PATH):
@@ -105,30 +107,29 @@ def json_to_latex_table(json_input, output_dir=None):
         latex_table = '\n'.join(latex_lines)
         
         # Output
-        if output_dir:
-            output_path = Path(output_dir).parent.parent
-            output_path = output_path / "tables" / f"{json_file.stem}_table.tex"
-            output_path.parent.mkdir(parents=True, exist_ok=True)
-            with open(output_path, 'w', encoding='utf-8') as f:
-                f.write(latex_table)
-            # print(f"LaTeX table saved to {output_path}")
-        else:
-            print(f"\n--- {json_file.name} ---")
-            print(latex_table)
+        output_dir_path = Path(output_dir)
+        if not output_dir_path.is_absolute():
+            output_dir_path = (REPO_ROOT / output_dir_path).resolve()
+
+        output_path = output_dir_path / f"{json_file.stem}_table.tex"
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(latex_table)
+        display_output_path = output_path.relative_to(REPO_ROOT)
 
         print("LaTeX tables written:")
-        print(f" - Combined data profile:    {output_path}")
+        print(f" - Combined data profile:    {display_output_path}")
 
 
 def main():
     data_source = (
         sys.argv[1]
         if len(sys.argv) > 1
-        else "data/processed/combined_data_profile.json"
+        else "data/stats/combined_data_profile.json"
     )
 
     input_path = Path(data_source)
-    output_dir = input_path.parent / "tables"
+    output_dir = DEFAULT_OUTPUT_DIR
     json_to_latex_table(str(input_path), str(output_dir))
 
 

@@ -30,6 +30,7 @@ import sys
 from pathlib import Path
 
 EVENT_COMBINATIONS_PATH = Path(__file__).resolve().parent.parent / "metadata" / "event_combinations.json"
+DEFAULT_OUTPUT_DIR = Path("data") / "tables"
 
 
 def load_event_combinations(path=EVENT_COMBINATIONS_PATH):
@@ -101,9 +102,11 @@ def domain_counts(csv_file, output_file=None, table_label="tab:domain_counts"):
 
 def build_combined_domain_counts(processed_root, output_csv):
     """Build a combined domain_counts.csv by summing per-source stats files."""
-    domain_files = sorted(processed_root.glob("*/stats/domain_counts.csv"))
+    # domain_files = sorted(processed_root.glob("**/*_domain_counts.csv"))
+    test = output_csv.parent / "stats"
+    domain_files = sorted(output_csv.parent.glob("*_domain_counts.csv"))
     if not domain_files:
-        raise FileNotFoundError(f"No per-source domain_counts.csv files found under {processed_root}")
+        raise FileNotFoundError(f"No per-source *_domain_counts.csv files found under {processed_root}")
 
     frames = [pd.read_csv(path) for path in domain_files]
     combined = (
@@ -115,31 +118,33 @@ def build_combined_domain_counts(processed_root, output_csv):
 
     output_csv.parent.mkdir(parents=True, exist_ok=True)
     combined.to_csv(output_csv, index=False)
-    print(f"Built combined domain counts from {len(domain_files)} files: {output_csv}")
+    # print(f"Built combined domain counts from {len(domain_files)} files: {output_csv}")
     return output_csv
 
 def make_beautiful_files():
-    data_source = (
-        Path(sys.argv[1])
-        if len(sys.argv) > 1
-        else Path("data/processed/combined_data_profile.json")
-    )
+    # data_source = (
+    #     Path(sys.argv[1])
+    #     if len(sys.argv) > 1
+    #     else Path("data/processed/combined_data_profile.json")
+    # )
+
+    data_source = Path("data/processed/combined_data_profile.json")
     source_prefix = data_source.stem.replace("_data_profile", "")
-    base_dir = data_source.parent
+    base_dir = data_source.parent.parent
 
-    input_csv = base_dir / "stats" / "domain_counts.csv"
+    combined_csv = base_dir / "stats" / "domain_counts.csv"
 
-    if source_prefix == "combined" and not input_csv.exists():
-        input_csv = build_combined_domain_counts(base_dir, input_csv)
+    if source_prefix == "combined" and not combined_csv.exists():
+        combined_csv = build_combined_domain_counts(base_dir, combined_csv)
 
     # Fallback for non-combined sources that do not have stats yet.
-    if not input_csv.exists():
-        input_csv = Path("data/processed/portland/stats/domain_counts.csv")
+    # if not input_csv.exists():
+    #     input_csv = Path("data/processed/portland/stats/domain_counts.csv")
 
-    output_dir = base_dir.parent / "tables"
+    output_dir = DEFAULT_OUTPUT_DIR
     output_dir.mkdir(parents=True, exist_ok=True)
     output_tex = output_dir / f"{source_prefix}_domain_counts_table.tex"
-    domain_counts(input_csv, output_tex, table_label=f"tab:domain_counts_{source_prefix}")
+    domain_counts(combined_csv, output_tex, table_label=f"tab:domain_counts_{source_prefix}")
 
     print("LaTeX tables written:")
     print(f" - Domain counts:    {output_tex}")

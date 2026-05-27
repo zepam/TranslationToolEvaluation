@@ -28,6 +28,9 @@ import argparse
 import json
 from pathlib import Path
 
+JSON_DATA_PROFILE_FOLDER = Path("data") / "stats"
+COMBINED_PROFILE_OUTPUT = JSON_DATA_PROFILE_FOLDER / "combined_data_profile.json"
+
 
 def find_profile_files(processed_root: Path) -> list[Path]:
     """Find all profile files under the processed root.
@@ -85,7 +88,7 @@ def combine_profiles(processed_root: Path, output_path: Path) -> dict:
     Raises:
         ValueError: If no matching profile files are found.
     """
-    profile_files = find_profile_files(processed_root)
+    profile_files = find_profile_files(JSON_DATA_PROFILE_FOLDER)
     if not profile_files:
         raise ValueError(f"No *_data_profile.json files found under {processed_root}")
 
@@ -123,13 +126,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--processed-root",
         type=Path,
-        default=Path("data/processed"),
+        default=Path("data/stats"),
         help="Root directory to search for *_data_profile.json files.",
     )
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("data/processed/combined_data_profile.json"),
+        default=Path("data/stats/combined_data_profile.json"),
         help="Output path for combined profile JSON.",
     )
     return parser.parse_args()
@@ -137,14 +140,16 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     """Run CLI entrypoint and print a compact merge summary."""
-    args = parse_args()
-    combined = combine_profiles(args.processed_root, args.output)
+    # args = parse_args()
+    # combined = combine_profiles(args.processed_root, args.output)
+
+    combined = combine_profiles(JSON_DATA_PROFILE_FOLDER, COMBINED_PROFILE_OUTPUT)
 
     print(f"Combined {combined['profiles_combined']} profile files.")
     print(f"Total alerts: {combined['total_alerts']}")
     print(f"Alert types: {len(combined['alert_types'])}")
     print(f"Languages: {len(combined['languages'])}")
-    print(f"Output written to: {args.output}")
+    print(f"Output written to (combine_data_files): {JSON_DATA_PROFILE_FOLDER}/combined_data_profile.json")
 
 
 if __name__ == "__main__":
