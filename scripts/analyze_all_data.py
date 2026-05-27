@@ -9,10 +9,12 @@ This script runs the core profiling scripts first, then any remaining
 from __future__ import annotations
 
 import argparse
+import os
 import subprocess
 import sys
 from pathlib import Path
-import os
+
+from scripts.profile_of_data import generate_data_profile
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS_DIR = Path(__file__).resolve().parent
@@ -20,7 +22,6 @@ SCRIPTS_DIR = Path(__file__).resolve().parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from scripts.profile_of_data import generate_data_profile
 
 def run_python_script(script_path: Path, *args: str) -> None:
     """Run a Python script with the current interpreter and fail fast on error."""
@@ -45,14 +46,14 @@ def parse_args() -> argparse.Namespace:
         "--stats-root",
         type=Path,
         default=REPO_ROOT / "data" / "stats",
-        help="Root processed-data directory to profile.",
+        help="Root processed-data directory to profile."
     )
 
     parser.add_argument(
         "--jsonl-root",
         type=Path,
         default=REPO_ROOT / "data" / "processed",
-        help="Root directory for JSONL files."
+        help="Root directory for JSONL files.",
     )
 
     return parser.parse_args()
