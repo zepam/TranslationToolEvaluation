@@ -86,7 +86,7 @@ def test_build_doc_texts_prioritizes_translations_and_normalizes_eng():
     assert texts.get("xx") == "origen"
 
 
-def test_load_code_to_name_from_py_tempfile():
+def test_load_language_codes():
     # Use a temporary file instead of pytest tmp_path fixture so these tests
     # can be run without pytest test harness.
     py_content = textwrap.dedent(
@@ -101,7 +101,7 @@ def test_load_code_to_name_from_py_tempfile():
     with tempfile.TemporaryDirectory() as td:
         p = Path(td) / "langcodes.py"
         p.write_text(py_content, encoding="utf-8")
-        mapping = MODULE.load_code_to_name_from_py(str(p), var_name="language_codes")
+        mapping = MODULE.load_language_codes(p, var_name="language_codes")
         assert mapping.get("en") == "English"
         assert mapping.get("am") == "Amharic"
         assert mapping.get("abc") == "Old"
