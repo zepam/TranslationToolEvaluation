@@ -29,7 +29,7 @@ DEFAULT_LANG_MAP = REPO_ROOT / "data" / "language_codes.py"
 # -----------------------
 # Import language codes
 # -----------------------
-def load_code_to_name_from_py(py_path: str, var_name: str = "langauge_codes") -> dict:
+def load_language_codes(py_path: Path, var_name: str = "language_codes") -> dict:
     """Load language code mappings from a Python file.
     
     Imports a Python module containing a dictionary of language definitions and
@@ -45,7 +45,7 @@ def load_code_to_name_from_py(py_path: str, var_name: str = "langauge_codes") ->
         dict: Dictionary mapping language codes (e.g., 'am', 'ar') to language names
             (e.g., 'Amharic', 'Arabic'). Only includes languages with valid codes.
     """
-    py_path = Path(py_path)
+    # py_path = Path(py_path)
     if not py_path.is_absolute():
         py_path = (REPO_ROOT / py_path).resolve()
 
@@ -82,6 +82,7 @@ def normalize_placeholders(text: str) -> str:
     
     Returns:
         str | None: Text with normalized placeholders.
+        {} for empty placeholders, {KEY} for placeholders with letters/numbers, and {   } for placeholders with only whitespace
     """
     if text is None:
         return text
@@ -109,6 +110,7 @@ def split_sentences(text: str) -> List[str]:
     Splits on common sentence delimiters including periods, exclamation marks,
     question marks, and their Unicode equivalents in various scripts (Devanagari,
     Arabic, CJK, etc.). Whitespace variations are handled consistently.
+    Input None or empty strings return an empty list.    
     
     Args:
         text (str | None): Text to split into sentences.
@@ -199,7 +201,8 @@ def build_doc_texts(obj: Dict[str, Any]) -> Dict[str, str]:
     
     Builds a deduplicated mapping of language codes to text content. Translations
     take priority over source text. English source language code 'eng' is normalized
-    to 'en'. Skips None or empty values.
+    to 'en'. Skips None or empty values. Simplified and Traditional Chinese are not merged in this function,
+    but both use 'zh-' as the language code for merging if needed.
     
     Args:
         obj (dict): Alert document with optional 'translations' and 'source' fields,
@@ -299,7 +302,7 @@ def iter_json_objects(in_dir: Path) -> Iterable[Dict[str, Any]]:
 # -----------------------
 # Main profiling
 # -----------------------
-def profile_languages(in_dir: str, out_csv: str, lang_code_to_name: Dict[str, str], dedupe_ids: bool = True):
+def profile_languages(in_dir: Path, out_csv: str, lang_code_to_name: Dict[str, str], dedupe_ids: bool = True) -> None:
     """Generate per-language statistics from JSONL alert documents.
     
     Processes all JSONL files in a directory and computes per-language statistics:
@@ -318,7 +321,7 @@ def profile_languages(in_dir: str, out_csv: str, lang_code_to_name: Dict[str, st
     Returns:
         None. Writes CSV file and prints confirmation message.
     """
-    in_dir_p = Path(in_dir)
+    # in_dir_p = Path(in_dir)
     ids_seen = set()
 
     docs = Counter()
@@ -327,7 +330,7 @@ def profile_languages(in_dir: str, out_csv: str, lang_code_to_name: Dict[str, st
     chars = Counter()
     vocab = defaultdict(set)  # lang -> set of tokens (lowercased)
 
-    for obj in iter_json_objects(in_dir_p):
+    for obj in iter_json_objects(in_dir):
         doc_id = obj.get("id")
         if dedupe_ids and doc_id is not None:
             if doc_id in ids_seen:
@@ -394,6 +397,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument(
         "--in-dir",
+        type=Path,
         default=str(DEFAULT_INPUT_DIR),
         help=(
             "Either data/processed root (uses source folders only, excluding stats/tables) "
@@ -408,12 +412,13 @@ def main():
     ap.add_argument("--no-dedupe", action="store_true", help="Do not dedupe by id")
     ap.add_argument(
         "--lang-map",
+        type=Path,
         default=str(DEFAULT_LANG_MAP),
         help="Path to language mapping JSON (from lang_code file)",
     )
     args = ap.parse_args()
 
-    code_to_name = load_code_to_name_from_py(args.lang_map, var_name="language_codes")
+    code_to_name = load_language_codes(args.lang_map, var_name="language_codes")
 
     profile_languages(
         args.in_dir, 

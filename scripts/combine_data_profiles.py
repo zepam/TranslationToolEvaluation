@@ -21,7 +21,7 @@ Merge behavior:
 
 Usage:
         python scripts/combine_data_profiles.py
-        python scripts/combine_data_profiles.py --processed-root data/processed --output data/processed/combined_data_profile.json
+       python scripts/combine_data_profiles.py --json-folder data/processed --output data/processed/combined_data_profile.json
 """
 
 import argparse
@@ -78,19 +78,19 @@ def merge_profile_into_combined(combined: dict, profile: dict) -> None:
             target_lang_counts[language] = int(target_lang_counts.get(language, 0)) + int(count)
 
 
-def combine_profiles(processed_root: Path, output_path: Path) -> dict:
+def combine_profiles(json_folder: Path, output_path: Path) -> dict:
     """Combine discovered profile files and write one JSON output.
     Args:
-        processed_root: Directory containing per-source profile files.
+        json_folder: Directory containing per-source profile files.
         output_path: Destination JSON path for the merged profile.
     Returns:
         The in-memory combined profile dictionary that was written to disk.
     Raises:
         ValueError: If no matching profile files are found.
     """
-    profile_files = find_profile_files(JSON_DATA_PROFILE_FOLDER)
+    profile_files = find_profile_files(json_folder)
     if not profile_files:
-        raise ValueError(f"No *_data_profile.json files found under {processed_root}")
+        raise ValueError(f"No *_data_profile.json files found under {json_folder}")
 
     combined = {
         "total_alerts": 0,
@@ -108,7 +108,7 @@ def combine_profiles(processed_root: Path, output_path: Path) -> dict:
 
         merge_profile_into_combined(combined, profile)
         # Store source file paths relative to repository root for traceability.
-        combined["source_profile_files"].append(str(profile_file.relative_to(processed_root.parent)))
+        combined["source_profile_files"].append(str(profile_file.relative_to(json_folder.parent)))
         combined["profiles_combined"] += 1
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -118,30 +118,30 @@ def combine_profiles(processed_root: Path, output_path: Path) -> dict:
     return combined
 
 
-def parse_args() -> argparse.Namespace:
-    """Build and parse command-line arguments for the script."""
-    parser = argparse.ArgumentParser(
-        description="Combine all *_data_profile.json files in data/processed into one JSON file."
-    )
-    parser.add_argument(
-        "--processed-root",
-        type=Path,
-        default=Path("data/stats"),
-        help="Root directory to search for *_data_profile.json files.",
-    )
-    parser.add_argument(
-        "--output",
-        type=Path,
-        default=Path("data/stats/combined_data_profile.json"),
-        help="Output path for combined profile JSON.",
-    )
-    return parser.parse_args()
+# def parse_args() -> argparse.Namespace:
+#     """Build and parse command-line arguments for the script."""
+#     parser = argparse.ArgumentParser(
+#         description="Combine all *_data_profile.json files in data/processed into one JSON file."
+#     )
+#     parser.add_argument(
+#         "--json-folder",
+#         type=Path,
+#         default=Path("data/stats"),
+#         help="Root directory to search for *_data_profile.json files.",
+#     )
+#     parser.add_argument(
+#         "--output",
+#         type=Path,
+#         default=Path("data/stats/combined_data_profile.json"),
+#         help="Output path for combined profile JSON.",
+#     )
+#     return parser.parse_args()
 
 
 def main() -> None:
     """Run CLI entrypoint and print a compact merge summary."""
     # args = parse_args()
-    # combined = combine_profiles(args.processed_root, args.output)
+    # combined = combine_profiles(args.json_folder, args.output)
 
     combined = combine_profiles(JSON_DATA_PROFILE_FOLDER, COMBINED_PROFILE_OUTPUT)
 
