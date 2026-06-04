@@ -13,7 +13,8 @@
 
 - [/] evaluate similarities betwen translations that are in the same language/event pair
 - [ ] extract similiar functions, like tokenization, RE definitions, normalization into one helper file
-- extract similiar latex table code into a single helper file to centralize formatting
+- [ ] extract similiar latex table code into a single helper file to centralize formatting
+- [ ] find some way to tag alerts so they can appear under different categories when appropriate
 
 ### 🟢 Low Priority
 
