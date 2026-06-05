@@ -5,7 +5,6 @@ shelter_in_place,53
 flood,33
 evacuation,33
 winter_storm,31
-volcano,29
 dam_failure,25
 power_outage,25
 heat,23
@@ -14,6 +13,7 @@ boil_water,20
 earthquake,18
 reunification,15
 pandemic_flu,13
+volcano,12
 911_outage,2
 flooding,2
 driving,2

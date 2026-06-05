@@ -1,0 +1,12 @@
+src,tgt,docs_with_pair,avg_src_sentences,avg_tgt_sentences
+eng,en,95,1.18,1.18
+eng,zh,82,1.17,1.0
+eng,de,82,1.17,1.24
+eng,sm,82,1.17,1.23
+eng,km,82,1.17,1.0
+eng,ko,82,1.17,1.21
+eng,ru,82,1.17,1.2
+eng,uk,82,1.17,1.2
+eng,tl,82,1.17,1.23
+eng,vi,79,1.18,1.2
+eng,es,69,1.25,1.25

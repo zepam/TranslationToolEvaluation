@@ -1,5 +1,5 @@
 {
-  "total_docs": 499,
+  "total_docs": 482,
   "languages": [
     "am",
     "en",
@@ -23,7 +23,7 @@
     "zh-Hant"
   ],
   "num_languages": 20,
-  "total_sentences_approx": 11497,
-  "total_tokens_approx": 181365,
+  "total_sentences_approx": 11119,
+  "total_tokens_approx": 175644,
   "total_pairs": 19
 }
