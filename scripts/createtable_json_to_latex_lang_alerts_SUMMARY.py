@@ -21,7 +21,7 @@ from pathlib import Path
 
 # Paths
 DEFAULT_INPUT_PATH = Path("/home/jen/TranslationsDataset/data/stats/combined_data_profile.json")
-EVENT_COMBINATIONS_PATH = Path(__file__).resolve().parent.parent / "metadata" / "event_combinations.json"
+EVENT_COMBINATIONS_PATH = Path(__file__).resolve().parent.parent / "data" / "event_combinations.json"
 
 
 def load_event_combinations(path=EVENT_COMBINATIONS_PATH):

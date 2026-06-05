@@ -69,6 +69,9 @@ language_codes = {
     "Traditional Chinese": {"iso639-2": "zh", "iso639-1": "zh", "BCP-47": "zh-Hant"},
     "Ukrainian": {"iso639-2": "ukr", "iso639-1": "uk", "BCP-47": None},
     "Vietnamese": {"iso639-2": "vie", "iso639-1": "vi", "BCP-47": None},
+    "German": {"iso639-2": "deu", "iso639-1": "de", "BCP-47": None},
+    "Samoan": {"iso639-2": "smo", "iso639-1": "sm", "BCP-47": None},
+    "Chinese": {"iso639-2": "zho", "iso639-1": "zh", "BCP-47": None},  # added to handle generic "Chinese" cases
 }
 
 # language_codes_reversed = {v: k for k, v in language_codes.items()}
@@ -104,4 +107,7 @@ language_codes_to_iso = {
     "tha": "th",
     "ukr": "uk",
     "vie": "vi",
+    "deu": "de",
+    "smo": "sm",
+    "zho": "zh",
 }

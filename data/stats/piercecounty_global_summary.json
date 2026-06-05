@@ -1,0 +1,21 @@
+{
+  "total_docs": 95,
+  "languages": [
+    "de",
+    "en",
+    "eng",
+    "es",
+    "km",
+    "ko",
+    "ru",
+    "sm",
+    "tl",
+    "uk",
+    "vi",
+    "zh"
+  ],
+  "num_languages": 12,
+  "total_sentences_approx": 1168,
+  "total_tokens_approx": 14461,
+  "total_pairs": 11
+}

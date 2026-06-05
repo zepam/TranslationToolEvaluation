@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-EVENT_COMBINATIONS_PATH = Path(__file__).resolve().parent.parent / "metadata" / "event_combinations.json"
+EVENT_COMBINATIONS_PATH = Path(__file__).resolve().parent.parent / "data" / "event_combinations.json"
 DEFAULT_OUTPUT_DIR = Path("data") / "tables"
 
 
