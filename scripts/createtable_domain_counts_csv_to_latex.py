@@ -29,7 +29,7 @@ import re
 import sys
 from pathlib import Path
 
-EVENT_COMBINATIONS_PATH = Path(__file__).resolve().parent.parent / "metadata" / "event_combinations.json"
+EVENT_COMBINATIONS_PATH = Path(__file__).resolve().parent.parent / "data" / "event_combinations.json"
 DEFAULT_OUTPUT_DIR = Path("data") / "tables"
 
 

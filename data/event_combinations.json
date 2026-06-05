@@ -1,0 +1,19 @@
+{
+    "flood": "flood",
+    "flooding": "flood",
+    "heat": "heat",
+    "extreme_heat": "heat",
+    "winter_storm": "winter_weather",
+    "winter_weather": "winter_weather",
+    "power_lines": "power",
+    "power_outage": "power",
+    "landslides_and_mudflows": "earth_movement",
+    "volcano_lahar": "volcanic activity",
+    "volcano:": "volcanic activity",
+    "monthly_lahar_siren_test": "volcanic activity",
+    "alert_and_warning": "general",
+    "pandemic_flu": "health",
+    "health_safety": "health",
+    "stay_indoors": "shelter_in_place",
+    "shelter_in_place": "shelter_in_place"
+}
