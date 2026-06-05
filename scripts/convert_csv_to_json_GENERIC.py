@@ -21,10 +21,12 @@ Records are skipped if they contain only the source language without translation
 Output JSONL files are written in compact format to a processed/ directory structure.
 """
 
+
 import json
 import re
 import sys
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import pandas as pd
 
@@ -136,6 +138,11 @@ def convert_csv_to_jsonl(csv_path, lang_map=language_codes):
             col, val = custom_kc_cleanup(col, val)
             #### End of custom handling for KC data ####
 
+            #### custom cleanup handling for Pierce County data ####
+            if basename.lower().startswith("piercecounty"):
+                col, val = custom_piercecounty_cleanup(col, val)
+            #### End of custom handling for Pierce County data ####
+
             lang_code = find_language_code(col, lang_map)
             if lang_code:
                 translations[lang_code] = str(val)
@@ -178,6 +185,12 @@ def custom_kc_cleanup(col, val):
         col = col[: col.rfind("(")].strip()
     if col.lower() == "laotian":
         col = "lao"
+    return col, val
+
+def custom_piercecounty_cleanup(col, val):
+    # if there is two or more underscores in the value, replace with a single placeholder{}
+    if isinstance(val, str) and val.count("_") >= 2:
+        val = re.sub(r"_+", "{}", val).strip()
     return col, val
 
 def main():
