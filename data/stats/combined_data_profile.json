@@ -1,5 +1,5 @@
 {
-    "total_alerts": 1793,
+    "total_alerts": 1794,
     "alert_types": [
         "911_outage",
         "air_quality",
@@ -20,14 +20,8 @@
         "health_safety_notice",
         "heat",
         "landslides_and_mudflows",
-<<<<<<< Updated upstream
-        "monthly_lahar_siren_test",
-=======
-<<<<<<< Updated upstream
-=======
         "monthly_lahar siren_test",
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+        "monthly_lahar_siren_test",
         "pandemic_flu",
         "power_lines",
         "power_outage",
@@ -78,7 +72,6 @@
         "tl",
         "uk",
         "vi",
-        "zh",
         "zh-Hans",
         "zh-Hant"
     ],
@@ -250,7 +243,6 @@
             "pa": 20,
             "fa": 47,
             "ja": 47,
-            "zh": 1,
             "de": 1,
             "sm": 1,
             "ar": 26,
@@ -265,15 +257,7 @@
             "te": 27
         },
         "911_outage": {
-<<<<<<< Updated upstream
-            "en": 15,
-=======
-<<<<<<< Updated upstream
-            "en": 10,
-=======
             "en": 14,
->>>>>>> Stashed changes
->>>>>>> Stashed changes
             "am": 10,
             "km": 14,
             "ko": 14,
@@ -281,18 +265,8 @@
             "om": 2,
             "ru": 14,
             "zh-Hans": 10,
-<<<<<<< Updated upstream
-            "es": 15,
-            "tl": 14,
-=======
-<<<<<<< Updated upstream
-            "es": 10,
-            "tl": 10,
-=======
             "es": 14,
             "tl": 14,
->>>>>>> Stashed changes
->>>>>>> Stashed changes
             "th": 10,
             "zh-Hant": 10,
             "vi": 14,
@@ -301,7 +275,6 @@
             "pa": 2,
             "fa": 10,
             "ja": 10,
-            "zh": 4,
             "de": 4,
             "sm": 4,
             "ar": 8,
@@ -372,7 +345,6 @@
             "pa": 32,
             "fa": 187,
             "ja": 187,
-            "zh": 4,
             "de": 4,
             "sm": 4,
             "ar": 154,
@@ -602,46 +574,9 @@
             "ja": 2,
             "hi": 1
         },
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-        "extreme_heat": {
-            "en": 262,
-            "es": 262,
-            "am": 262,
-            "ar": 262,
-            "my": 262,
-            "zh-Hans": 262,
-            "zh-Hant": 262,
-            "chk": 262,
-            "fa": 262,
-            "fr": 262,
-            "hi": 262,
-            "ja": 262,
-            "kar": 262,
-            "km": 262,
-            "ko": 262,
-            "lo": 262,
-            "mh": 262,
-            "ne": 262,
-            "ro": 262,
-            "ru": 262,
-            "so": 262,
-            "sw": 262,
-            "tl": 262,
-            "te": 262,
-            "th": 262,
-            "uk": 262,
-            "vi": 262,
-            "hmn": 234,
-            "ium": 234,
-            "om": 234
-=======
->>>>>>> Stashed changes
         "health_safety_notice": {
             "en": 2,
             "es": 2,
-            "zh": 2,
             "de": 2,
             "km": 2,
             "ko": 2,
@@ -651,14 +586,21 @@
             "uk": 2,
             "vi": 2
         },
-<<<<<<< Updated upstream
-        "monthly_lahar_siren_test": {
-=======
         "monthly_lahar siren_test": {
->>>>>>> Stashed changes
             "en": 1,
             "es": 1,
-            "zh": 1,
+            "de": 1,
+            "km": 1,
+            "ko": 1,
+            "ru": 1,
+            "sm": 1,
+            "tl": 1,
+            "uk": 1,
+            "vi": 1
+        },
+        "monthly_lahar_siren_test": {
+            "en": 1,
+            "es": 1,
             "de": 1,
             "km": 1,
             "ko": 1,
@@ -671,7 +613,6 @@
         "eoc_activation": {
             "en": 2,
             "es": 2,
-            "zh": 2,
             "de": 2,
             "km": 2,
             "ko": 2,
@@ -682,14 +623,8 @@
             "vi": 2
         },
         "stay_indoors": {
-<<<<<<< Updated upstream
-            "en": 12,
-            "es": 12,
-=======
             "en": 11,
             "es": 11,
->>>>>>> Stashed changes
-            "zh": 11,
             "de": 11,
             "km": 11,
             "ko": 11,
@@ -700,13 +635,8 @@
             "vi": 11
         },
         "weather_alert": {
-<<<<<<< Updated upstream
-            "en": 33,
-=======
             "en": 36,
->>>>>>> Stashed changes
             "es": 14,
-            "zh": 30,
             "de": 30,
             "km": 30,
             "ko": 30,
@@ -714,16 +644,11 @@
             "sm": 30,
             "tl": 30,
             "uk": 30,
-<<<<<<< Updated upstream
-            "vi": 30
-=======
             "vi": 33
->>>>>>> Stashed changes
         },
         "child_abduction_missing_person": {
             "en": 2,
             "es": 2,
-            "zh": 2,
             "de": 2,
             "km": 2,
             "ko": 2,
@@ -732,15 +657,10 @@
             "tl": 2,
             "uk": 2,
             "vi": 2
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
         },
         "general": {
             "en": 142,
             "es": 135,
-            "zh": 18,
             "de": 18,
             "km": 135,
             "ko": 135,
@@ -775,19 +695,9 @@
             "rhg": 48,
             "sr": 48
         },
-<<<<<<< Updated upstream
-        "volcano_lahar": {
-            "en": 7,
-            "es": 7,
-=======
-<<<<<<< Updated upstream
-        "shelters": {
-=======
         "volcano_lahar": {
             "en": 6,
             "es": 6,
->>>>>>> Stashed changes
-            "zh": 6,
             "de": 6,
             "km": 6,
             "ko": 6,
@@ -800,7 +710,6 @@
         "hazardous_incident": {
             "en": 1,
             "es": 1,
-            "zh": 1,
             "de": 1,
             "km": 1,
             "ko": 1,
@@ -811,10 +720,6 @@
             "vi": 1
         },
         "shelter_information": {
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
             "en": 34,
             "es": 34,
             "am": 34,
