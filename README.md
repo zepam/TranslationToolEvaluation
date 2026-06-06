@@ -1,5 +1,16 @@
 # Project Description: Multilingual Emergency Translation Dataset
 
+## Table of Contents
+1. [Overview](#overview)
+2. [Problem Context](#problem-context)
+3. [Current Dataset Snapshot](#current-dataset-snapshot)
+4. [Repository Components](#repository-components)
+5. [Data Processing Workflow](#data-processing-workflow)
+6. [Research and Evaluation Use Cases](#research-and-evaluation-use-cases)
+7. [Design Principles](#design-principles)
+8. [Intended Audience](#intended-audience)
+9. [Project Status](#project-status)
+
 ## Overview
 
 This project builds and maintains a multilingual parallel corpus focused on public safety and emergency communication. The repository contains data, metadata, scripts, and demo assets for creating structured translation resources from emergency alert content and producing analysis-ready outputs for research and evaluation.
@@ -10,21 +21,21 @@ The dataset is designed to support machine translation evaluation, low-resource 
 
 Emergency alerts must be translated quickly and accurately across many languages. In practice, translation quality can vary across language pairs and event domains (for example, wildfire, flood, evacuation). This project addresses that gap by:
 
-- consolidating multilingual alert content into consistent JSONL formats,
-- preserving source/translation structure and placeholder tokens,
-- profiling language and domain coverage, and
-- generating reproducible summary tables for reporting and benchmarking.
+- consolidating multilingual alert content into consistent JSONL formats
+- preserving source/translation structure and placeholder tokens
+- profiling language and domain coverage
+- generating reproducible summary tables for reporting and benchmarking
 
 ## Current Dataset Snapshot
 
-Based on the current combined profile in [data/processed/combined_data_profile.json](data/processed/combined_data_profile.json):
+Based on the current combined profile in [data/stats/combined_data_profile.json](data/stats/combined_data_profile.json):
 
-- Total alerts: 1,715
-- Languages represented: 33
-- Alert/event categories represented: 26
+- Total alerts: 1,793
+- Languages represented: 37
+- Alert/event categories represented: 34
 - Primary domains include high-volume categories such as extreme heat, wildfire, evacuation, and air quality
 
-Domain frequency outputs are available in [data/processed/stats/domain_counts.csv](data/processed/stats/domain_counts.csv).
+Domain frequency outputs are available in [data/stats/domain_counts.csv](data/stats/domain_counts.csv).
 
 ## Repository Components
 
@@ -47,13 +58,13 @@ At a high level, the project pipeline is:
 
 ## Research and Evaluation Use Cases
 
-- Benchmarking MT systems on emergency-domain text
+- Benchmarking MT systems on emergency-domain text. The evaluation planning notes in [docs/evaluation_plan.md](docs/evaluation_plan.md) outline metric options such as BLEU/chrF/COMET and domain-aware checks.
 - Measuring translation coverage by language and event type
 - Evaluating placeholder fidelity and critical term preservation
 - Building per-language token and vocabulary profiles
 - Producing reproducible tables for reports and papers
+- Creating thorough and useful prompts for LLMs to create correct and useful alert messaging. Or at least testing out the possibility of getting correct and useful messages as output.
 
-The evaluation planning notes in [evaluation_plan.md](evaluation_plan.md) outline metric options such as BLEU/chrF/COMET and domain-aware checks.
 
 ## Design Principles
 
@@ -83,10 +94,18 @@ The repository currently provides a functional data-processing toolkit and a com
   - the `README` file in the scripts directory will give you more information
 - Notebook for data analysis
 
-## File Name Format
+<!-- ## File Name Format
 
 ### Raw Files
 
 `SOURCE_scenario.filetype`
 
-ex: `CITY_911_outage.csv` is a csv file containing translations about 911 outages from CITY (or county, etc.).
+ex: `CITY_911_outage.csv` is a csv file containing translations about 911 outages from CITY (or county, etc.). -->
+
+
+------------------------------------------------------
+
+*this file was last updated on: 06 June 2026*
+
+
+[overviewLink]: Overview
