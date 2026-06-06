@@ -60,7 +60,7 @@ def load_language_codes(py_path: Path, var_name: str = "language_codes") -> dict
     for lang_name, codes in data.items():
         if not isinstance(codes, dict):
             continue
-        code = codes.get("iso639-1") or codes.get("iso639-2")
+        code = codes.get("BCP-47") or codes.get("iso639-1") or codes.get("iso639-2")
         if code:
             code_to_name[str(code)] = lang_name
     return code_to_name

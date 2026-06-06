@@ -59,19 +59,28 @@ language_codes = {
     "Rohingya": {"iso639-2": "rhg", "iso639-1": None, "BCP-47": None},
     "Russian": {"iso639-2": "rus", "iso639-1": "ru", "BCP-47": None},
     "Serbian": {"iso639-2": "srp", "iso639-1": "sr", "BCP-47": None},
-    "Simplified Chinese": {"iso639-2": "zh", "iso639-1": "zh", "BCP-47": "zh-Hans"},
+    "Chinese (Simplified)": {"iso639-2": "zh", "iso639-1": "zh", "BCP-47": "zh-Hans"},
     "Somali": {"iso639-2": "som", "iso639-1": "so", "BCP-47": None},
     "Spanish": {"iso639-2": "spa", "iso639-1": "es", "BCP-47": None},
     "Swahili": {"iso639-2": "swa", "iso639-1": "sw", "BCP-47": None},
     "Tagalog": {"iso639-2": "tgl", "iso639-1": "tl", "BCP-47": None},
     "Telugu": {"iso639-2": "tel", "iso639-1": "te", "BCP-47": None},
     "Thai": {"iso639-2": "tha", "iso639-1": "th", "BCP-47": None},
-    "Traditional Chinese": {"iso639-2": "zh", "iso639-1": "zh", "BCP-47": "zh-Hant"},
+    "Chinese (Traditional)": {"iso639-2": "zh", "iso639-1": "zh", "BCP-47": "zh-Hant"},
     "Ukrainian": {"iso639-2": "ukr", "iso639-1": "uk", "BCP-47": None},
     "Vietnamese": {"iso639-2": "vie", "iso639-1": "vi", "BCP-47": None},
+<<<<<<< Updated upstream
     "German": {"iso639-2": "deu", "iso639-1": "de", "BCP-47": None},
     "Samoan": {"iso639-2": "smo", "iso639-1": "sm", "BCP-47": None},
     "Chinese": {"iso639-2": "zho", "iso639-1": "zh", "BCP-47": None},  # added to handle generic "Chinese" cases
+=======
+<<<<<<< Updated upstream
+=======
+    "German": {"iso639-2": "deu", "iso639-1": "de", "BCP-47": None},
+    "Samoan": {"iso639-2": "smo", "iso639-1": "sm", "BCP-47": None},
+    "Chinese (Generic)": {"iso639-2": "zho", "iso639-1": "zh", "BCP-47": None},  # added to handle generic "Chinese" cases
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 }
 
 # language_codes_reversed = {v: k for k, v in language_codes.items()}
