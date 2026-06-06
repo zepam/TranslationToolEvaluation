@@ -1,5 +1,5 @@
 {
-  "total_docs": 95,
+  "total_docs": 96,
   "languages": [
     "de",
     "en",
@@ -11,16 +11,10 @@
     "sm",
     "tl",
     "uk",
-    "vi",
-    "zh"
+    "vi"
   ],
-  "num_languages": 12,
-<<<<<<< Updated upstream
-  "total_sentences_approx": 1168,
-  "total_tokens_approx": 14461,
-=======
-  "total_sentences_approx": 1185,
-  "total_tokens_approx": 15074,
->>>>>>> Stashed changes
-  "total_pairs": 11
+  "num_languages": 11,
+  "total_sentences_approx": 1134,
+  "total_tokens_approx": 13366,
+  "total_pairs": 10
 }
