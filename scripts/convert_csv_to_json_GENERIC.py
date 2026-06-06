@@ -66,16 +66,16 @@ def find_language_code(column_name, lang_map):
         or "traditional chinese" in column_name.lower()
     ):
         return (
-            lang_map["Traditional Chinese"]["BCP-47"]
-            or lang_map["Traditional Chinese"]["iso639-1"]
-            or lang_map["Traditional Chinese"]["iso639-2"]
+            lang_map["Chinese (Traditional)"]["BCP-47"]
+            or lang_map["Chinese (Traditional)"]["iso639-1"]
+            or lang_map["Chinese (Traditional)"]["iso639-2"]
         )
         # Handle traditional Chinese when the column name contains both words (in any order)
     elif "traditional" in column_name.lower() and "chinese" in column_name.lower():
         return (
-            lang_map["Traditional Chinese"]["BCP-47"]
-            or lang_map["Traditional Chinese"]["iso639-1"]
-            or lang_map["Traditional Chinese"]["iso639-2"]
+            lang_map["Chinese (Traditional)"]["BCP-47"]
+            or lang_map["Chinese (Traditional)"]["iso639-1"]
+            or lang_map["Chinese (Traditional)"]["iso639-2"]
         )
     elif "simplified chinese" in column_name.lower() or (
         "simplified" in column_name.lower() and "chinese" in column_name.lower()
@@ -84,9 +84,9 @@ def find_language_code(column_name, lang_map):
             f"Warning: Column name '{column_name}' is recognized as Simplified Chinese. Using BCP-47 code if available."
         )
         return (
-            lang_map["Simplified Chinese"]["BCP-47"]
-            or lang_map["Simplified Chinese"]["iso639-1"]
-            or lang_map["Simplified Chinese"]["iso639-2"]
+            lang_map["Chinese (Simplified)"]["BCP-47"]
+            or lang_map["Chinese (Simplified)"]["iso639-1"]
+            or lang_map["Chinese (Simplified)"]["iso639-2"]
         )
 
     print(
