@@ -1,6 +1,7 @@
 {
     "total_alerts": 95,
     "alert_types": [
+<<<<<<< Updated upstream
         "volcano_lahar",
         "911_outage",
         "child_abduction_missing_person",
@@ -26,6 +27,33 @@
         "uk",
         "de",
         "km"
+=======
+        "child_abduction_missing_person",
+        "hazardous_incident",
+        "911_outage",
+        "monthly_lahar siren_test",
+        "volcano_lahar",
+        "health_safety_notice",
+        "eoc_activation",
+        "boil_water",
+        "general",
+        "weather_alert",
+        "evacuation",
+        "stay_indoors"
+    ],
+    "languages": [
+        "sm",
+        "uk",
+        "zh",
+        "ko",
+        "vi",
+        "km",
+        "de",
+        "en",
+        "tl",
+        "ru",
+        "es"
+>>>>>>> Stashed changes
     ],
     "translations_per_alert": [],
     "translations_per_alert_type_per_language": {
@@ -43,8 +71,13 @@
             "vi": 2
         },
         "911_outage": {
+<<<<<<< Updated upstream
             "en": 5,
             "es": 5,
+=======
+            "en": 4,
+            "es": 4,
+>>>>>>> Stashed changes
             "zh": 4,
             "de": 4,
             "km": 4,
@@ -55,7 +88,11 @@
             "uk": 4,
             "vi": 4
         },
+<<<<<<< Updated upstream
         "monthly_lahar_siren_test": {
+=======
+        "monthly_lahar siren_test": {
+>>>>>>> Stashed changes
             "en": 1,
             "es": 1,
             "zh": 1,
@@ -82,8 +119,13 @@
             "vi": 2
         },
         "stay_indoors": {
+<<<<<<< Updated upstream
             "en": 12,
             "es": 12,
+=======
+            "en": 11,
+            "es": 11,
+>>>>>>> Stashed changes
             "zh": 11,
             "de": 11,
             "km": 11,
@@ -95,7 +137,11 @@
             "vi": 11
         },
         "weather_alert": {
+<<<<<<< Updated upstream
             "en": 33,
+=======
+            "en": 36,
+>>>>>>> Stashed changes
             "es": 14,
             "zh": 30,
             "de": 30,
@@ -105,7 +151,11 @@
             "sm": 30,
             "tl": 30,
             "uk": 30,
+<<<<<<< Updated upstream
             "vi": 30
+=======
+            "vi": 33
+>>>>>>> Stashed changes
         },
         "evacuation": {
             "en": 4,
@@ -160,8 +210,13 @@
             "vi": 18
         },
         "volcano_lahar": {
+<<<<<<< Updated upstream
             "en": 7,
             "es": 7,
+=======
+            "en": 6,
+            "es": 6,
+>>>>>>> Stashed changes
             "zh": 6,
             "de": 6,
             "km": 6,

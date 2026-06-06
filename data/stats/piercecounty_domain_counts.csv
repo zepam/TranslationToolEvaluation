@@ -1,13 +1,26 @@
 scenario,count
+<<<<<<< Updated upstream
 weather_alert,33
 general,25
 stay_indoors,12
 volcano_lahar,7
 911_outage,5
 evacuation,4
+=======
+weather_alert,36
+general,25
+stay_indoors,11
+volcano_lahar,6
+evacuation,4
+911_outage,4
+>>>>>>> Stashed changes
 child_abduction_missing_person,2
 eoc_activation,2
 health_safety_notice,2
 boil_water,1
 hazardous_incident,1
+<<<<<<< Updated upstream
 monthly_lahar_siren_test,1
+=======
+monthly_lahar siren_test,1
+>>>>>>> Stashed changes
