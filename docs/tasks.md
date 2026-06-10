@@ -17,6 +17,7 @@
   - ✅ pierce county
   - [ ] portland
   - [ ] king county
+- confirm that chinese is supported by Simplified, Traditional, and Generic (use when not specified)
 
 ### 🟠 Medium Priority
 
