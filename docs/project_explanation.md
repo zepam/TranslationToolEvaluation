@@ -8,6 +8,10 @@ This project helps people work with translations in a simple and organized way.
 - Supports comparison across language variants
 - Helps track updates through a structured translation workflow
 - Designed for document and product text management across localized content sets
+- Stores translation content in one place
+- Helps compare different language versions
+- Makes it easier to review and update text
+- Supports a clearer workflow for translation tasks
 
 ## Supported languages
 
@@ -59,19 +63,11 @@ This project helps people work with translations in a simple and organized way.
 - Winter Storm
 - Winter Weather
 
-
-## What it does
-
-- Stores translation content in one place
-- Helps compare different language versions
-- Makes it easier to review and update text
-- Supports a clearer workflow for translation tasks
-
-## Why it matters
+## Why does this matter?
 
 When text needs to be used in more than one language, it can become hard to keep everything consistent. This project reduces that problem by making translation work easier to manage and check.
 
-## Who it is for
+## Who is this for?
 
 - People who manage translated content
 - Teams that work with documents or product text in multiple languages
