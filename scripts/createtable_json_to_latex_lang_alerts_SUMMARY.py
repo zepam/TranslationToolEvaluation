@@ -155,7 +155,7 @@ def generate_summary_table(data: dict, source_prefix: str) -> str:
 
     lines.append("\\bottomrule")
     lines.append("\\end{tabular}")
-    lines.append("\\caption{Summary of translation document language coverage by alert type.}")
+    lines.append("\\caption{Summary of translation document language coverage by alert type. Min/Med/Max: per‑language counts for that alert type. }")
     lines.append(f"\\label{{tab:{source_prefix}_translations_per_alert_lang_summary}}")
     lines.append("\\end{table}")
     return "\n".join(lines)
