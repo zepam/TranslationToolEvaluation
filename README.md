@@ -40,7 +40,7 @@ Domain frequency outputs are available in [data/stats/domain_counts.csv](data/st
 ## Repository Components
 
 - Raw and processed data assets under [data](data)
-- Metadata and schema documentation under [metadata](metadata)
+- Metadata and schema documentation under [metadata](metadata), including the [processed data schema](metadata/processed_data_schema.md)
 - Processing and reporting scripts under [scripts](scripts)
 - A web demo interface under [demo](demo)
 
