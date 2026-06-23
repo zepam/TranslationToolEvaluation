@@ -4,6 +4,8 @@ import importlib.util
 import json
 from pathlib import Path
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
 def load_language_codes_py(py_path: str, var_name: str = "langauge_codes") -> dict:
     spec = importlib.util.spec_from_file_location("language_codes_module", py_path)
     module = importlib.util.module_from_spec(spec)
@@ -45,7 +47,7 @@ def main():
     ap = argparse.ArgumentParser()
     # ap.add_argument("--csv", required=True, help="Input per-language CSV (from profiler)")
     ap.add_argument("--csv", default="data/stats/combined_per_language_profile.csv", help="Input per-language CSV (from profiler)")
-    ap.add_argument("--lang-codes-py", default="/home/jen/TranslationsDataset/data/language_codes.py",
+    ap.add_argument("--lang-codes-py", default=str(REPO_ROOT / "data" / "language_codes.py"),
                     help="Path to language_codes.py")
     # ap.add_argument("--out-tex", required=True, help="Output.tex file")
     ap.add_argument("--out_tex", default="data/tables/combined_lang_profiles_table.tex", help="Output.tex file")
