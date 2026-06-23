@@ -10,6 +10,7 @@
 - ⏳ Develop licensing agreement to share with agencies
 - [ ] FCC - fix the sentence parsing as detailed in `analysis_out/missing_extra_report.csv`
 - ⏳ Clarify which sentences are similiar and which are essentially templates. `Flood watch` is similar to `flood warning`, but `the temp will be XX today` is a template. Many sentences are similiar, but carry an important distinction. 
+- Examine placeholder names that will minimize the chances of translation. Using symbols? Strange characters? Emoji?
 - [ ] Clean up placeholders to [PLACEHOLDER] [OR WHATEVER WORD WORKS BEST]
   - [ ] kc
   - [ ] pierce county
