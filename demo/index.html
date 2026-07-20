@@ -166,6 +166,43 @@
         }.load-more-btn:hover {
             background: #125ca1;
         }
+        .show-all-btn {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .show-all-btn:hover { background: #3b8b3b; }
+
+        /* Modal for showing all translations */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .modal-content {
+            background: white;
+            max-width: 900px;
+            width: 95%;
+            max-height: 85vh;
+            overflow: auto;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+        }
+        .modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+        .close-btn { background: transparent; border: none; font-size: 20px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -625,7 +662,9 @@
                             <div class="source-label">Source (${sourceLang.toUpperCase()})</div>
                             <div>${sourceText}</div>
                         </div>
-                        
+
+                        <button class="show-all-btn" onclick="showAllTranslations('${alert.id}')">Show all translations</button>
+
                         <div class="translations-grid">
                 `;
                 
@@ -655,6 +694,77 @@
             document.getElementById('targetFilter').value = '';
             document.getElementById('textSearch').value = '';
             await filterAlerts();
+        }
+
+        // Show a modal with all translations for a given alert id
+        function escapeHtml(str) {
+            if (str === null || str === undefined) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function showAllTranslations(id) {
+            const alert = (filteredAlerts || []).find(a => a.id === id) || (alertsData || []).find(a => a.id === id);
+            if (!alert) {
+                alert('Could not find alert data for id: ' + id);
+                return;
+            }
+
+            // Remove existing modal if present
+            const existing = document.getElementById('translationsModal');
+            if (existing) existing.remove();
+
+            const sourceLang = alert.__sourceLang;
+            const sourceText = alert.source && alert.source[sourceLang] ? alert.source[sourceLang] : '';
+            const entries = Object.entries(alert.translations || {});
+
+            let translationsHtml = '';
+            // Include source as the first item
+            translationsHtml += `
+                <div class="translation-item">
+                    <div class="lang-code">${escapeHtml(sourceLang)}</div>
+                    <div class="translation-text">${escapeHtml(sourceText)}</div>
+                </div>`;
+
+            for (const [lang, text] of entries) {
+                translationsHtml += `
+                    <div class="translation-item">
+                        <div class="lang-code">${escapeHtml(lang)}</div>
+                        <div class="translation-text">${escapeHtml(text)}</div>
+                    </div>`;
+            }
+
+            const modal = document.createElement('div');
+            modal.id = 'translationsModal';
+            modal.className = 'modal-overlay';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <strong>${escapeHtml(formatAlertId(alert.id))}</strong>
+                            <div style="font-size:12px;color:#666">${escapeHtml(alert.scenario || '')}</div>
+                        </div>
+                        <button class="close-btn" onclick="closeTranslationsModal()">✕</button>
+                    </div>
+
+                    <div style="margin-bottom:10px;"><strong>Source (${escapeHtml(sourceLang)})</strong></div>
+                    <div style="margin-bottom:14px;">${escapeHtml(sourceText)}</div>
+
+                    <div class="translations-grid">
+                        ${translationsHtml}
+                    </div>
+                </div>`;
+
+            document.body.appendChild(modal);
+        }
+
+        function closeTranslationsModal() {
+            const el = document.getElementById('translationsModal');
+            if (el) el.remove();
         }
         
         // Add enter key and debounce support for text search

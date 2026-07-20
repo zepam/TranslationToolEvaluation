@@ -1,33 +1,34 @@
-B. Multilingual QA tool for translators
-Goal
+# Multilingual QA tool for translators
+## Goal
 
 Provide a practical UI & automated checks that highlight missing/extra sentences, altered entities, length/character limits, tone/register mismatches, and provide recommendations to translators and reviewers.
 
-Key features
+## Key features
 
 File ingestion and sentence alignment visualization.
-Automatic checks:
+- Automatic checks:
 
-Missing/extra sentence detection (per-english-sentence).
-Entity preservation (phone numbers, placeholders, URLs).
-Lexical divergence warning: low chrF but high semantic similarity (paraphrase OK) vs low sem & low chrF (possible mistranslation).
-Tokenization sanity: suspect languages where tokens look like characters (flag).
-Style/locale warnings (units, currency, scripts).
+    - Missing/extra sentence detection (per-english-sentence).
+    - Entity preservation (phone numbers, placeholders, URLs).
+    - Lexical divergence warning: low chrF but high semantic similarity (paraphrase OK) vs low sem & low chrF (possible mistranslation).
+    - Tokenization sanity: suspect languages where tokens look like characters (flag).
+    - Style/locale warnings (units, currency, scripts).
 
 
-Triage dashboard: priority buckets (critical = entity mismatch, high = missing sentences, medium = long translations).
-Translator workspace: side-by-side editor with suggestions, machine-suggested fixes (LLM suggestions), and one-click acceptance.
-Audit trail & export: store original + corrected + reviewer notes.
+- Triage dashboard: priority buckets (critical = entity mismatch, high = missing sentences, medium = long translations).
+- Translator workspace: side-by-side editor with suggestions, machine-suggested fixes (LLM suggestions), and one-click acceptance.
+- Audit trail & export: store original + corrected + reviewer notes.
 
-Architecture & stack
+## Architecture & stack
 
 Backend: FastAPI (Python) or Flask
 
 Tasks: run splitters (stanza), compute metrics (chrF, embeddings), entity regex, language detection.
+
 Queue: Celery or RQ for heavier tasks (embeddings, LLM calls).
 
 
-ML components:
+### ML components
 
 Sentence embedding service: multilingual SBERT/LaBSE model deployed locally or via HF Inference.
 Tokenizer: SentencePiece joint model (from earlier).
@@ -41,7 +42,7 @@ Components: file upload, per-file summary, per-row detail, inline editor, accept
 
 Storage: SQLite/Postgres for metadata; store files in S3 or local storage.
 
-QA checks (algorithms)
+## QA checks (algorithms)
 
 Missing/Extra:
 
@@ -66,17 +67,17 @@ tokens_per_char ratio; if approx 1 → likely char-level tokenization; flag for 
 
 
 
-Human workflow
+## Human workflow
 
 Translators fix high/critical flags first (entities, missing sentences).
 Reviewers check medium/low flags and accept.
 For each file record accept/reject, reviewer note, time stamp.
 
-Evaluation
+## Evaluation
 
 Measure time per file for translators with vs without tool, error reduction rate on a held-out set, and rater satisfaction.
 
-Implementation steps & deliverables
+## Implementation steps & deliverables
 
 Prototype backend + simple UI to upload one CSV and run checks (3–5 days).
 Add interactive editor and accept/reject flows (5–10 days).
@@ -84,7 +85,7 @@ Integrate embedding-based paraphrase detection and choose thresholds (3–5 days
 Human pilot with translators for feedback & iterate (7–14 days).
 Deliverables: working web app (dockerized), docs, test suite, sample outputs.
 
-Ethics & operational considerations
+## Ethics & operational considerations
 
 Never auto-publish translated alerts without final human signoff.
 Log all edits and who approved them.
