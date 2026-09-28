@@ -10,6 +10,7 @@
 - ⏳ Develop licensing agreement to share with agencies
 - [ ] FCC - fix the sentence parsing as detailed in `analysis_out/missing_extra_report.csv`
 - ⏳ Clarify which sentences are similiar and which are essentially templates. `Flood watch` is similar to `flood warning`, but `the temp will be XX today` is a template. Many sentences are similiar, but carry an important distinction. 
+  - Actually, there doesn't seem to be much overlap.
 - Examine placeholder names that will minimize the chances of translation. Using symbols? Strange characters? Emoji?
 - [ ] Clean up placeholders to [PLACEHOLDER] [OR WHATEVER WORD WORKS BEST]
   - [ ] kc
@@ -19,19 +20,20 @@
   - [ ] portland
   - [ ] king county
 - confirm that chinese is supported by Simplified, Traditional, and Generic (use when not specified)
+- [⏳] Sheri will send WC translations week of 9/21 ~~contact Sheri about getting WC translations~~
 
 ### 🟠 Medium Priority
 
 - ⏳ evaluate similarities betwen translations that are in the same language/event pair
-- [ ] extract similiar functions, like tokenization, RE definitions, normalization into one helper file
-- [ ] extract similiar latex table code into a single helper file to centralize formatting
+- [ ] Add placeholder fidelity and critical-term checks to evaluation outputs
 - [ ] find some way to tag alerts so they can appear under different categories when appropriate
 
 ### 🟢 Low Priority
 
 - [ ] Draft citation guidance section for organizations and data use
 - [ ] Update demo with new events and languages
-- [ ] Add placeholder fidelity and critical-term checks to evaluation outputs
+- [ ] extract similiar functions, like tokenization, RE definitions, normalization into one helper file
+- [ ] extract similiar latex table code into a single helper file to centralize formatting
 
 ## 🤔 Maybe?
 
