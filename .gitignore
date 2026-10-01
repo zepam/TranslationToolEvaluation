@@ -1,7 +1,9 @@
 analysis_out/groups/
-*.png
 analysis_out/sim_matrix.npy
-.git-rewrite/
 data/raw/fcc_sentencedelimited
+
+*.png
+.git-rewrite/
 **/__pycache__/**
 .github/agents/duplicate-code-detector.agent.md
+.markdownlint.json
