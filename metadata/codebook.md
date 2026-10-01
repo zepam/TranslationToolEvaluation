@@ -47,7 +47,6 @@ This codebook defines the minimal fields used to index, summarize, and validate 
     - Validation: must be one of the allowed values.  
     - Example: `human`
 
-
   - <span style="color:red">**MAYBE THESE TOO? TBD**</span>
     - length_chars  
       - Type: integer  

@@ -1,6 +1,7 @@
 # Project Description: Multilingual Emergency Translation Dataset
 
 ## Table of Contents
+
 1. [Overview](#overview)
 2. [Problem Context](#problem-context)
 3. [Current Dataset Snapshot](#current-dataset-snapshot)
@@ -65,7 +66,6 @@ At a high level, the project pipeline is:
 - Producing reproducible tables for reports and papers
 - Creating thorough and useful prompts for LLMs to create correct and useful alert messaging. Or at least testing out the possibility of getting correct and useful messages as output.
 
-
 ## Design Principles
 
 - Reproducibility: script-driven transformations and deterministic outputs
@@ -102,10 +102,6 @@ The repository currently provides a functional data-processing toolkit and a com
 
 ex: `CITY_911_outage.csv` is a csv file containing translations about 911 outages from CITY (or county, etc.). -->
 
-
 ------------------------------------------------------
 
 *this file was last updated on: 06 June 2026*
-
-
-[overviewLink]: Overview
