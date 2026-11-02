@@ -1,4 +1,4 @@
-# Project Description: Multilingual Emergency Translation Dataset
+# Multilingual Emergency Translation Dataset
 
 ## Table of Contents
 
